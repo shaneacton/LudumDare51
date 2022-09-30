@@ -854,7 +854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87d4d3046cba0343ad99b6027b405d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 7
+  dodgeSpeed: 50
+  dodgeTime: 0.05
 --- !u!1 &636874745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1592470475
 Transform:
   m_ObjectHideFlags: 0

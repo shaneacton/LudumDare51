@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private int _strategy;
     // For straight line strategy
     private bool _targetCalculated = false;
-    private Vector3 _staticTarget;
+    private Vector3 _staticDir;
 
     void Start()
     {
@@ -74,14 +74,13 @@ public class Enemy : MonoBehaviour
             var x_noise = Random.Range(-1f, 1f);
             var y_noise = Random.Range(-1f, 1f);
 
-            _staticTarget = new Vector3(-pos.x + x_noise, -pos.y + y_noise, 0);
-
+            var staticTarget = new Vector3(-pos.x + x_noise, -pos.y + y_noise, 0);
+            _staticDir = (staticTarget - transform.position).normalized;
             // Only do this once
             _targetCalculated = true;
         }
 
-        var dir = _staticTarget - transform.position;
-        var newPos = transform.position + dir.normalized * speed * Time.fixedDeltaTime;
+        var newPos = transform.position + _staticDir * speed * Time.fixedDeltaTime;
 
         _rb.MovePosition(newPos);
     }
@@ -92,7 +91,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
 
         var pos = transform.position;
-        if (Mathf.Abs(pos.x) > 10 || Mathf.Abs(pos.y) > 7)
-            Destroy(this);
+        if (Mathf.Abs(pos.x) > 12 || Mathf.Abs(pos.y) > 12)
+            Destroy(gameObject);
     }
 }
