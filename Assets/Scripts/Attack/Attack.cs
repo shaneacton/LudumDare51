@@ -7,14 +7,15 @@ public class Attack : MonoBehaviour
     private MovementRecorder _recorder;
     public GameObject bulletPrefab;
     public GameObject bulletSpawnPos;
+    public GameObject lazerPrefab;
     public bool lazerOn = false;
 
-    public LineRenderer lineRenderer;
 
     private void Start()
     {
         _look = GetComponent<MouseLook>();
         _recorder = GetComponent<MovementRecorder>();
+
     }
 
     private void Update()
@@ -24,31 +25,23 @@ public class Attack : MonoBehaviour
 
     public void fire()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (!Input.GetMouseButtonDown(0))
+        {
+            return;
+        }
+
 
         _recorder.Attacked();
 
-        if (lazerOn)
-        {
 
-        }
-        else
-        {
-            var bullet = Instantiate(bulletPrefab,
-                               bulletSpawnPos.transform.position,
-                               transform.rotation
-                               );
-        }
-     
+        var projectilePrefab = lazerOn ? lazerPrefab : bulletPrefab;
+
+
+        var bullet = Instantiate(projectilePrefab,
+                           bulletSpawnPos.transform.position,
+                           transform.rotation
+                           );
+
     }
 
-    public void EnableLazer()
-    {
-        lineRenderer.enabled = true;
-    }
-
-    public void DisableLazer()
-    {
-        lineRenderer = false;
-    }
 }
