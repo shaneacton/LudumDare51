@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Lazer : MonoBehaviour
 {
-    [SerializeField] private float _speed = 500;
-
     private float x_scale;
     public float scaleFactor = 5;
     public bool freeze = false;
