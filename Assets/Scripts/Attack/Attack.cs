@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour
     private MovementRecorder _recorder;
     public GameObject bulletPrefab;
     public GameObject bulletSpawnPos;
+    public bool lazerOn = false;
 
     private void Start()
     {
