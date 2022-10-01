@@ -28,6 +28,15 @@ public class LazerBeam : MonoBehaviour
             lazer.scaleFactor = 0;
             lazer.DisableBeam();
         }
-
+        if (other.transform.CompareTag("Enemy")) 
+        {
+            Destroy(other.gameObject);
+            GameManager.instance.OnKillEnemy();
+        }
+        else if (other.transform.CompareTag("Player"))
+        {
+            GameManager.instance.OnPlayerDead();
+            Destroy(other.gameObject);
+        }
     }
 }
