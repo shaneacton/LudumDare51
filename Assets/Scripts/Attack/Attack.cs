@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MouseLook), typeof(MovementRecorder))]
@@ -8,8 +9,10 @@ public class Attack : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject bulletSpawnPos;
     public GameObject lazerPrefab;
-    public bool lazerOn = false;
 
+    public float coolDown = 5;
+
+    private bool lazerReady = true;
 
     private void Start()
     {
@@ -25,20 +28,41 @@ public class Attack : MonoBehaviour
 
     public void fire()
     {
-        if (!Input.GetMouseButtonDown(0) || !GameManager.instance.canMove) return;
+        if (!GameManager.instance.canMove) return;
+
+        if (Input.GetMouseButtonDown(0)) // fire bullet
+        {
+            InstantiateProjectile(bulletPrefab);
+        }
+
+        if (Input.GetMouseButtonDown(1) && lazerReady) // fire lazer
+        {
+            InstantiateProjectile(lazerPrefab);
+            lazerReady = false;
+            StartCoroutine(EndRoutine());
+        }
+    }
 
 
+    private void InstantiateProjectile(GameObject obj)
+    {
         _recorder.Attacked();
 
-
-        var projectilePrefab = lazerOn ? lazerPrefab : bulletPrefab;
-
-
-        var bullet = Instantiate(projectilePrefab,
+        var bullet = Instantiate(obj,
                            bulletSpawnPos.transform.position,
                            transform.rotation
                            );
+    }
 
+
+    IEnumerator EndRoutine()
+    {
+
+        yield return new WaitForSeconds(coolDown);
+
+        lazerReady = true;
+
+        Debug.Log("lazer ready");
     }
 
 }

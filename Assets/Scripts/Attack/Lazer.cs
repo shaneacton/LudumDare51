@@ -7,7 +7,6 @@ public class Lazer : MonoBehaviour
 
     private float x_scale;
     public float scaleFactor = 5;
-    public bool freeze = false;
     public float timeout = 5;
     private void Start()
     {
@@ -35,7 +34,7 @@ public class Lazer : MonoBehaviour
 
     IEnumerator EndRoutine()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(timeout);
 
         Destroy(gameObject);
     }
