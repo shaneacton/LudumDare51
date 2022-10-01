@@ -28,7 +28,7 @@ public class Attack : MonoBehaviour
         var bullet = Instantiate(bulletPrefab,
                                  bulletSpawnPos.transform.position,
                                  transform.rotation
-                                 );
+                                );
 
     }
 }

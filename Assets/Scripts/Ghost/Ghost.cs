@@ -40,4 +40,15 @@ class Ghost : MonoBehaviour
         
         // TODO shooting
     }
+
+    public void SetMovements(List<MovementData> mvment)
+    {
+        movements = mvment;
+        Debug.Log(movements.Count);
+    }
+
+    public void ResetMovement()
+    {
+        _i = 0;
+    }
 }
