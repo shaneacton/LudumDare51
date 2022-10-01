@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(GhostAttack))]
 class Ghost : MonoBehaviour
 {
     public List<MovementData> movements = new List<MovementData>();
@@ -9,8 +10,13 @@ class Ghost : MonoBehaviour
 
     private float _worldTime;
     private bool _once;
+
+    private GhostAttack _attack;
+
     void Start()
     {
+        _attack = GetComponent<GhostAttack>();
+
         if (movements.Count != 0)
         {
             transform.position = movements[0].position;
@@ -23,8 +29,12 @@ class Ghost : MonoBehaviour
     {
         if (movements.Count != 0)
         {
-            transform.position = movements[_i].position;
-            transform.rotation = movements[_i].rotation;
+            var step = movements[_i];
+            transform.position = step.position;
+            transform.rotation = step.rotation;
+            if (step.attacked)
+                _attack.fire();
+
             _i++;
         }
         

@@ -877,6 +877,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1052951256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 847142553814095115, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+  m_PrefabInstance: {fileID: 1421846661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1145848703
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,6 +968,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9150943
       objectReference: {fileID: 0}
+    - target: {fileID: 847142553814095112, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.4
+      objectReference: {fileID: 0}
     - target: {fileID: 847142555344448760, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1047,6 +1056,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d55b22d36073848b2318da8c01accb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1421846671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421846662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2628701fb781840966d98a2535fec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 6546234609742408879, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}
+  bulletSpawnPos: {fileID: 1052951256}
 --- !u!1 &1457744992
 GameObject:
   m_ObjectHideFlags: 0
