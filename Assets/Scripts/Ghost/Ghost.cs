@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,19 +14,38 @@ class Ghost : MonoBehaviour
 
     private GhostAttack _attack;
 
-    void Start()
-    {
-        _attack = GetComponent<GhostAttack>();
+    private int rewindSpeed = 4;
 
-        if (movements.Count != 0)
+    private State state;
+
+    enum State
+    {
+        Normal, Reverse
+    }
+
+    void Start() { _attack = GetComponent<GhostAttack>(); }
+
+    void FixedUpdate()
+    {
+        if (state == State.Normal) { FollowMovements(); }
+        else if (state == State.Reverse) { ReverseMovements(); }
+    }
+
+    private void ReverseMovements()
+    {
+        if (movements.Count != 0 && _i < movements.Count && _i >= 0)
         {
-            transform.position = movements[0].position;
-            transform.rotation = movements[0].rotation;
-            _i = 1;
+            var step = movements[_i];
+            transform.position = step.position;
+            transform.rotation = step.rotation;
+            // if (step.attacked)
+            // _attack.fire();
+
+            _i -= rewindSpeed;
         }
     }
 
-    void FixedUpdate()
+    void FollowMovements()
     {
         if (movements.Count != 0 && _i < movements.Count)
         {
@@ -37,9 +57,8 @@ class Ghost : MonoBehaviour
 
             _i++;
         }
-        
-        // TODO shooting
     }
+
 
     public void SetMovements(List<MovementData> mvment)
     {
@@ -47,8 +66,17 @@ class Ghost : MonoBehaviour
         Debug.Log(movements.Count);
     }
 
-    public void ResetMovement()
+    public void ReverseMovement()
     {
-        _i = 0;
+        state = State.Reverse;
+        _i = movements.Count - 1;
+    }
+
+    public void ResetPosition()
+    {
+        _i = 1;
+        state = State.Normal;
+        transform.position = movements[0].position;
+        transform.rotation = movements[0].rotation;
     }
 }

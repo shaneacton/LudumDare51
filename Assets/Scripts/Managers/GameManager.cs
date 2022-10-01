@@ -12,20 +12,34 @@ public class GameManager : MonoBehaviour
     public GameObject ghostPrefab;
     public bool alive = true;
     private MovementRecorder movementRecorder;
-
     public TextMeshProUGUI deadUI;
     public TextMeshProUGUI scoreUI;
     private int score = 0;
-
     private List<List<MovementData>> _ghostMovements = new List<List<MovementData>>();
     private List<Ghost> _ghosts = new List<Ghost>();
 
-    public bool canMove = true;
+    [System.NonSerialized]
+    public List<Bullet> _bullets = new List<Bullet>();
 
-    private void Awake(){
+    [System.NonSerialized]
+    public bool canMove = true;
+    private Transform nearestSpawnToPlayer;
+    private bool movingPlayerToTarget = false;
+    public float spawnMoveSpeed = 4f;
+
+    private void Awake()
+    {
         instance = this;
         movementRecorder = player.GetComponent<MovementRecorder>();
         deadUI.enabled = false;
+    }
+
+    private void Update()
+    {
+        if (movingPlayerToTarget)
+        {
+            movePlayerToTarget(nearestSpawnToPlayer.position, spawnMoveSpeed);
+        }
     }
 
     public void OnKillEnemy()
@@ -45,6 +59,8 @@ public class GameManager : MonoBehaviour
 
     public Transform OnStart()
     {
+        movementRecorder.StopRecording();
+
         Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         player.transform.position = nearestSpawn.position;
 
@@ -54,24 +70,61 @@ public class GameManager : MonoBehaviour
 
     public Transform OnReset()
     {
+        // Start of break
+        // movementRecorder.StopRecording();
+
         var ghostMovement = new List<MovementData>(movementRecorder.movements);
         _ghostMovements.Add(ghostMovement);
         movementRecorder.movements.Clear();
 
-        var ghostGO = Instantiate(ghostPrefab, ghostMovement[0].position, ghostMovement[0].rotation);
+        var ghostGO = Instantiate(
+            ghostPrefab, 
+            ghostMovement[ghostMovement.Count - 1].position,
+            ghostMovement[ghostMovement.Count - 1].rotation
+        );
         var ghost = ghostGO.GetComponent<Ghost>();
         ghost.movements = ghostMovement;
         _ghosts.Add(ghost);
 
-        foreach (var g in _ghosts) { g.ResetMovement(); }
-        Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
-        player.transform.position = nearestSpawn.position;
+        foreach (var g in _ghosts) { g.ReverseMovement(); }
+        foreach (var b in _bullets) { Destroy(b.gameObject); }
 
-        return nearestSpawn;
+        nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
+        movingPlayerToTarget = true;
+        // player.transform.position = nearestSpawn.position;
+
+        return nearestSpawnToPlayer;
     }
 
-    public void onBreakEnd(){
+    public void onBreakEnd()
+    {
+        // movementRecorder.StartRecording();
+        foreach (var g in _ghosts) { g.ResetPosition(); }
+    }
 
+    private void movePlayerToTarget(Vector3 target, float speed)
+    {
+        if (player.transform.position != target)
+        {
+            var step = speed * Time.deltaTime;
+            player.transform.position = Vector3.MoveTowards(player.transform.position, target, step);
+        }
+        else
+        {
+            movingPlayerToTarget = false;
+        }
+    }
+
+    public void EnablePlayerMovement()
+    {
+        canMove = true;
+        movementRecorder.StartRecording();
+    }
+
+    public void DisablePlayerMovement()
+    {
+        canMove = false;
+        movementRecorder.StopRecording();
     }
 
     IEnumerator SwitchScene()
@@ -80,7 +133,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public static long getEpochTime(){
+    public static long getEpochTime()
+    {
         System.DateTime epochStart = new System.DateTime(2020, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
         int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
         return cur_time;
