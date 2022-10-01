@@ -1189,6 +1189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorTilePrefab: {fileID: 816639980945430082, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
   obstaclePrefab: {fileID: 7972506628736361861, guid: c8b205d40cfa6dc46be50a0d832574c6, type: 3}
+  obstacleTopPrefab: {fileID: 7972506628736361861, guid: 5edb6f81cfe0afa4f98840a4a25117b8, type: 3}
   spawnTilePrefab: {fileID: 885753411578522118, guid: ad3f9bdb3095a164f87ccdb6cfa1f3af, type: 3}
   numXTiles: 20
   numYTiles: 10

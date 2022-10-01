@@ -6,6 +6,7 @@ public abstract class MapDefinition: MonoBehaviour
 {
     public GameObject floorTilePrefab;
     public GameObject obstaclePrefab;
+    public GameObject obstacleTopPrefab;
     public GameObject spawnTilePrefab;
     
     public int numXTiles = 20; // must be even
@@ -39,7 +40,7 @@ public abstract class MapDefinition: MonoBehaviour
             for (int j = 0; j < numYTiles; j++)
             {
                 bool spawnPoint = spawnPositions.Contains(new Vector2Int(i, j));
-                spawnTile(i, j, obstacles[i, j], spawnPoint);
+                spawnTile(i, j, spawnPoint);
             }
         }
     }
@@ -61,7 +62,7 @@ public abstract class MapDefinition: MonoBehaviour
         return grid;
     }
 
-    void spawnTile(int i, int j, bool obstacle, bool spawnPoint)
+    void spawnTile(int i, int j, bool spawnPoint)
     {
         if (_tiles == null)
         {
@@ -72,9 +73,13 @@ public abstract class MapDefinition: MonoBehaviour
         Vector3 pos = Vector3.right * x + Vector3.up * y;
         pos.z = 2;
         GameObject tilePrefab;
-        if (obstacle)
+        if (obstacles[i, j])
         {
             tilePrefab = obstaclePrefab;
+            if ((j - 1 >= 0 && obstacles[i, j-1]))// || j==0)
+            {
+                tilePrefab = obstacleTopPrefab;
+            }
         }
         else
         {
