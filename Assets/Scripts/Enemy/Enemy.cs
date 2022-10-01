@@ -31,6 +31,16 @@ public class Enemy : MonoBehaviour
     {
         DestroyOutOfBounds();
         approachPlayer();
+        if (canEnemySeePlayer())
+        {
+            _renderer.material.SetColor("_Color", Color.white);
+            // Debug.Log("can see player");
+        }
+        else
+        {
+            _renderer.material.SetColor("_Color", Color.black);
+            // Debug.Log("cannot see player");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -84,6 +94,24 @@ public class Enemy : MonoBehaviour
         }
         
         moveTowards(newPos);
+    }
+
+    public bool canEnemySeePlayer()
+    {
+        Vector3 dir2Player = GameManager.instance.player.transform.position -transform.position;
+        int layerMask = ~(LayerMask.GetMask("Enemy", "Ghost", "EnemyBullet", "PlayerBullet"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir2Player, Mathf.Infinity, layerMask);
+        
+        if (hit.collider != null)
+        {
+            GameObject hitObj = hit.collider.gameObject;
+            // Debug.Log("can see " + hitObj);
+            if (hitObj.tag == "Player")
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void moveTowards(Vector3 target)
