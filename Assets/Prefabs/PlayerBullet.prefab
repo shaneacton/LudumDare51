@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6546234609742408879, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}
+      propertyPath: m_TagString
+      value: PlayerBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616092920275515936, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}
+      propertyPath: _speed
+      value: 350
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}
