@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject player;
-    private Ghost currGhost;
+    private Collider2D playerCollider;
     public GameObject ghostPrefab;
     public bool alive = true;
     private MovementRecorder movementRecorder;
@@ -32,13 +32,19 @@ public class GameManager : MonoBehaviour
         instance = this;
         movementRecorder = player.GetComponent<MovementRecorder>();
         deadUI.enabled = false;
+        playerCollider = player.GetComponent<Collider2D>();
     }
 
     private void Update()
     {
         if (movingPlayerToTarget)
         {
+            playerCollider.enabled = false;
             movePlayerToTarget(nearestSpawnToPlayer.position, spawnMoveSpeed);
+        }
+        else
+        {
+            playerCollider.enabled = true;
         }
     }
 
@@ -62,7 +68,9 @@ public class GameManager : MonoBehaviour
         movementRecorder.StopRecording();
 
         Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
-        player.transform.position = nearestSpawn.position;
+        Vector3 pos = nearestSpawn.position;
+        pos.z = 0;
+        player.transform.position = pos;
 
         return nearestSpawn;
     }
@@ -104,6 +112,7 @@ public class GameManager : MonoBehaviour
 
     private void movePlayerToTarget(Vector3 target, float speed)
     {
+        target.z = 0;
         if (player.transform.position != target)
         {
             var step = speed * Time.deltaTime;

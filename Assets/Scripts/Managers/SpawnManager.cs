@@ -28,7 +28,12 @@ public class SpawnManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
+         Vector2Int[] spawnPositions = MapManager.singleton.mapDef.getSpawnPoints();
+         SpawnPoints = new List<GameObject>();
+         foreach (Vector2Int spawnPos in spawnPositions)
+         {
+             SpawnPoints.Add(MapManager.singleton.mapDef._tiles[spawnPos.x, spawnPos.y].gameObject);
+         }
         StartCoroutine(StartSpawnLoop());
     }
 
@@ -105,7 +110,9 @@ public class SpawnManager : MonoBehaviour
         {
             var spawnPtIdx = UnityEngine.Random.Range(0, SpawnPoints.Count);
             var spawnPt = SpawnPoints[spawnPtIdx].transform;
-            var enemyGO = Instantiate(enemy, spawnPt.position, Quaternion.identity, spawnPt);
+            Vector3 pos = spawnPt.position;
+            pos.z = 0;
+            var enemyGO = Instantiate(enemy, pos, Quaternion.identity, spawnPt);
 
             enemies.Add(enemyGO);
         }
@@ -125,9 +132,11 @@ public class SpawnManager : MonoBehaviour
         Transform tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = gameObject.transform.position;
+        currentPos.z = 0;
         foreach (GameObject spawn in SpawnPoints)
         {
             Vector3 spawnPos = spawn.transform.position;
+            spawnPos.z = 0;
             float dist = Vector3.Distance(spawnPos, currentPos);
             if (dist < minDist)
             {
