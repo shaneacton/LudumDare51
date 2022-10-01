@@ -679,7 +679,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -723,9 +723,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 579888892}
+  ghostPrefab: {fileID: 0}
   alive: 1
   deadUI: {fileID: 403213268}
   scoreUI: {fileID: 447196920}
+  canMove: 1
 --- !u!1 &579888892
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,7 +759,7 @@ Transform:
   m_GameObject: {fileID: 579888892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.085, y: 0.085, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1137204042}
@@ -870,7 +872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4818463e2950f41a982650a797cd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 0}
 --- !u!1 &1137204041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,7 +1214,11 @@ MonoBehaviour:
   - {fileID: 1364306171}
   - {fileID: 1607640493}
   - {fileID: 1617368248}
-  TimeBetweenSpawns: 1
+  spawnTime: 10
+  breakTime: 3
+  numEnemies: 2
+  loopTimer: {fileID: 0}
+  breakTimer: {fileID: 0}
 --- !u!1 &1607640493
 GameObject:
   m_ObjectHideFlags: 0
