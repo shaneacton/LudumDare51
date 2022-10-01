@@ -3,29 +3,35 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+
+    public static SpawnManager instance;
+
     public GameObject enemy;
     public GameObject player;
     public List<GameObject> SpawnPoints;
     public float TimeBetweenSpawns = 10;
-    private float TimeSinceSpawned = 0f;
+    private float TimeSinceSpawned;
 
+    public int numEnemies = 2;
 
-    private void Start() {
-        int spawnPtIdx = Random.Range(0, SpawnPoints.Count);
-        var spawnPt = SpawnPoints[spawnPtIdx].transform;
-        Instantiate(player, spawnPt.position, Quaternion.identity, spawnPt);
+    private void Start()
+    {
+        instance = this;
 
-        SpawnPoints.RemoveAt(spawnPtIdx);
+        var playerSpawnPt = GameManager.instance.OnStart();
+        SpawnPoints.Remove(playerSpawnPt.gameObject);
+        SpawnEnemies();
+        SpawnPoints.Add(playerSpawnPt.gameObject);
     }
 
     private void Update()
     {
         if (TimeSinceSpawned > TimeBetweenSpawns && GameManager.instance.alive)
         {
-            var spawnPtIdx = Random.Range(0, SpawnPoints.Count);
-            var spawnPt = SpawnPoints[spawnPtIdx].transform;
-
-            Instantiate(enemy, spawnPt.position, Quaternion.identity, spawnPt);
+            var playerSpawnPt = GameManager.instance.OnReset();
+            SpawnPoints.Remove(playerSpawnPt.gameObject);
+            SpawnEnemies();
+            SpawnPoints.Add(playerSpawnPt.gameObject);
 
             TimeSinceSpawned = 0;
         }
@@ -33,5 +39,35 @@ public class SpawnManager : MonoBehaviour
         {
             TimeSinceSpawned += Time.deltaTime;
         }
+
+    }
+
+    public void SpawnEnemies()
+    {
+        for (int i = 0; i < numEnemies; i++)
+        {
+            var spawnPtIdx = Random.Range(0, SpawnPoints.Count);
+            var spawnPt = SpawnPoints[spawnPtIdx].transform;
+            Instantiate(enemy, spawnPt.position, Quaternion.identity, spawnPt);
+        }
+
+    }
+
+    public Transform getNearestSpawnPoint(GameObject gameObject)
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = gameObject.transform.position;
+        foreach (GameObject spawn in SpawnPoints)
+        {
+            Vector3 spawnPos = spawn.transform.position;
+            float dist = Vector3.Distance(spawnPos, currentPos);
+            if (dist < minDist)
+            {
+                tMin = spawn.transform;
+                minDist = dist;
+            }
+        }
+        return tMin;
     }
 }

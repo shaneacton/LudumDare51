@@ -27,7 +27,7 @@ class Ghost : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (movements.Count != 0)
+        if (movements.Count != 0 && _i < movements.Count)
         {
             var step = movements[_i];
             transform.position = step.position;
@@ -39,5 +39,16 @@ class Ghost : MonoBehaviour
         }
         
         // TODO shooting
+    }
+
+    public void SetMovements(List<MovementData> mvment)
+    {
+        movements = mvment;
+        Debug.Log(movements.Count);
+    }
+
+    public void ResetMovement()
+    {
+        _i = 0;
     }
 }
