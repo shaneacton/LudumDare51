@@ -34,7 +34,8 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator StartSpawnLoop()
     {
-        GameManager.instance.canMove = false;
+        // GameManager.instance.canMove = false;
+        GameManager.instance.DisablePlayerMovement();
         var playerSpawnPt = GameManager.instance.OnStart();
 
         breakStartTime = GameManager.getEpochTime();
@@ -42,7 +43,8 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(breakTime);
 
         GameManager.instance.onBreakEnd();
-        GameManager.instance.canMove = true;
+        // GameManager.instance.canMove = true;
+        GameManager.instance.EnablePlayerMovement();
 
         breakTimer.GetComponent<BreakTimer>().Hide();
         loopTimer.GetComponent<LoopTimer>().Show();
@@ -63,21 +65,22 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnLoop()
     {
-
         if (!GameManager.instance.alive) { StopCoroutine(SpawnLoop()); }
 
-        GameManager.instance.canMove = false;
+        // GameManager.instance.canMove = false;
+        GameManager.instance.DisablePlayerMovement();
+
         DestroyAllEnemies();
         
         var playerSpawnPt = GameManager.instance.OnReset();
 
         breakStartTime = GameManager.getEpochTime();
-
         yield return new WaitForSeconds(breakTime);
 
         GameManager.instance.onBreakEnd();
 
-        GameManager.instance.canMove = true;
+        // GameManager.instance.canMove = true;
+        GameManager.instance.EnablePlayerMovement();
 
         breakTimer.GetComponent<BreakTimer>().Hide();
         loopTimer.GetComponent<LoopTimer>().Show();

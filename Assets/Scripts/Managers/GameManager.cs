@@ -31,8 +31,10 @@ public class GameManager : MonoBehaviour
         deadUI.enabled = false;
     }
 
-    private void Update() {
-        if(movingPlayerToTarget) {
+    private void Update()
+    {
+        if (movingPlayerToTarget)
+        {
             movePlayerToTarget(nearestSpawnToPlayer.position, spawnMoveSpeed);
         }
     }
@@ -66,36 +68,59 @@ public class GameManager : MonoBehaviour
     public Transform OnReset()
     {
         // Start of break
-        movementRecorder.StopRecording();
+        // movementRecorder.StopRecording();
 
         var ghostMovement = new List<MovementData>(movementRecorder.movements);
         _ghostMovements.Add(ghostMovement);
         movementRecorder.movements.Clear();
 
-        var ghostGO = Instantiate(ghostPrefab, ghostMovement[0].position, ghostMovement[0].rotation);
+        var ghostGO = Instantiate(
+            ghostPrefab, 
+            ghostMovement[ghostMovement.Count - 1].position,
+            ghostMovement[ghostMovement.Count - 1].rotation
+        );
         var ghost = ghostGO.GetComponent<Ghost>();
         ghost.movements = ghostMovement;
         _ghosts.Add(ghost);
 
-        foreach (var g in _ghosts) { g.ResetMovement(); }
+        foreach (var g in _ghosts) { g.ReverseMovement(); }
+
         nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
-        
         movingPlayerToTarget = true;
         // player.transform.position = nearestSpawn.position;
-                
+
         return nearestSpawnToPlayer;
     }
 
-    public void onBreakEnd(){}
+    public void onBreakEnd()
+    {
+        // movementRecorder.StartRecording();
+        foreach (var g in _ghosts) { g.ResetPosition(); }
+    }
 
-    private void movePlayerToTarget(Vector3 target, float speed){
-        if(player.transform.position != target){
-            var step = speed * Time.deltaTime; 
+    private void movePlayerToTarget(Vector3 target, float speed)
+    {
+        if (player.transform.position != target)
+        {
+            var step = speed * Time.deltaTime;
             player.transform.position = Vector3.MoveTowards(player.transform.position, target, step);
         }
-        else{
+        else
+        {
             movingPlayerToTarget = false;
         }
+    }
+
+    public void EnablePlayerMovement()
+    {
+        canMove = true;
+        movementRecorder.StartRecording();
+    }
+
+    public void DisablePlayerMovement()
+    {
+        canMove = false;
+        movementRecorder.StopRecording();
     }
 
     IEnumerator SwitchScene()

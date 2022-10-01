@@ -23,18 +23,7 @@ class Ghost : MonoBehaviour
         Normal, Reverse
     }
 
-    void Start()
-    {
-        state = State.Normal;
-        _attack = GetComponent<GhostAttack>();
-
-        if (movements.Count != 0)
-        {
-            transform.position = movements[0].position;
-            transform.rotation = movements[0].rotation;
-            _i = 1;
-        }
-    }
+    void Start() { _attack = GetComponent<GhostAttack>(); }
 
     void FixedUpdate()
     {
@@ -49,8 +38,8 @@ class Ghost : MonoBehaviour
             var step = movements[_i];
             transform.position = step.position;
             transform.rotation = step.rotation;
-            if (step.attacked)
-                _attack.fire();
+            // if (step.attacked)
+            // _attack.fire();
 
             _i -= rewindSpeed;
         }
@@ -77,7 +66,11 @@ class Ghost : MonoBehaviour
         Debug.Log(movements.Count);
     }
 
-    public void ReverseMovement() { state = State.Reverse; }
+    public void ReverseMovement()
+    {
+        state = State.Reverse;
+        _i = movements.Count - 1;
+    }
 
     public void ResetPosition()
     {
