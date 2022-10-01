@@ -1,21 +1,22 @@
+
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     [SerializeField] protected float _speed = 500;
     private void Start()
     {
         var rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.right * _speed);
+        rb.AddForce((GameManager.instance.player.transform.position - transform.position).normalized * _speed);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.transform.CompareTag("Enemy")) 
         {
-            Destroy(other.gameObject);
-            GameManager.instance.OnKillEnemy();
+            // Destroy(other.gameObject);
+            // GameManager.instance.OnKillEnemy();
         }
         else if (other.transform.CompareTag("Player"))
         {
