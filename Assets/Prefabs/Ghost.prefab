@@ -48,6 +48,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 847142555344448762, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+      propertyPath: lazerPrefab
+      value: 
+      objectReference: {fileID: 3255117027061317592, guid: 4ae8ca7bc062e2548988e8f766279dfc, type: 3}
+    - target: {fileID: 847142555344448762, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 4822571741269214372, guid: 55ac99bdeebe13440b1e6a35198f7ed1, type: 3}
     - target: {fileID: 847142555344448765, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -140,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2628701fb781840966d98a2535fec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6546234609742408879, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}
+  bulletPrefab: {fileID: 4822571741269214372, guid: 55ac99bdeebe13440b1e6a35198f7ed1, type: 3}
   bulletSpawnPos: {fileID: 3955783186188390986}
 --- !u!1 &3955783186188390986 stripped
 GameObject:
