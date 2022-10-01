@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
         alive = false;
         deadUI.enabled = true;
 
-        LeaderboardManager.instance.SendScore(score);
-        StartCoroutine(SwitchScene());
+        // LeaderboardManager.instance.SendScore(score);
+        // StartCoroutine(SwitchScene());
     }
 
     public Transform OnStart()
