@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using Color = UnityEngine.Color;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -70,7 +71,6 @@ public class Enemy : MonoBehaviour
             return;
         }
         
-        // nearbyEnemies.Add(this);
         if (Vector3.Distance(target, transform.position) > 0.001f)
         { // is moving
             List<Enemy> nearbyEnemies = EnemyManager.getNearbyEnemies(this);
@@ -88,7 +88,6 @@ public class Enemy : MonoBehaviour
 
     private void moveTowards(Vector3 target)
     {
-        // Debug.Log("moving to " + target);
         Vector3 enemyToTarget = target - transform.position;
         if (enemyToTarget.magnitude >= speed * Time.fixedDeltaTime)
         {

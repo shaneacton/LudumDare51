@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -95,7 +96,11 @@ public class GameManager : MonoBehaviour
         _ghosts.Add(ghost);
 
         foreach (var g in _ghosts) { g.ReverseMovement(); }
-        foreach (var b in _bullets) { Destroy(b.gameObject); }
+
+        foreach (var b in _bullets)
+        {
+            try { Destroy(b.gameObject); }catch(Exception e){}
+        }
 
         nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
         movingPlayerToTarget = true;

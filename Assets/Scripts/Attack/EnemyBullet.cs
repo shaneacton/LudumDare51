@@ -8,7 +8,8 @@ public class EnemyBullet : MonoBehaviour
     private void Start()
     {
         var rb = GetComponent<Rigidbody2D>();
-        rb.AddForce((GameManager.instance.player.transform.position - transform.position).normalized * _speed);
+        Vector3 bulletDir = (GameManager.instance.player.transform.position - transform.position).normalized;
+        rb.AddForce(bulletDir * _speed);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

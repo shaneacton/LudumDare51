@@ -132,11 +132,11 @@ public class SpawnManager : MonoBehaviour
         Transform tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = gameObject.transform.position;
-        currentPos.z = 0;
+        // currentPos.z = 0;
         foreach (GameObject spawn in SpawnPoints)
         {
             Vector3 spawnPos = spawn.transform.position;
-            spawnPos.z = 0;
+            // spawnPos.z = 0;
             float dist = Vector3.Distance(spawnPos, currentPos);
             if (dist < minDist)
             {
