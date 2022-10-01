@@ -20,13 +20,10 @@ public class GameManager : MonoBehaviour
     private List<List<MovementData>> _ghostMovements = new List<List<MovementData>>();
     private List<Ghost> _ghosts = new List<Ghost>();
 
-    void Start()
-    {
-        movementRecorder = player.GetComponent<MovementRecorder>();
+    private void Awake(){
         instance = this;
+        movementRecorder = player.GetComponent<MovementRecorder>();
         deadUI.enabled = false;
-
-        // player = GameObject.Find("Player");
     }
 
     public void OnKillEnemy()
@@ -76,5 +73,11 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public static long getEpochTime(){
+        System.DateTime epochStart = new System.DateTime(2020, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+        return cur_time;
     }
 }

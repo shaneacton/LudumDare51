@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using System;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -9,44 +11,61 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemy;
     public GameObject player;
     public List<GameObject> SpawnPoints;
-    public float TimeBetweenSpawns = 10;
-    private float TimeSinceSpawned;
-
+    public long spawnTime = 10;
+    [System.NonSerialized]
+    public long spawnStartTime;
+    public long breakTime = 3;
+    [System.NonSerialized]
+    public long breakStartTime;
     public int numEnemies = 2;
 
-    private void Start()
+    public GameObject loopTimer;
+    public GameObject breakTimer;
+
+    private void Awake()
     {
         instance = this;
+        // var playerSpawnPt = GameManager.instance.OnStart();
+        // SpawnPoints.Remove(playerSpawnPt.gameObject);
+        // SpawnEnemies();
+        // SpawnPoints.Add(playerSpawnPt.gameObject);
 
-        var playerSpawnPt = GameManager.instance.OnStart();
-        SpawnPoints.Remove(playerSpawnPt.gameObject);
-        SpawnEnemies();
-        SpawnPoints.Add(playerSpawnPt.gameObject);
+        StartCoroutine(SpawnLoop());
     }
 
-    private void Update()
-    {
-        if (TimeSinceSpawned > TimeBetweenSpawns && GameManager.instance.alive)
-        {
-            var playerSpawnPt = GameManager.instance.OnReset();
-            SpawnPoints.Remove(playerSpawnPt.gameObject);
-            SpawnEnemies();
-            SpawnPoints.Add(playerSpawnPt.gameObject);
+    IEnumerator SpawnLoop(){
+        
+        if (!GameManager.instance.alive) { StopCoroutine(SpawnLoop()); }
+        
+        breakStartTime = GameManager.getEpochTime();
 
-            TimeSinceSpawned = 0;
-        }
-        else
-        {
-            TimeSinceSpawned += Time.deltaTime;
-        }
+        yield return new WaitForSeconds(breakTime);
 
+        breakTimer.GetComponent<BreakTimer>().Hide();
+        loopTimer.GetComponent<LoopTimer>().Show();
+
+        spawnStartTime = GameManager.getEpochTime();
+
+        SpawnEnemies();
+
+        yield return new WaitForSeconds(spawnTime);
+
+        loopTimer.GetComponent<LoopTimer>().Hide();
+
+        var playerSpawnPt = GameManager.instance.OnReset();
+        SpawnPoints.Remove(playerSpawnPt.gameObject);
+        SpawnPoints.Add(playerSpawnPt.gameObject);
+
+        breakTimer.GetComponent<BreakTimer>().Show();
+
+        StartCoroutine(SpawnLoop());
     }
 
     public void SpawnEnemies()
     {
         for (int i = 0; i < numEnemies; i++)
         {
-            var spawnPtIdx = Random.Range(0, SpawnPoints.Count);
+            var spawnPtIdx = UnityEngine.Random.Range(0, SpawnPoints.Count);
             var spawnPt = SpawnPoints[spawnPtIdx].transform;
             Instantiate(enemy, spawnPt.position, Quaternion.identity, spawnPt);
         }
