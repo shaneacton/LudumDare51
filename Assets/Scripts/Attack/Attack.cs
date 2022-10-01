@@ -9,6 +9,8 @@ public class Attack : MonoBehaviour
     public GameObject bulletSpawnPos;
     public bool lazerOn = false;
 
+    public LineRenderer lineRenderer;
+
     private void Start()
     {
         _look = GetComponent<MouseLook>();
@@ -26,10 +28,27 @@ public class Attack : MonoBehaviour
 
         _recorder.Attacked();
 
-        var bullet = Instantiate(bulletPrefab,
-                                 bulletSpawnPos.transform.position,
-                                 transform.rotation
-                                 );
+        if (lazerOn)
+        {
 
+        }
+        else
+        {
+            var bullet = Instantiate(bulletPrefab,
+                               bulletSpawnPos.transform.position,
+                               transform.rotation
+                               );
+        }
+     
+    }
+
+    public void EnableLazer()
+    {
+        lineRenderer.enabled = true;
+    }
+
+    public void DisableLazer()
+    {
+        lineRenderer = false;
     }
 }
