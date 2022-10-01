@@ -1140,7 +1140,7 @@ MonoBehaviour:
   SpawnPoints: []
   spawnTime: 10
   breakTime: 3
-  numEnemies: 3
+  numEnemies: 1
   loopTimer: {fileID: 845160694}
   breakTimer: {fileID: 306108305}
 --- !u!1 &1923478490

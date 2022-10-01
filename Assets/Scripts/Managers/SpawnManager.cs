@@ -28,12 +28,12 @@ public class SpawnManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-         Vector2Int[] spawnPositions = MapManager.singleton.mapDef.getSpawnPoints();
-         SpawnPoints = new List<GameObject>();
-         foreach (Vector2Int spawnPos in spawnPositions)
-         {
-             SpawnPoints.Add(MapManager.singleton.mapDef._tiles[spawnPos.x, spawnPos.y].gameObject);
-         }
+        Vector2Int[] spawnPositions = MapManager.singleton.mapDef.getSpawnPoints();
+        SpawnPoints = new List<GameObject>();
+        foreach (Vector2Int spawnPos in spawnPositions)
+        {
+            SpawnPoints.Add(MapManager.singleton.mapDef._tiles[spawnPos.x, spawnPos.y].gameObject);
+        }
         StartCoroutine(StartSpawnLoop());
     }
 
@@ -56,14 +56,27 @@ public class SpawnManager : MonoBehaviour
 
         spawnStartTime = GameManager.getEpochTime();
 
+        int numWaveZero = (int)Mathf.Ceil(numEnemies / 3f);
+        int numWaveOne = (int)Mathf.Ceil((numEnemies - numWaveZero) / 2f);
+        int numWaveTwo = numEnemies - numWaveOne - numWaveZero;
+
+        float waveZeroTime = UnityEngine.Random.Range(2.5f, 3.5f);
+        float waveOneTime = UnityEngine.Random.Range(2.5f, 3.5f);
+
         SpawnPoints.Remove(playerSpawnPt.gameObject);
-        SpawnEnemies();
+        SpawnEnemies(numWaveZero);
         SpawnPoints.Add(playerSpawnPt.gameObject);
 
-        yield return new WaitForSeconds(spawnTime);
+        yield return new WaitForSeconds(waveZeroTime);
+        SpawnEnemies(numWaveOne);
+        yield return new WaitForSeconds(waveOneTime);
+        SpawnEnemies(numWaveTwo);
+        yield return new WaitForSeconds(10 - waveOneTime - waveZeroTime);
 
         loopTimer.GetComponent<LoopTimer>().Hide();
         breakTimer.GetComponent<BreakTimer>().Show();
+
+        numEnemies += 1;
 
         StartCoroutine(SpawnLoop());
     }
@@ -76,7 +89,7 @@ public class SpawnManager : MonoBehaviour
         GameManager.instance.DisablePlayerMovement();
 
         DestroyAllEnemies();
-        
+
         var playerSpawnPt = GameManager.instance.OnReset();
 
         breakStartTime = GameManager.getEpochTime();
@@ -92,21 +105,34 @@ public class SpawnManager : MonoBehaviour
 
         spawnStartTime = GameManager.getEpochTime();
 
+        int numWaveZero = (int)Mathf.Ceil(numEnemies / 3f);
+        int numWaveOne = (int)Mathf.Ceil((numEnemies - numWaveZero) / 2f);
+        int numWaveTwo = numEnemies - numWaveOne - numWaveZero;
+
+        float waveZeroTime = UnityEngine.Random.Range(2.5f, 3.5f);
+        float waveOneTime = UnityEngine.Random.Range(2.5f, 3.5f);
+
         SpawnPoints.Remove(playerSpawnPt.gameObject);
-        SpawnEnemies();
+        SpawnEnemies(numWaveZero);
         SpawnPoints.Add(playerSpawnPt.gameObject);
 
-        yield return new WaitForSeconds(spawnTime);
+        yield return new WaitForSeconds(waveZeroTime);
+        SpawnEnemies(numWaveOne);
+        yield return new WaitForSeconds(waveOneTime);
+        SpawnEnemies(numWaveTwo);
+        yield return new WaitForSeconds(10 - waveOneTime - waveZeroTime);
 
         loopTimer.GetComponent<LoopTimer>().Hide();
         breakTimer.GetComponent<BreakTimer>().Show();
 
+        numEnemies += 1;
+
         StartCoroutine(SpawnLoop());
     }
 
-    public void SpawnEnemies()
+    public void SpawnEnemies(int n)
     {
-        for (int i = 0; i < numEnemies; i++)
+        for (int i = 0; i < n; i++)
         {
             var spawnPtIdx = UnityEngine.Random.Range(0, SpawnPoints.Count);
             var spawnPt = SpawnPoints[spawnPtIdx].transform;
