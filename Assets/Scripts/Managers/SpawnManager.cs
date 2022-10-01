@@ -25,6 +25,14 @@ public class SpawnManager : MonoBehaviour
     public GameObject loopTimer;
     public GameObject breakTimer;
 
+    public enum State
+    {
+        Break,
+        Wave
+    };
+
+    public State _state;
+
     private void Awake()
     {
         instance = this;
@@ -39,6 +47,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator StartSpawnLoop()
     {
+        _state = State.Break;
         // GameManager.instance.canMove = false;
         GameManager.instance.DisablePlayerMovement();
         var playerSpawnPt = GameManager.instance.OnStart();
@@ -46,6 +55,8 @@ public class SpawnManager : MonoBehaviour
         breakStartTime = GameManager.getEpochTime();
 
         yield return new WaitForSeconds(breakTime);
+
+        _state = State.Wave;
 
         GameManager.instance.onBreakEnd();
         // GameManager.instance.canMove = true;
@@ -85,6 +96,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (!GameManager.instance.alive) { StopCoroutine(SpawnLoop()); }
 
+        _state = State.Break;
         // GameManager.instance.canMove = false;
         GameManager.instance.DisablePlayerMovement();
 
@@ -94,6 +106,8 @@ public class SpawnManager : MonoBehaviour
 
         breakStartTime = GameManager.getEpochTime();
         yield return new WaitForSeconds(breakTime);
+
+        _state = State.Wave;
 
         GameManager.instance.onBreakEnd();
 
