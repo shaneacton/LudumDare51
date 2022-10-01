@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
-using System;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -17,6 +17,9 @@ public class SpawnManager : MonoBehaviour
     public long breakTime = 3;
     [System.NonSerialized]
     public long breakStartTime;
+
+    [NonSerialized] public List<GameObject> enemies = new List<GameObject>();
+
     public int numEnemies = 2;
 
     public GameObject loopTimer;
@@ -67,7 +70,9 @@ public class SpawnManager : MonoBehaviour
         {
             var spawnPtIdx = UnityEngine.Random.Range(0, SpawnPoints.Count);
             var spawnPt = SpawnPoints[spawnPtIdx].transform;
-            Instantiate(enemy, spawnPt.position, Quaternion.identity, spawnPt);
+            var enemyGO = Instantiate(enemy, spawnPt.position, Quaternion.identity, spawnPt);
+
+            enemies.Add(enemyGO);
         }
 
     }
