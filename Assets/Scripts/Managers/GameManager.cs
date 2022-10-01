@@ -20,13 +20,12 @@ public class GameManager : MonoBehaviour
     private List<List<MovementData>> _ghostMovements = new List<List<MovementData>>();
     private List<Ghost> _ghosts = new List<Ghost>();
 
-    void Start()
-    {
-        movementRecorder = player.GetComponent<MovementRecorder>();
-        instance = this;
-        deadUI.enabled = false;
+    public bool canMove = true;
 
-        // player = GameObject.Find("Player");
+    private void Awake(){
+        instance = this;
+        movementRecorder = player.GetComponent<MovementRecorder>();
+        deadUI.enabled = false;
     }
 
     public void OnKillEnemy()
@@ -40,8 +39,8 @@ public class GameManager : MonoBehaviour
         alive = false;
         deadUI.enabled = true;
 
-        LeaderboardManager.instance.SendScore(score);
-        StartCoroutine(SwitchScene());
+        // LeaderboardManager.instance.SendScore(score);
+        // StartCoroutine(SwitchScene());
     }
 
     public Transform OnStart()
@@ -65,16 +64,25 @@ public class GameManager : MonoBehaviour
         _ghosts.Add(ghost);
 
         foreach (var g in _ghosts) { g.ResetMovement(); }
-
         Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         player.transform.position = nearestSpawn.position;
 
         return nearestSpawn;
     }
 
+    public void onBreakEnd(){
+
+    }
+
     IEnumerator SwitchScene()
     {
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public static long getEpochTime(){
+        System.DateTime epochStart = new System.DateTime(2020, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+        return cur_time;
     }
 }

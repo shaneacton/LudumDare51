@@ -5,10 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
-
-    [SerializeField] private float _speed = 500;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] protected float _speed = 500;
+    private void Start()
     {
         var rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * _speed);

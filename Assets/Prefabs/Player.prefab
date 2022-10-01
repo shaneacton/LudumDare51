@@ -152,7 +152,7 @@ Transform:
   - {fileID: 847142553713381556}
   - {fileID: 847142553814095112}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &847142555344448763
 PolygonCollider2D:
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd46c2523559d6743967f353e7f6a80b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6546234609742408879, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}
+  bulletPrefab: {fileID: 7357497731098227277, guid: a4636e4ade8a4354ba1c8a5849d3bb0c, type: 3}
   bulletSpawnPos: {fileID: 847142553814095115}
 --- !u!114 &847142555344448760
 MonoBehaviour:
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87d4d3046cba0343ad99b6027b405d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 7
+  movementSpeed: 5
   dodgeSpeed: 50
   dodgeTime: 0.05
 --- !u!114 &847142555344448761

@@ -32,6 +32,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(!GameManager.instance.canMove){return;}
         var inputs = GetInputs();
 
         if (_state == MoveState.Normal)
