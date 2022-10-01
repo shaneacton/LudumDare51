@@ -13,19 +13,19 @@ class MovementRecorder : MonoBehaviour
         movements = new List<MovementData>();
         movements.Add(new MovementData(transform.position, transform.rotation, false));
     }
-    private void FixedUpdate()
-    {
-        movements.Add(new MovementData(transform.position, transform.rotation, _attacked));
-        _attacked = false;
-
-        _worldTime += Time.fixedDeltaTime;
-
-        if (_worldTime > 2 && _once)
-        {
-            ghost.movements = movements;
-            _once = false;
-        }
-    }
+    // private void FixedUpdate()
+    // {
+    //     movements.Add(new MovementData(transform.position, transform.rotation, _attacked));
+    //     _attacked = false;
+    //
+    //     _worldTime += Time.fixedDeltaTime;
+    //
+    //     if (_worldTime > 2 && _once)
+    //     {
+    //         ghost.movements = movements;
+    //         _once = false;
+    //     }
+    // }
 
     public void Attacked()
     {
