@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     private List<Ghost> _ghosts = new List<Ghost>();
 
     [System.NonSerialized]
+    public List<Bullet> _bullets = new List<Bullet>();
+
+    [System.NonSerialized]
     public bool canMove = true;
     private Transform nearestSpawnToPlayer;
     private bool movingPlayerToTarget = false;
@@ -72,10 +75,11 @@ public class GameManager : MonoBehaviour
         _ghosts.Add(ghost);
 
         foreach (var g in _ghosts) { g.ResetMovement(); }
+
+        foreach (var b in _bullets) { Destroy(b.gameObject); }
+
         nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
-        
         movingPlayerToTarget = true;
-        // player.transform.position = nearestSpawn.position;
                 
         return nearestSpawnToPlayer;
     }
