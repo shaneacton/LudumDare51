@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
 
     private Renderer _renderer;
 
+    private Vector3 lastMovementDirection;
+
     void Start()
     {
         _player = GameManager.instance.player;
@@ -72,7 +74,7 @@ public class Enemy : MonoBehaviour
                 Vector3 nearToPos = newPos - nearby.transform.position;
                 float dist = nearToPos.magnitude;
                 // Debug.Log("dist: " + dist + " offsetting newPos by: " + nearToPos.normalized / Mathf.Pow(dist, 2f));
-                newPos += nearToPos.normalized / Mathf.Pow(dist, 2f);
+                newPos += nearToPos.normalized / Mathf.Pow(dist, 3f);
             }
         }
         
@@ -82,6 +84,11 @@ public class Enemy : MonoBehaviour
     private void moveTowards(Vector3 target)
     {
         Vector3 enemyToTarget = target - transform.position;
+        if (Vector3.Dot(enemyToTarget, lastMovementDirection) < 0)
+        { // has flipped direction since last frame
+            lastMovementDirection = lastMovementDirection + Time.fixedDeltaTime * (enemyToTarget.normalized - lastMovementDirection);
+            return;
+        }
         if (enemyToTarget.magnitude >= speed * Time.fixedDeltaTime)
         {
             Vector3 newPos = transform.position + enemyToTarget.normalized * speed * Time.fixedDeltaTime;
@@ -91,6 +98,8 @@ public class Enemy : MonoBehaviour
         {
             _rb.MovePosition(target);
         }
+
+        lastMovementDirection = enemyToTarget.normalized;
     }
 
     private void DestroyOutOfBounds()
