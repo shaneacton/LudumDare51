@@ -24,7 +24,6 @@ public class LazerBeam : MonoBehaviour
     {
         if (other.transform.CompareTag("Environment"))
         {
-            Debug.Log("collision");
             disable = true;
             lazer.scaleFactor = 0;
             lazer.DisableBeam();
