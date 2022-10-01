@@ -2,23 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ghost : MonoBehaviour
+[RequireComponent(typeof(GhostAttack))]
+class Ghost : MonoBehaviour
 {
-    List<MovementData> movements;
+    public List<MovementData> movements = new List<MovementData>();
     private int _i;
+
+    private float _worldTime;
+    private bool _once;
+
+    private GhostAttack _attack;
+
     void Start()
     {
-        transform.position = movements[0].position;
-        transform.rotation = movements[0].rotation;
-        _i = 1;
+        _attack = GetComponent<GhostAttack>();
+
+        if (movements.Count != 0)
+        {
+            transform.position = movements[0].position;
+            transform.rotation = movements[0].rotation;
+            _i = 1;
+        }
     }
 
     void FixedUpdate()
     {
-        transform.position = movements[_i].position;
-        transform.rotation = movements[_i].rotation;
-        // TODO shooting
+        if (movements.Count != 0)
+        {
+            var step = movements[_i];
+            transform.position = step.position;
+            transform.rotation = step.rotation;
+            if (step.attacked)
+                _attack.fire();
 
-        _i++;
+            _i++;
+        }
+        
+        // TODO shooting
     }
 }
