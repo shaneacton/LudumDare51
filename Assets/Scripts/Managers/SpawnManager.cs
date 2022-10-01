@@ -28,10 +28,35 @@ public class SpawnManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        // var playerSpawnPt = GameManager.instance.OnStart();
-        // SpawnPoints.Remove(playerSpawnPt.gameObject);
-        // SpawnEnemies();
-        // SpawnPoints.Add(playerSpawnPt.gameObject);
+
+        StartCoroutine(StartSpawnLoop());
+    }
+
+    IEnumerator StartSpawnLoop(){
+        
+        GameManager.instance.canMove = false;
+        var playerSpawnPt = GameManager.instance.OnStart();
+
+        breakStartTime = GameManager.getEpochTime();
+
+        yield return new WaitForSeconds(breakTime);
+
+        GameManager.instance.canMove = true;
+
+        breakTimer.GetComponent<BreakTimer>().Hide();
+        loopTimer.GetComponent<LoopTimer>().Show();
+
+        spawnStartTime = GameManager.getEpochTime();
+
+        SpawnPoints.Remove(playerSpawnPt.gameObject);
+        SpawnEnemies();
+        SpawnPoints.Add(playerSpawnPt.gameObject);
+
+        yield return new WaitForSeconds(spawnTime);
+
+        loopTimer.GetComponent<LoopTimer>().Hide();
+
+        breakTimer.GetComponent<BreakTimer>().Show();
 
         StartCoroutine(SpawnLoop());
     }
@@ -39,25 +64,31 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnLoop(){
         
         if (!GameManager.instance.alive) { StopCoroutine(SpawnLoop()); }
+
+        GameManager.instance.canMove = false;
+        DestroyAllEnemies();
+        var playerSpawnPt = GameManager.instance.OnReset();
         
         breakStartTime = GameManager.getEpochTime();
 
         yield return new WaitForSeconds(breakTime);
 
+        GameManager.instance.canMove = true;
+
         breakTimer.GetComponent<BreakTimer>().Hide();
         loopTimer.GetComponent<LoopTimer>().Show();
 
+        GameManager.instance.onBreakEnd();
+
         spawnStartTime = GameManager.getEpochTime();
 
+        SpawnPoints.Remove(playerSpawnPt.gameObject);
         SpawnEnemies();
+        SpawnPoints.Add(playerSpawnPt.gameObject);
 
         yield return new WaitForSeconds(spawnTime);
 
         loopTimer.GetComponent<LoopTimer>().Hide();
-
-        var playerSpawnPt = GameManager.instance.OnReset();
-        SpawnPoints.Remove(playerSpawnPt.gameObject);
-        SpawnPoints.Add(playerSpawnPt.gameObject);
 
         breakTimer.GetComponent<BreakTimer>().Show();
 
@@ -75,6 +106,12 @@ public class SpawnManager : MonoBehaviour
             enemies.Add(enemyGO);
         }
 
+    }
+
+    public void DestroyAllEnemies() {
+        foreach(GameObject enemy in enemies){
+            Destroy(enemy);
+        }
     }
 
     public Transform getNearestSpawnPoint(GameObject gameObject)

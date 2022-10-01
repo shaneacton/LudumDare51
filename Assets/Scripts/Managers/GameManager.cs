@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     private List<List<MovementData>> _ghostMovements = new List<List<MovementData>>();
     private List<Ghost> _ghosts = new List<Ghost>();
 
+    public bool canMove = true;
+
     private void Awake(){
         instance = this;
         movementRecorder = player.GetComponent<MovementRecorder>();
@@ -62,11 +64,14 @@ public class GameManager : MonoBehaviour
         _ghosts.Add(ghost);
 
         foreach (var g in _ghosts) { g.ResetMovement(); }
-
         Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         player.transform.position = nearestSpawn.position;
 
         return nearestSpawn;
+    }
+
+    public void onBreakEnd(){
+
     }
 
     IEnumerator SwitchScene()

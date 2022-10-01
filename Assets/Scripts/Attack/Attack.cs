@@ -21,7 +21,7 @@ public class Attack : MonoBehaviour
 
     public void fire()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (!Input.GetMouseButtonDown(0) || !GameManager.instance.canMove) return;
 
         _recorder.Attacked();
 
