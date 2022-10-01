@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     [System.NonSerialized]
     public bool canMove = true;
-    private Transform nearestSpawnToPlayer;
+    private Tile nearestSpawnToPlayer;
     private bool movingPlayerToTarget = false;
     public float spawnMoveSpeed = 4f;
 
@@ -41,11 +41,24 @@ public class GameManager : MonoBehaviour
         if (movingPlayerToTarget)
         {
             playerCollider.enabled = false;
-            movePlayerToTarget(nearestSpawnToPlayer.position, spawnMoveSpeed);
+            movePlayerToTarget(nearestSpawnToPlayer.transform.position, spawnMoveSpeed);
         }
         else
         {
             playerCollider.enabled = true;
+            Tile nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
+            foreach (Tile spawnPoint in SpawnManager.instance.SpawnPoints)
+            {
+                if (spawnPoint == nearestSpawnToPlayer)
+                {
+                    spawnPoint.setColour(Color.yellow);
+                }
+                else
+                {
+                    spawnPoint.setColour(Color.white);
+                }
+            }
+            
         }
     }
 
@@ -64,12 +77,12 @@ public class GameManager : MonoBehaviour
         // StartCoroutine(SwitchScene());
     }
 
-    public Transform OnStart()
+    public Tile OnStart()
     {
         movementRecorder.StopRecording();
 
-        Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
-        Vector3 pos = nearestSpawn.position;
+        Tile nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
+        Vector3 pos = nearestSpawn.transform.position;
         pos.z = 0;
         player.transform.position = pos;
 
@@ -77,7 +90,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public Transform OnReset()
+    public Tile OnReset()
     {
         // Start of break
         // movementRecorder.StopRecording();

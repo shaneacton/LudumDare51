@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
 
     public GameObject enemy;
     public GameObject player;
-    public List<GameObject> SpawnPoints;
+    public List<Tile> SpawnPoints;
     public long spawnTime = 10;
     [System.NonSerialized]
     public long spawnStartTime;
@@ -29,10 +29,10 @@ public class SpawnManager : MonoBehaviour
     {
         instance = this;
         Vector2Int[] spawnPositions = MapManager.singleton.mapDef.getSpawnPoints();
-        SpawnPoints = new List<GameObject>();
+        SpawnPoints = new List<Tile>();
         foreach (Vector2Int spawnPos in spawnPositions)
         {
-            SpawnPoints.Add(MapManager.singleton.mapDef._tiles[spawnPos.x, spawnPos.y].gameObject);
+            SpawnPoints.Add(MapManager.singleton.mapDef._tiles[spawnPos.x, spawnPos.y]);
         }
         StartCoroutine(StartSpawnLoop());
     }
@@ -63,9 +63,9 @@ public class SpawnManager : MonoBehaviour
         float waveZeroTime = UnityEngine.Random.Range(2.5f, 3.5f);
         float waveOneTime = UnityEngine.Random.Range(2.5f, 3.5f);
 
-        SpawnPoints.Remove(playerSpawnPt.gameObject);
+        SpawnPoints.Remove(playerSpawnPt);
         SpawnEnemies(numWaveZero);
-        SpawnPoints.Add(playerSpawnPt.gameObject);
+        SpawnPoints.Add(playerSpawnPt);
 
         yield return new WaitForSeconds(waveZeroTime);
         SpawnEnemies(numWaveOne);
@@ -90,7 +90,7 @@ public class SpawnManager : MonoBehaviour
 
         DestroyAllEnemies();
 
-        var playerSpawnPt = GameManager.instance.OnReset();
+        Tile playerSpawnPt = GameManager.instance.OnReset();
 
         breakStartTime = GameManager.getEpochTime();
         yield return new WaitForSeconds(breakTime);
@@ -112,9 +112,9 @@ public class SpawnManager : MonoBehaviour
         float waveZeroTime = UnityEngine.Random.Range(2.5f, 3.5f);
         float waveOneTime = UnityEngine.Random.Range(2.5f, 3.5f);
 
-        SpawnPoints.Remove(playerSpawnPt.gameObject);
+        SpawnPoints.Remove(playerSpawnPt);
         SpawnEnemies(numWaveZero);
-        SpawnPoints.Add(playerSpawnPt.gameObject);
+        SpawnPoints.Add(playerSpawnPt);
 
         yield return new WaitForSeconds(waveZeroTime);
         SpawnEnemies(numWaveOne);
@@ -153,20 +153,20 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public Transform getNearestSpawnPoint(GameObject gameObject)
+    public Tile getNearestSpawnPoint(GameObject gameObject)
     {
-        Transform tMin = null;
+        Tile tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = gameObject.transform.position;
         // currentPos.z = 0;
-        foreach (GameObject spawn in SpawnPoints)
+        foreach (Tile spawn in SpawnPoints)
         {
             Vector3 spawnPos = spawn.transform.position;
             // spawnPos.z = 0;
             float dist = Vector3.Distance(spawnPos, currentPos);
             if (dist < minDist)
             {
-                tMin = spawn.transform;
+                tMin = spawn;
                 minDist = dist;
             }
         }
