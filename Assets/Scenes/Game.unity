@@ -816,7 +816,7 @@ MonoBehaviour:
   alive: 1
   deadUI: {fileID: 403213268}
   scoreUI: {fileID: 447196920}
-  canMove: 1
+  spawnMoveSpeed: 4
 --- !u!1 &845160694
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 1045872177}
   m_Layer: 8
   m_Name: Environment
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1036,6 +1036,10 @@ PrefabInstance:
       propertyPath: movementSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 847142555344448762, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+      propertyPath: lazerPrefab
+      value: 
+      objectReference: {fileID: 3255117027061317592, guid: 4ae8ca7bc062e2548988e8f766279dfc, type: 3}
     - target: {fileID: 847142555344448768, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1133,6 +1137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 3201723212570159024, guid: 79c67d8e33e85fb45a25ea7fd2ea62df, type: 3}
   player: {fileID: 2048775195}
+  SpawnPoints: []
   spawnTime: 10
   breakTime: 3
   numEnemies: 3
@@ -1150,7 +1155,7 @@ GameObject:
   - component: {fileID: 1923478492}
   m_Layer: 8
   m_Name: MainMap
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1187,34 +1192,6 @@ MonoBehaviour:
   spawnTilePrefab: {fileID: 885753411578522118, guid: ad3f9bdb3095a164f87ccdb6cfa1f3af, type: 3}
   numXTiles: 20
   numYTiles: 10
-  obstacles:
-  - {x: 1, y: 3}
-  - {x: 2, y: 3}
-  - {x: 3, y: 3}
-  - {x: 4, y: 3}
-  - {x: 6, y: 3}
-  - {x: 7, y: 3}
-  - {x: 7, y: 3}
-  - {x: 8, y: 3}
-  - {x: 9, y: 3}
-  - {x: 10, y: 3}
-  - {x: 7, y: 4}
-  - {x: 7, y: 4}
-  - {x: 10, y: 5}
-  - {x: 10, y: 5}
-  - {x: 16, y: 3}
-  - {x: 17, y: 3}
-  - {x: 18, y: 3}
-  - {x: 15, y: 6}
-  - {x: 15, y: 7}
-  - {x: 15, y: 8}
-  - {x: 16, y: 6}
-  spawnPoints:
-  - {x: 2, y: 2}
-  - {x: 17, y: 2}
-  - {x: 8, y: 4}
-  - {x: 7, y: 7}
-  - {x: 17, y: 8}
 --- !u!1 &2048775195 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 847142555344448770, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
