@@ -13,14 +13,15 @@ public class EnemyAttack : MonoBehaviour
     private Vector3 originalWarningIndicatorScale;
     public float warningIndicatorGrowSpeed = 0.001f;
 
-    private void Start(){
-      originalWarningIndicatorScale = warningIndicator.transform.localScale;
+    private void Start()
+    {
+        originalWarningIndicatorScale = warningIndicator.transform.localScale;
     }
 
     void Update()
     {
-
-        if(timeSinceLastAttack > attackPeriod-1) {
+        if (timeSinceLastAttack > attackPeriod - 1)
+        {
             warningIndicator.SetActive(true);
             warningIndicator.transform.localScale += new Vector3(warningIndicatorGrowSpeed, warningIndicatorGrowSpeed, warningIndicatorGrowSpeed);
         }
@@ -32,8 +33,8 @@ public class EnemyAttack : MonoBehaviour
                                      bulletSpawnPos.transform.position,
                                      transform.rotation
                                     );
-            timeSinceLastAttack = Random.Range(-1f,1f);
-            
+            timeSinceLastAttack = Random.Range(-1f, 1f);
+
             warningIndicator.SetActive(false);
             warningIndicator.transform.localScale = originalWarningIndicatorScale;
         }

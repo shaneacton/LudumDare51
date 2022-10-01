@@ -11,11 +11,6 @@ public class Lazer : MonoBehaviour
         x_scale = transform.localScale.x;
     }
 
-    private void Update()
-    {
-
-
-    }
 
     public void IncreaseBeamSize()
     {
@@ -23,7 +18,7 @@ public class Lazer : MonoBehaviour
         transform.localScale = new Vector3(x_scale,
                                             transform.localScale.y,
                                             transform.localScale.z);
-    } 
+    }
 
     public void DisableBeam()
     {

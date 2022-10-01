@@ -13,8 +13,14 @@ class Ghost : MonoBehaviour
     private bool _once;
 
     private GhostAttack _attack;
-
     private int rewindSpeed = 4;
+
+    public int indicatorSeconds;
+    private int nextAttack;
+    public GameObject warningIndicator;
+    private Vector3 originalWarningIndicatorScale;
+    public float warningIndicatorGrowSpeed = 0.001f;
+
 
     private State state;
 
@@ -23,7 +29,11 @@ class Ghost : MonoBehaviour
         Normal, Reverse
     }
 
-    void Start() { _attack = GetComponent<GhostAttack>(); }
+    void Start()
+    {
+        _attack = GetComponent<GhostAttack>();
+        originalWarningIndicatorScale = warningIndicator.transform.localScale;
+    }
 
     void FixedUpdate()
     {
@@ -52,8 +62,21 @@ class Ghost : MonoBehaviour
             var step = movements[_i];
             transform.position = step.position;
             transform.rotation = step.rotation;
-            if (step.attacked)
-                _attack.fire();
+
+            if (step.attacked) { _attack.fire(); }
+
+            nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attacked);
+            if (nextAttack < 50 && nextAttack != -1)
+            {
+                warningIndicator.SetActive(true);
+                float scale = 0.00005f * nextAttack * nextAttack;
+                warningIndicator.transform.localScale += new Vector3(scale, scale, scale);
+            }
+            else
+            {
+                warningIndicator.SetActive(false);
+                warningIndicator.transform.localScale = originalWarningIndicatorScale;
+            }
 
             _i++;
         }
