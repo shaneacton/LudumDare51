@@ -12,20 +12,28 @@ public class GameManager : MonoBehaviour
     public GameObject ghostPrefab;
     public bool alive = true;
     private MovementRecorder movementRecorder;
-
     public TextMeshProUGUI deadUI;
     public TextMeshProUGUI scoreUI;
     private int score = 0;
-
     private List<List<MovementData>> _ghostMovements = new List<List<MovementData>>();
     private List<Ghost> _ghosts = new List<Ghost>();
 
+    [System.NonSerialized]
     public bool canMove = true;
+    private Transform nearestSpawnToPlayer;
+    private bool movingPlayerToTarget = false;
+    public float spawnMoveSpeed = 4f;
 
-    private void Awake(){
+    private void Awake() {
         instance = this;
         movementRecorder = player.GetComponent<MovementRecorder>();
         deadUI.enabled = false;
+    }
+
+    private void Update() {
+        if(movingPlayerToTarget) {
+            movePlayerToTarget(nearestSpawnToPlayer.position, spawnMoveSpeed);
+        }
     }
 
     public void OnKillEnemy()
@@ -64,14 +72,24 @@ public class GameManager : MonoBehaviour
         _ghosts.Add(ghost);
 
         foreach (var g in _ghosts) { g.ResetMovement(); }
-        Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
-        player.transform.position = nearestSpawn.position;
-
-        return nearestSpawn;
+        nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
+        
+        movingPlayerToTarget = true;
+        // player.transform.position = nearestSpawn.position;
+                
+        return nearestSpawnToPlayer;
     }
 
-    public void onBreakEnd(){
+    public void onBreakEnd(){}
 
+    private void movePlayerToTarget(Vector3 target, float speed){
+        if(player.transform.position != target){
+            var step = speed * Time.deltaTime; 
+            player.transform.position = Vector3.MoveTowards(player.transform.position, target, step);
+        }
+        else{
+            movingPlayerToTarget = false;
+        }
     }
 
     IEnumerator SwitchScene()

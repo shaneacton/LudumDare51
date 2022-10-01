@@ -67,6 +67,7 @@ public class SpawnManager : MonoBehaviour
 
         GameManager.instance.canMove = false;
         DestroyAllEnemies();
+        
         var playerSpawnPt = GameManager.instance.OnReset();
         
         breakStartTime = GameManager.getEpochTime();
