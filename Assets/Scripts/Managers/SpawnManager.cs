@@ -1,7 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -32,8 +32,8 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(StartSpawnLoop());
     }
 
-    IEnumerator StartSpawnLoop(){
-        
+    IEnumerator StartSpawnLoop()
+    {
         GameManager.instance.canMove = false;
         var playerSpawnPt = GameManager.instance.OnStart();
 
@@ -41,6 +41,7 @@ public class SpawnManager : MonoBehaviour
 
         yield return new WaitForSeconds(breakTime);
 
+        GameManager.instance.onBreakEnd();
         GameManager.instance.canMove = true;
 
         breakTimer.GetComponent<BreakTimer>().Hide();
@@ -55,30 +56,30 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(spawnTime);
 
         loopTimer.GetComponent<LoopTimer>().Hide();
-
         breakTimer.GetComponent<BreakTimer>().Show();
 
         StartCoroutine(SpawnLoop());
     }
 
-    IEnumerator SpawnLoop(){
-        
+    IEnumerator SpawnLoop()
+    {
+
         if (!GameManager.instance.alive) { StopCoroutine(SpawnLoop()); }
 
         GameManager.instance.canMove = false;
         DestroyAllEnemies();
         var playerSpawnPt = GameManager.instance.OnReset();
-        
+
         breakStartTime = GameManager.getEpochTime();
 
         yield return new WaitForSeconds(breakTime);
+
+        GameManager.instance.onBreakEnd();
 
         GameManager.instance.canMove = true;
 
         breakTimer.GetComponent<BreakTimer>().Hide();
         loopTimer.GetComponent<LoopTimer>().Show();
-
-        GameManager.instance.onBreakEnd();
 
         spawnStartTime = GameManager.getEpochTime();
 
@@ -89,7 +90,6 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(spawnTime);
 
         loopTimer.GetComponent<LoopTimer>().Hide();
-
         breakTimer.GetComponent<BreakTimer>().Show();
 
         StartCoroutine(SpawnLoop());
@@ -108,8 +108,10 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    public void DestroyAllEnemies() {
-        foreach(GameObject enemy in enemies){
+    public void DestroyAllEnemies()
+    {
+        foreach (GameObject enemy in enemies)
+        {
             Destroy(enemy);
         }
     }

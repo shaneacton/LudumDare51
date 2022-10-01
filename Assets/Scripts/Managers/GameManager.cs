@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
 
     public bool canMove = true;
 
-    private void Awake(){
+    private void Awake()
+    {
         instance = this;
         movementRecorder = player.GetComponent<MovementRecorder>();
         deadUI.enabled = false;
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
 
     public Transform OnStart()
     {
+        movementRecorder.StopRecording();
+
         Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         player.transform.position = nearestSpawn.position;
 
@@ -54,6 +57,9 @@ public class GameManager : MonoBehaviour
 
     public Transform OnReset()
     {
+        // Start of break
+        movementRecorder.StopRecording();
+
         var ghostMovement = new List<MovementData>(movementRecorder.movements);
         _ghostMovements.Add(ghostMovement);
         movementRecorder.movements.Clear();
@@ -63,15 +69,17 @@ public class GameManager : MonoBehaviour
         ghost.movements = ghostMovement;
         _ghosts.Add(ghost);
 
-        foreach (var g in _ghosts) { g.ResetMovement(); }
+        foreach (var g in _ghosts) { g.ReverseMovement(); }
         Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         player.transform.position = nearestSpawn.position;
 
         return nearestSpawn;
     }
 
-    public void onBreakEnd(){
-
+    public void onBreakEnd()
+    {
+        foreach (var g in _ghosts) { g.ResetPosition(); }
+        movementRecorder.StartRecording();
     }
 
     IEnumerator SwitchScene()
@@ -80,7 +88,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public static long getEpochTime(){
+    public static long getEpochTime()
+    {
         System.DateTime epochStart = new System.DateTime(2020, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
         int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
         return cur_time;
