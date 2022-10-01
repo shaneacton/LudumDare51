@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         deadUI.enabled = false;
+
+        player = GameObject.Find("Player");
     }
 
     public void OnKillEnemy()
@@ -31,7 +33,14 @@ public class GameManager : MonoBehaviour
         deadUI.enabled = true;
         
         LeaderboardManager.instance.SendScore(score);
-        StartCoroutine(SwitchScene());
+        StartCoroutine(SwitchScene());        
+    }
+
+    public void OnReset(){
+
+        Transform nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
+        player.transform.position = nearestSpawn.position;
+
     }
 
     IEnumerator SwitchScene()
