@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
@@ -10,9 +14,8 @@ public class Enemy : MonoBehaviour
     public float speed = 10;
 
     private int _strategy;
-    // For straight line strategy
-    private bool _targetCalculated = false;
-    private Vector3 _staticDir;
+
+    private Renderer _renderer;
 
     void Start()
     {
@@ -20,19 +23,17 @@ public class Enemy : MonoBehaviour
         _player_rb = _player.GetComponent<Rigidbody2D>();
 
         _rb = GetComponent<Rigidbody2D>();
-        _strategy = Random.Range(0, 3);
+        _strategy = Random.Range(0, 2);
+
+        _renderer = GetComponent<Renderer>();
+        
+        EnemyManager.registerEnemy(this);
     }
 
     void FixedUpdate()
     {
         DestroyOutOfBounds();
-
-        if (_strategy == 0)
-            GotoPlayer();
-        else if (_strategy == 1)
-            InfrontOfPlayer();
-        else if (_strategy == 2)
-            StraightLine();
+        approachPlayer();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -44,45 +45,52 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void GotoPlayer()
+    private void approachPlayer(float infrontMag=2f)
     {
-        var dir = _player.transform.position - transform.position;
-        var newPos = transform.position + dir.normalized * speed * Time.fixedDeltaTime;
-
-        _rb.MovePosition(newPos);
-    }
-
-    private void InfrontOfPlayer()
-    {
-        var player_vel = _player_rb.velocity;
+        var player_vel = _player_rb.velocity.normalized * infrontMag;
         var target = _player.transform.position + new Vector3(player_vel.x, player_vel.y, 0f);
-
-        var dir = target - transform.position;
-        var newPos = transform.position + dir.normalized * speed * Time.fixedDeltaTime;
-
-        _rb.MovePosition(newPos);
+        // float distToTarget = Vector3.Distance(transform.position, _player.transform.position);
+        safeMoveTowards(target);
     }
 
-    private void StraightLine()
+    private void safeMoveTowards(Vector3 target, float minimumDistance = 3f)
     {
-        if (!_targetCalculated)
-        {
-            speed *= 5; // straight line strategy requires faster movement
-
-            var pos = transform.position;
-
-            var x_noise = Random.Range(-1f, 1f);
-            var y_noise = Random.Range(-1f, 1f);
-
-            var staticTarget = new Vector3(-pos.x + x_noise, -pos.y + y_noise, 0);
-            _staticDir = (staticTarget - transform.position).normalized;
-            // Only do this once
-            _targetCalculated = true;
+        Vector3 enemyToTarget = target - transform.position;
+        Vector3 newPos = transform.position + enemyToTarget.normalized * speed * Time.fixedDeltaTime;
+        if (Vector3.Distance(newPos, target) < minimumDistance)
+        { // too close, don't approach
+            safeMoveTowards(transform.position, minimumDistance:0f);
+            return;
         }
+        
+        List<Enemy> nearbyEnemies = EnemyManager.getNearbyEnemies(this);
+        // nearbyEnemies.Add(this);
+        if (Vector3.Distance(target, transform.position) > 0.001f)
+        { // is moving
+            foreach (Enemy nearby in nearbyEnemies)
+            { // move around other enemies
+                Vector3 nearToPos = newPos - nearby.transform.position;
+                float dist = nearToPos.magnitude;
+                // Debug.Log("dist: " + dist + " offsetting newPos by: " + nearToPos.normalized / Mathf.Pow(dist, 2f));
+                newPos += nearToPos.normalized / Mathf.Pow(dist, 2f);
+            }
+        }
+        
+        moveTowards(newPos);
+    }
 
-        var newPos = transform.position + _staticDir * speed * Time.fixedDeltaTime;
-
-        _rb.MovePosition(newPos);
+    private void moveTowards(Vector3 target)
+    {
+        Vector3 enemyToTarget = target - transform.position;
+        if (enemyToTarget.magnitude >= speed * Time.fixedDeltaTime)
+        {
+            Vector3 newPos = transform.position + enemyToTarget.normalized * speed * Time.fixedDeltaTime;
+            _rb.MovePosition(newPos);  
+        }
+        else
+        {
+            _rb.MovePosition(target);
+        }
     }
 
     private void DestroyOutOfBounds()
@@ -93,5 +101,10 @@ public class Enemy : MonoBehaviour
         var pos = transform.position;
         if (Mathf.Abs(pos.x) > 12 || Mathf.Abs(pos.y) > 12)
             Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        EnemyManager.removeEnemy(this);
     }
 }
