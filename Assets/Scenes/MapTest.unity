@@ -215,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 242839760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.46, y: -3.3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42547, y: 0.42547, z: 0.42547}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592470475}
@@ -381,7 +381,7 @@ Transform:
   m_GameObject: {fileID: 411450749}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42547, y: 0.42547, z: 0.42547}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592470475}
@@ -679,7 +679,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -702,7 +702,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -980,7 +980,7 @@ Transform:
   m_GameObject: {fileID: 1145848703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.31, y: 3.56, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42547, y: 0.42547, z: 0.42547}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592470475}
@@ -997,6 +997,7 @@ GameObject:
   - component: {fileID: 1217164043}
   - component: {fileID: 1217164042}
   - component: {fileID: 1217164044}
+  - component: {fileID: 1217164045}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1044,8 +1045,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 816639980945430082, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
-  obstaclePrefab: {fileID: 816639980945430082, guid: c5f285ac457548d44ae3ca0ac455b1f1, type: 3}
-  numTiles: 10
+  obstaclePrefab: {fileID: 7972506628736361861, guid: c8b205d40cfa6dc46be50a0d832574c6, type: 3}
+--- !u!114 &1217164045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217164041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90794dabdb64da2a1c5f905239953fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numTiles: 20
 --- !u!1 &1364306171
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1084,7 @@ Transform:
   m_GameObject: {fileID: 1364306171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.42, y: 5.28, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42547, y: 0.42547, z: 0.42547}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592470475}
@@ -1102,7 +1115,7 @@ Transform:
   m_GameObject: {fileID: 1457744992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.54, y: -6.03, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42547, y: 0.42547, z: 0.42547}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592470475}
@@ -1200,7 +1213,7 @@ MonoBehaviour:
   - {fileID: 1364306171}
   - {fileID: 1607640493}
   - {fileID: 1617368248}
-  TimeBetweenSpawns: 3
+  TimeBetweenSpawns: 1
 --- !u!1 &1607640493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1239,7 @@ Transform:
   m_GameObject: {fileID: 1607640493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.58, y: 0.09, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42547, y: 0.42547, z: 0.42547}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592470475}
@@ -1257,7 +1270,7 @@ Transform:
   m_GameObject: {fileID: 1617368248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9, y: -5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42547, y: 0.42547, z: 0.42547}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1592470475}

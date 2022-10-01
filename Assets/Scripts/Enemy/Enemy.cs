@@ -12,21 +12,15 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D _rb;
     public float speed = 10;
-
-    private int _strategy;
-
+    
     private Renderer _renderer;
-
-    private Vector3 lastMovementDirection;
-
+    
     void Start()
     {
         _player = GameManager.instance.player;
         _player_rb = _player.GetComponent<Rigidbody2D>();
 
         _rb = GetComponent<Rigidbody2D>();
-        _strategy = Random.Range(0, 2);
-
         _renderer = GetComponent<Renderer>();
         
         EnemyManager.registerEnemy(this);
@@ -51,30 +45,41 @@ public class Enemy : MonoBehaviour
     {
         var player_vel = _player_rb.velocity.normalized * infrontMag;
         var target = _player.transform.position + new Vector3(player_vel.x, player_vel.y, 0f);
-        // float distToTarget = Vector3.Distance(transform.position, _player.transform.position);
-        safeMoveTowards(target);
+        aStarMoveTowards(target);
     }
 
-    private void safeMoveTowards(Vector3 target, float minimumDistance = 3f)
+    void aStarMoveTowards(Vector3 target)
     {
+        Vector3 nextTileTarget = MapManager.getNextTarget(this, target);
+        // Debug.Log("moving to " + nextTile + " from pos: " + transform.position + " and tile: " + MapManager.getTileLocation(transform.position));
+        safeMoveTowards(nextTileTarget);
+    }
+
+    private void safeMoveTowards(Vector3 target, float minimumDistance = 0.15f)
+    {
+        /*
+         * First makes sure enemy is not already too close
+         * Then accounts for nearby enemies too
+         */
         Vector3 enemyToTarget = target - transform.position;
         Vector3 newPos = transform.position + enemyToTarget.normalized * speed * Time.fixedDeltaTime;
         if (Vector3.Distance(newPos, target) < minimumDistance)
         { // too close, don't approach
+            // Debug.Log("too close. Dist: " + Vector3.Distance(newPos, target));
             safeMoveTowards(transform.position, minimumDistance:0f);
             return;
         }
         
-        List<Enemy> nearbyEnemies = EnemyManager.getNearbyEnemies(this);
         // nearbyEnemies.Add(this);
         if (Vector3.Distance(target, transform.position) > 0.001f)
         { // is moving
+            List<Enemy> nearbyEnemies = EnemyManager.getNearbyEnemies(this);
             foreach (Enemy nearby in nearbyEnemies)
             { // move around other enemies
                 Vector3 nearToPos = newPos - nearby.transform.position;
                 float dist = nearToPos.magnitude;
                 // Debug.Log("dist: " + dist + " offsetting newPos by: " + nearToPos.normalized / Mathf.Pow(dist, 2f));
-                newPos += nearToPos.normalized / Mathf.Pow(dist, 3f);
+                newPos += 0.002f * nearToPos.normalized / Mathf.Pow(dist, 2f);
             }
         }
         
@@ -83,12 +88,8 @@ public class Enemy : MonoBehaviour
 
     private void moveTowards(Vector3 target)
     {
+        // Debug.Log("moving to " + target);
         Vector3 enemyToTarget = target - transform.position;
-        if (Vector3.Dot(enemyToTarget, lastMovementDirection) < 0)
-        { // has flipped direction since last frame
-            lastMovementDirection = lastMovementDirection + Time.fixedDeltaTime * (enemyToTarget.normalized - lastMovementDirection);
-            return;
-        }
         if (enemyToTarget.magnitude >= speed * Time.fixedDeltaTime)
         {
             Vector3 newPos = transform.position + enemyToTarget.normalized * speed * Time.fixedDeltaTime;
@@ -98,8 +99,6 @@ public class Enemy : MonoBehaviour
         {
             _rb.MovePosition(target);
         }
-
-        lastMovementDirection = enemyToTarget.normalized;
     }
 
     private void DestroyOutOfBounds()

@@ -2,19 +2,25 @@ using UnityEngine;
 
 public class MapSpawner : MonoBehaviour
 {
+    public static MapSpawner singleton;
+    
     public GameObject tilePrefab;
     public GameObject obstaclePrefab;
-    public int numTiles = 10;
 
-    private bool[,] obstacles;
+    public static float obstacleChance = 0.2f; // 0.2
+
+    public bool[,] obstacles;
+    public Tile[,] tiles;
     private void Awake()
     {
-        obstacles = new bool[numTiles, numTiles];
-        for (int i = 0; i < numTiles; i++)
+        singleton = this;
+        obstacles = new bool[MapManager.singleton.numTiles, MapManager.singleton.numTiles];
+        tiles = new Tile[MapManager.singleton.numTiles, MapManager.singleton.numTiles];
+        for (int i = 0; i < MapManager.singleton.numTiles; i++)
         {
-            for (int j = 0; j < numTiles; j++)
+            for (int j = 0; j < MapManager.singleton.numTiles; j++)
             {
-                bool obstacle = Random.Range(0f, 1f) > 0.2f;
+                bool obstacle = Random.Range(0f, 1f) < obstacleChance;
                 spawnTile(i, j, obstacle);
             }
         }
@@ -22,16 +28,24 @@ public class MapSpawner : MonoBehaviour
 
     void spawnTile(int i, int j, bool obstacle)
     {
-        i -= numTiles / 2;
-        j -= numTiles / 2;
-        Vector3 pos = Vector3.up * i + Vector3.right * j;
+        int x = i - MapManager.singleton.numTiles / 2;
+        int y = j - MapManager.singleton.numTiles / 2;
+        Vector3 pos = Vector3.right * x + Vector3.up * y;
+        GameObject tileObj;
         if (obstacle)
         {
-            Instantiate(tilePrefab, pos, transform.rotation);
+            tileObj = Instantiate(obstaclePrefab, pos, transform.rotation);
         }
         else
         {
-            Instantiate(obstaclePrefab, pos, transform.rotation);
+            tileObj = Instantiate(tilePrefab, pos, transform.rotation);
         }
+
+        Tile tile = tileObj.GetComponent<Tile>();
+        tile.X = i;
+        tile.Y = j;
+
+        tiles[i, j] = tile;
+        obstacles[i, j] = obstacle;
     }
 }
