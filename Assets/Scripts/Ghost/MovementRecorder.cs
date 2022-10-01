@@ -11,7 +11,6 @@ class MovementRecorder : MonoBehaviour
         if (!_canRecord) { return; }
 
         movements = new List<MovementData>();
-        movements.Add(new MovementData(transform.position, transform.rotation, false));
     }
     private void FixedUpdate()
     {
