@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
         else if (other.transform.CompareTag("Player"))
         {
             GameManager.instance.OnPlayerDead();
-            Destroy(other.gameObject);
+            // Destroy(other.gameObject);
         }
 
         GameManager.instance._bullets.Remove(this);
