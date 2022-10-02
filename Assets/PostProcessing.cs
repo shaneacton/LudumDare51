@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
@@ -8,14 +6,12 @@ public class PostProcessing : MonoBehaviour
 {
     public Volume volume;
     private LensDistortion lensDistortion;
-
-    public float lifespanSeconds = 5;
-    public float flashingSeconds = 2.5f;
-    //public float flashFrequency = 3;
+    private ChromaticAberration chromaticAberration;
 
     public float frequencyMultiplier = 1;
     public float intensityMultiplier = 1f;
     public float xDistortionMultiplier = 0.5f;
+    public float chromeIntensityMultiplier = 0.5f;
 
     public float defaultIntensity = 0.4f;
     public float defaultX = 0.3f;
@@ -23,7 +19,7 @@ public class PostProcessing : MonoBehaviour
     public float lerpStart;
     public float targetLerpTime;
 
-
+    public float chromiomIntensity = 0.4f;
 
     private void Start()
     {
@@ -33,17 +29,19 @@ public class PostProcessing : MonoBehaviour
     {
         if (SpawnManager.instance._state == SpawnManager.State.Break)
         {
-            DistortionFunction(SpawnManager.instance.breakTime);
+            DistortionFunction();
         }
 
         else
         {
-           var intensity =  Mathf.Lerp(GetDistortionIntensit(), defaultIntensity, (Time.time - lerpStart) / targetLerpTime);
+            var intensity = Mathf.Lerp(GetDistortionIntensit(), defaultIntensity, (Time.time - lerpStart) / targetLerpTime);
             var xmag = Mathf.Lerp(GetDistortionXMultiplier(), defaultX, (Time.time - lerpStart) / targetLerpTime);
+            var chromIntensity = Mathf.Lerp(GetChromaticAberation(), chromiomIntensity, (Time.time - lerpStart) / targetLerpTime);
             LensDistortionIntensity(intensity);
             LensDistortionXMultiplier(xmag);
+            ChromaticAberration(chromIntensity);
         }
-        
+
     }
 
     public void LensDistortionIntensity(float value)
@@ -80,23 +78,32 @@ public class PostProcessing : MonoBehaviour
         return defaultX;
     }
 
-    public void DistortionFunction(long period)
+    public void ChromaticAberration(float value)
     {
+        if (volume.profile.TryGet<ChromaticAberration>(out chromaticAberration))
+        {
+            chromaticAberration.intensity.value = value;
+        }
+    }
 
-        float frequency = (1 / period)*frequencyMultiplier;
+    public float GetChromaticAberation()
+    {
+        if (volume.profile.TryGet<ChromaticAberration>(out chromaticAberration))
+        {
+            return chromaticAberration.intensity.value;
+        }
 
-        float timeSinceSpawn = Time.time - SpawnManager.instance.breakStartTime;
-        //float deltT = timeSinceSpawn - lifespanSeconds + flashingSeconds;
-        //float flashTimeLeft = (lifespanSeconds - timeSinceSpawn) / flashingSeconds;
-        //float x = deltT * frequency / flashTimeLeft;
+        return chromiomIntensity;
+    }
 
-       
-
-        float intensity = (Mathf.Cos(Time.time*frequencyMultiplier) + 1) * intensityMultiplier;
-        float xShift = (Mathf.Cos(Time.time*frequencyMultiplier) + 1) * xDistortionMultiplier;
+    public void DistortionFunction()
+    {
+        float intensity = (Mathf.Cos(Time.time * frequencyMultiplier) + 1) * intensityMultiplier;
+        float chromeIntensity = (Mathf.Cos(Time.time * frequencyMultiplier) + 1) * chromeIntensityMultiplier;
+        float xShift = (Mathf.Cos(Time.time * frequencyMultiplier) + 1) * xDistortionMultiplier;
 
         LensDistortionIntensity(intensity);
         LensDistortionXMultiplier(xShift);
-        //Debug.Log($"{intensity} {x}");
+        ChromaticAberration(chromeIntensity);
     }
 }

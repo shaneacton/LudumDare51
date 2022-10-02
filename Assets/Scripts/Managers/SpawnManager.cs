@@ -156,6 +156,7 @@ public class SpawnManager : MonoBehaviour
             transforms.Add(spawnPt);
 
             // TODO Play spawn effect
+            AudioManager.Play("EnemySpawn");
             spawnPt.GetComponent<SpawnTile>().StartEffects();
         }
 
