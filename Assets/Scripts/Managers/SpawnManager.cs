@@ -156,14 +156,14 @@ public class SpawnManager : MonoBehaviour
             transforms.Add(spawnPt);
 
             // TODO Play spawn effect
-            spawnPt.GetComponent<SpawnTile>().EnemySpawnVFX.Play();
+            spawnPt.GetComponent<SpawnTile>().StartEffects();
         }
 
         yield return new WaitForSeconds(PreWarnEnemySpawnTime);
 
         foreach (var spawnPt in transforms)
         {
-            spawnPt.GetComponent<SpawnTile>().EnemySpawnVFX.Stop();
+            spawnPt.GetComponent<SpawnTile>().StopEffects();
             var pos = spawnPt.position;
             pos.z = 0;
             var enemyGO = Instantiate(enemy, pos, Quaternion.identity, spawnPt);
