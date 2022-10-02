@@ -71,6 +71,7 @@ public class Attack : MonoBehaviour
             chargeUpBar.gameObject.GetComponent<RectTransform>().position = transform.position;
             if (lazerReady && timeCharging > lazerChargeTime)
             {
+                AudioManager.Play("Lazer");
                 _recorder.Attacked(AttackType.Lazer);
                 InstantiateProjectile(lazerPrefab);
                 lazerReady = false;
