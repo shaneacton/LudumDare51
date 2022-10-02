@@ -14,8 +14,8 @@ public class Enemy : MonoBehaviour
     private Renderer _renderer;
 
     public GameObject coinPrefab;
-
-
+    public float spawnChance = 0.3333f;
+    
     void Start()
     {
         _player = GameManager.instance.player;
@@ -143,7 +143,10 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        Instantiate(coinPrefab, transform.position, transform.rotation);
+        if (Random.Range(0f, 1f) < spawnChance)
+        {
+            Instantiate(coinPrefab, transform.position, transform.rotation);
+        }
         EnemyManager.removeEnemy(this);
     }
 }
