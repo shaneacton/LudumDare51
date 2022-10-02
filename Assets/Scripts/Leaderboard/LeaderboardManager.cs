@@ -12,6 +12,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public static LeaderboardManager instance;
     public string computerId;
+    public string playFabId;
 
     public int LeaderboardSize = 10;
     public List<PlayerLeaderboardEntry> leaderboard;
@@ -46,6 +47,7 @@ public class LeaderboardManager : MonoBehaviour
             response =>
             {
                 Debug.Log("Successful login");
+                playFabId = response.PlayFabId;
                 GetLeaderboard(EndUIManager.instance.DisplayLeaderboard);
             },
             response => { Debug.Log($"Leaderboard update failed {response.GenerateErrorReport()}"); }

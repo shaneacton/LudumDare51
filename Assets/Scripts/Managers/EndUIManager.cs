@@ -32,19 +32,18 @@ public class EndUIManager : MonoBehaviour
         Debug.Log("Got leaderboard succesfully" + result.Leaderboard.Count);
 
         result.Leaderboard.Sort((x, y) => x.Position.CompareTo(y.Position));
-        var leaderboard = result.Leaderboard.Select(x => $"{x.Position,-15}. {x.DisplayName,-10}: {x.StatValue,-5}").ToArray();
+        var leaderboard = result.Leaderboard.Select(x => $"{x.Position}.\t{x.DisplayName}: {x.StatValue}").ToList();
 
-        for (int i = 0; i < leaderboard.Length - 1; i++)
+        for (int i = 0; i < leaderboard.Count - 1; i++)
         {
-            if (result.Leaderboard[i].PlayFabId == LeaderboardManager.instance.computerId)
+            if (result.Leaderboard[i].Profile.PlayerId == LeaderboardManager.instance.playFabId)
             {
-                leaderboard[i] = $"<b>{leaderboard[i]}</b>";
+                leaderboard[i] = $"<b><color=white>{leaderboard[i]}</color></b>";
                 break;
             }
         }
 
-        leaderboard.Prepend("Pos.\tName\tScore");
-        Debug.Log(leaderboard[0]);
+        leaderboard.Insert(0, "<b>Pos.\tName: Score</b>\n_________________");
         _LeaderboardUI.SetText(string.Join('\n', leaderboard));
     }
 
