@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6948770237598906202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6948770237598906203}
+  - component: {fileID: 6948770237598906204}
+  m_Layer: 8
+  m_Name: MainMap
+  m_TagString: Environment
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6948770237598906203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948770237598906202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6948770238725946030}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6948770237598906204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948770237598906202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69111e3f332949afb67cfcd0c963ccaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorTilePrefab: {fileID: 816639980945430082, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
+  obstaclePrefab: {fileID: 7972506628736361861, guid: c8b205d40cfa6dc46be50a0d832574c6, type: 3}
+  obstacleTopPrefab: {fileID: 7972506628736361861, guid: 5edb6f81cfe0afa4f98840a4a25117b8, type: 3}
+  spawnTilePrefab: {fileID: 885753411578522118, guid: ad3f9bdb3095a164f87ccdb6cfa1f3af, type: 3}
+  numXTiles: 20
+  numYTiles: 10
+--- !u!1 &6948770238725946029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6948770238725946030}
+  - component: {fileID: 6948770238725946031}
+  - component: {fileID: 6948770238725946033}
+  - component: {fileID: 2584111619894071132}
+  m_Layer: 8
+  m_Name: Environment
+  m_TagString: Environment
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6948770238725946030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948770238725946029}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6948770237598906203}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6948770238725946031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948770238725946029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914dac141cf140049d865ff1ce0f92af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6948770238725946033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948770238725946029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90794dabdb64da2a1c5f905239953fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapDef: {fileID: 6948770237598906204}
+--- !u!114 &2584111619894071132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948770238725946029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2601fecf48218e44d89fa5c50a2a64ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  ghostPrefab: {fileID: 3955783184932678211, guid: 1f3edf47e3a4d25499be2410404534cf, type: 3}
+  coinPrefab: {fileID: 5146615921676078667, guid: 9157165ea469626429c84e5fa1cc1c7e, type: 3}
+  alive: 1
+  deadUI: {fileID: 0}
+  HUD: {fileID: 0}
+  scoreUI: {fileID: 0}
+  cursorTexture: {fileID: 2800000, guid: f44e8615222f13845b25e0edfeea5c76, type: 3}
+  score: 0
+  spawnMoveSpeed: 4

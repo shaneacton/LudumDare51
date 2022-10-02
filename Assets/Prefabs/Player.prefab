@@ -242,8 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  dodgeSpeed: 50
-  dodgeTime: 0.05
+  dodgeSpeed: 15
+  dodgeTime: 0.1
   animator: {fileID: 950375154}
 --- !u!114 &847142555344448761
 MonoBehaviour:
