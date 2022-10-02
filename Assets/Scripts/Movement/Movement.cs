@@ -42,7 +42,11 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!GameManager.instance.canMove) { return; }
+        if (!GameManager.instance.canMove)
+        {
+            animator.SetBool("isMoving", false);
+            return;
+        }
         var inputs = GetInputs();
 
         if (_state == MoveState.Normal)
@@ -51,18 +55,18 @@ public class Movement : MonoBehaviour
 
             // if (Input.GetKey(KeyCode.Space)) { StartCoroutine(StartDodge(inputs)); }
         }
-        // else if (_state == MoveState.Dodging) { Dodge(inputs); }
 
         if (isMoving == false && (inputs.x != 0 || inputs.y != 0))
         {
             isMoving = true;
             animator.SetBool("isMoving", true);
         }
-        else if (isMoving == true && (inputs.x == 0 && inputs.y == 0))
+        else if (isMoving && (inputs.x == 0 && inputs.y == 0))
         {
             isMoving = false;
             animator.SetBool("isMoving", false);
         }
+
 
     }
 

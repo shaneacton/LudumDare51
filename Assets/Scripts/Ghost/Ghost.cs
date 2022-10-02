@@ -46,6 +46,10 @@ class Ghost : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (_i == -1)
+        {
+            Debug.LogError("weird i value: " + _i);
+        }
         if (movements.Count != 0 && _i < movements.Count)
         {
             animator.SetBool("isMoving", Vector3.Distance(transform.position, movements[_i].position) >= 0.01);
