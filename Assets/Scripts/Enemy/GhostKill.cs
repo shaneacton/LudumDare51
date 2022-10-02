@@ -1,5 +1,8 @@
 ﻿
-public class GhostKill
+public class GhostKill: PickUp
 {
-    
+    public override void pickUp()
+    {
+        // todo
+    }
 }

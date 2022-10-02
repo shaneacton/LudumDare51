@@ -64,9 +64,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void incrementScore()
+    public static void incrementScore(int num=1)
     {
-        instance.score++;
+        instance.score+=num;
         instance.scoreUI.SetText($"Score: {instance.score}");
     }
 
