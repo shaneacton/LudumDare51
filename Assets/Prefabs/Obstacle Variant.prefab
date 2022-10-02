@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1936640923629463453, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.096
+      value: 0.084
       objectReference: {fileID: 0}
     - target: {fileID: 2868272306872251190, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
       propertyPath: altSprites.Array.size

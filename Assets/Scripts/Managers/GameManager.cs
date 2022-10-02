@@ -25,8 +25,6 @@ public class GameManager : MonoBehaviour
 
     [System.NonSerialized]
     public List<Bullet> _bullets = new List<Bullet>();
-
-    [System.NonSerialized]
     public bool canMove = true;
     private Tile nearestSpawnToPlayer;
     private bool movingPlayerToTarget = false;
@@ -170,6 +168,7 @@ public class GameManager : MonoBehaviour
 
         nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
         movingPlayerToTarget = true;
+        player.GetComponent<Attack>().chargeUpBar.gameObject.SetActive( false);
         // player.transform.position = nearestSpawn.position;
 
         return nearestSpawnToPlayer;

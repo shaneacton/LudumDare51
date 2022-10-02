@@ -139,6 +139,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnTile Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2868272306872251190, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
+      propertyPath: altSprites.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868272306872251190, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
+      propertyPath: altSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: ae2a381c6b3c1ac4299adb3b37f6b9db, type: 3}
+    - target: {fileID: 2868272306872251190, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
+      propertyPath: altSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: ae2a381c6b3c1ac4299adb3b37f6b9db, type: 3}
+    - target: {fileID: 2868272306872251190, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
+      propertyPath: altSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: ae2a381c6b3c1ac4299adb3b37f6b9db, type: 3}
+    - target: {fileID: 2868272306872251190, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
+      propertyPath: altSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: ae2a381c6b3c1ac4299adb3b37f6b9db, type: 3}
     - target: {fileID: 3384258728426127006, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
       propertyPath: m_Sprite
       value: 
