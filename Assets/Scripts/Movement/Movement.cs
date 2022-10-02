@@ -6,6 +6,9 @@ public class Movement : MonoBehaviour
 {
     private int PLAYER_LAYER;
     private int ENEMY_LAYER;
+    private int GHOST_BULLET_LAYER;
+    private int ENEMY_BULLET_LAYER;
+
 
     public float movementSpeed = 10f;
     public float dodgeSpeed = 50f;
@@ -33,26 +36,30 @@ public class Movement : MonoBehaviour
 
         PLAYER_LAYER = LayerMask.NameToLayer("Player");
         ENEMY_LAYER = LayerMask.NameToLayer("Enemy");
+        ENEMY_LAYER = LayerMask.NameToLayer("EnemyBullet");
+        ENEMY_LAYER = LayerMask.NameToLayer("PlayerBullet");
     }
 
     void FixedUpdate()
     {
-        if(!GameManager.instance.canMove){return;}
+        if (!GameManager.instance.canMove) { return; }
         var inputs = GetInputs();
 
         if (_state == MoveState.Normal)
         {
             Move(inputs, movementSpeed);
 
-            if (Input.GetKey(KeyCode.Space)) { StartCoroutine(StartDodge(inputs)); }
+            // if (Input.GetKey(KeyCode.Space)) { StartCoroutine(StartDodge(inputs)); }
         }
-        else if (_state == MoveState.Dodging) { Dodge(inputs); }
+        // else if (_state == MoveState.Dodging) { Dodge(inputs); }
 
-        if(isMoving == false && (inputs.x != 0 || inputs.y != 0)){
+        if (isMoving == false && (inputs.x != 0 || inputs.y != 0))
+        {
             isMoving = true;
             animator.SetBool("isMoving", true);
         }
-        else if(isMoving == true && (inputs.x == 0 && inputs.y == 0)){
+        else if (isMoving == true && (inputs.x == 0 && inputs.y == 0))
+        {
             isMoving = false;
             animator.SetBool("isMoving", false);
         }
@@ -78,25 +85,32 @@ public class Movement : MonoBehaviour
         rb.MovePosition(newPos);
     }
 
-    IEnumerator StartDodge(Vector2 inputs)
-    {
-        _state = MoveState.Dodging;
-        _dodgeDir = inputs;
-        Physics2D.IgnoreLayerCollision(PLAYER_LAYER, ENEMY_LAYER, true);
+    // IEnumerator StartDodge(Vector2 inputs) // BROKEN!
+    // {
+    //     _state = MoveState.Dodging;
+    //     _dodgeDir = inputs;
+    //     Physics2D.IgnoreLayerCollision(PLAYER_LAYER, ENEMY_LAYER, true);
+    //     Physics2D.IgnoreLayerCollision(PLAYER_LAYER, ENEMY_BULLET_LAYER, true);
+    //     Physics2D.IgnoreLayerCollision(PLAYER_LAYER, GHOST_BULLET_LAYER, true);
 
-        yield return new WaitForSeconds(dodgeTime);
+    //     yield return new WaitForSeconds(dodgeTime);
 
-        Physics2D.IgnoreLayerCollision(PLAYER_LAYER, ENEMY_LAYER, false);
-        _state = MoveState.Normal;
+    //     _state = MoveState.Normal;
 
-        // TODO 
-        // Extended immunity time here with another wait for seconds (coyote time)?
-        // Maybe should disable inputs for a bit longer, have like .01 seconds of downtime after dodge
-        // Dodge cooldown so can't keep dodging
-    }
+    //     yield return new WaitForSeconds(dodgeTime);
+    //     // Extra invulnerable time
+    //     Physics2D.IgnoreLayerCollision(PLAYER_LAYER, ENEMY_LAYER, false);
+    //     Physics2D.IgnoreLayerCollision(PLAYER_LAYER, ENEMY_BULLET_LAYER, false);
+    //     Physics2D.IgnoreLayerCollision(PLAYER_LAYER, GHOST_BULLET_LAYER, false);
 
-    void Dodge(Vector2 inputs)
-    {
-        Move(_dodgeDir, dodgeSpeed);
-    }
+    //     // TODO 
+    //     // Extended immunity time here with another wait for seconds (coyote time)?
+    //     // Maybe should disable inputs for a bit longer, have like .01 seconds of downtime after dodge
+    //     // Dodge cooldown so can't keep dodging
+    // }
+
+    // void Dodge(Vector2 inputs)
+    // {
+    //     Move(_dodgeDir, dodgeSpeed);
+    // }
 }
