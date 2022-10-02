@@ -6,10 +6,12 @@ public class RoundTimerUI : MonoBehaviour
     public Slider slider;
     public float max = 10;
     public GameObject fill;
+    public BatteryText batteryText;
 
     void Start()
     {
         slider.maxValue = max;
+        Instantiate(batteryText);
     }
 
     // Update is called once per frame
@@ -30,11 +32,23 @@ public class RoundTimerUI : MonoBehaviour
     {
         slider.value = value;
 
-        if (value > 5) GameObject.Find("Fill").GetComponent<Image>().color = new Color(0, 255, 0);
-
-        else if (value <= 6 && value >3) GameObject.Find("Fill").GetComponent<Image>().color = new Color(255, 255, 0); // yellow
- 
-        else if (value < 3) GameObject.Find("Fill").GetComponent<Image>().color = new Color(255, 0, 0); // red
-
+        if (value > 5)
+        {
+            GameObject.Find("Fill").GetComponent<Image>().color = new Color(0, 255, 0);
+            this.batteryText.ChangeColour(new Color(0, 255, 0));
+            batteryText.ChangeText("Battery High");
+        }
+        else if (value <= 6 && value > 3)
+        {
+            GameObject.Find("Fill").GetComponent<Image>().color = new Color(255, 255, 0); // yellow
+            batteryText.ChangeColour(new Color(255, 255, 0));
+            batteryText.ChangeText("Battery Mid");
+        }
+        else if (value < 3)
+        {
+            GameObject.Find("Fill").GetComponent<Image>().color = new Color(255, 0, 0); // red
+            batteryText.ChangeColour(new Color(255, 0, 0));
+            batteryText.ChangeText("Battery Low");
+        }
     }
 }
