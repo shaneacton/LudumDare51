@@ -44,6 +44,7 @@ public class Attack : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // fire bullet
         {
+            AudioManager.Play("Pistol");
             InstantiateProjectile(bulletPrefab);
         }
 
