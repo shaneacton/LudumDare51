@@ -32,7 +32,7 @@ public class EndUIManager : MonoBehaviour
         Debug.Log("Got leaderboard succesfully" + result.Leaderboard.Count);
 
         result.Leaderboard.Sort((x, y) => x.Position.CompareTo(y.Position));
-        var leaderboard = result.Leaderboard.Select(x => $"{x.Position}.\t{x.DisplayName}: {x.StatValue}").ToArray();
+        var leaderboard = result.Leaderboard.Select(x => $"{x.Position,-15}. {x.DisplayName,-10}: {x.StatValue,-5}").ToArray();
 
         for (int i = 0; i < leaderboard.Length - 1; i++)
         {
@@ -43,6 +43,8 @@ public class EndUIManager : MonoBehaviour
             }
         }
 
+        leaderboard.Prepend("Pos.\tName\tScore");
+        Debug.Log(leaderboard[0]);
         _LeaderboardUI.SetText(string.Join('\n', leaderboard));
     }
 
