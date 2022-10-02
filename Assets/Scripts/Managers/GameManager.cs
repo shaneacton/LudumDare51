@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         // deadUI.SetActive(false);
         playerCollider = player.GetComponent<Collider2D>();
         // Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        Cursor.visible = false;
+        // ;Cursor.visible = false
     }
 
     private void Update()
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
 
     public Tile OnStart()
     {
-        Cursor.visible = false;
+        // Cursor.visible = false;
 
         movementRecorder.StopRecording();
         AudioManager.Stop("MenuSong");

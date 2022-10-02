@@ -46,9 +46,11 @@ class Ghost : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        animator.SetBool("isMoving", Vector3.Distance(transform.position, movements[_i].position) >= 0.01);
-        animator.SetFloat("direction", transform.rotation.z * 180);
+        if (movements.Count != 0 && _i < movements.Count)
+        {
+            animator.SetBool("isMoving", Vector3.Distance(transform.position, movements[_i].position) >= 0.01);
+            animator.SetFloat("direction", transform.rotation.z * 180);
+        }
 
         if (state == State.Normal) { FollowMovements(); }
         else if (state == State.Reverse) { ReverseMovements(); }
