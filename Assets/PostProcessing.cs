@@ -8,16 +8,6 @@ public class PostProcessing : MonoBehaviour
 {
     public Volume volume;
     private LensDistortion lensDistortion;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void LensDistortionIntensity(float value)
     {
