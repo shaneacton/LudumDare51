@@ -37,7 +37,8 @@ public abstract class MapDefinition: MonoBehaviour
         Vector2Int[] spawnPositions = getSpawnPoints();
         for (int i = 0; i < numXTiles; i++)
         {
-            for (int j = 0; j < numYTiles; j++)
+            // for (int j = 0; j < numYTiles; j++)
+            for (int j = numYTiles-1; j >= 0; j--)
             {
                 bool spawnPoint = spawnPositions.Contains(new Vector2Int(i, j));
                 spawnTile(i, j, spawnPoint);
@@ -71,7 +72,7 @@ public abstract class MapDefinition: MonoBehaviour
         int x = i - numXTiles / 2;
         int y = j - numYTiles / 2;
         Vector3 pos = Vector3.right * x + Vector3.up * y;
-        pos.z = 2;
+        pos.z = 2 + (j/(float)numYTiles);
         GameObject tilePrefab;
         if (obstacles[i, j])
         {

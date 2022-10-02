@@ -8,6 +8,7 @@ TagManager:
   - Ghost
   - PlayerBullet
   - EnemyBullet
+  - Environment
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Ghost
   - PlayerBullet
   - EnemyBullet
-  - 
+  - Coin
   - 
   - 
   - 

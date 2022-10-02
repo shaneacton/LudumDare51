@@ -1517,6 +1517,7 @@ MonoBehaviour:
   deadUI: {fileID: 1546321152}
   HUD: {fileID: 461635923}
   scoreUI: {fileID: 447196920}
+  cursorTexture: {fileID: 2800000, guid: f44e8615222f13845b25e0edfeea5c76, type: 3}
   spawnMoveSpeed: 4
 --- !u!114 &519420035
 MonoBehaviour:
