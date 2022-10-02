@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -22,24 +24,36 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
-        if (timeSinceLastAttack > attackPeriod - 1)
-        {
-            warningIndicator.SetActive(true);
-            warningIndicator.transform.localScale += new Vector3(warningIndicatorGrowSpeed, warningIndicatorGrowSpeed, warningIndicatorGrowSpeed);
+        bool waitedLongEnoughToShoot = timeSinceLastAttack > attackPeriod;
+        bool aboutToBeAbleToShoot = timeSinceLastAttack > attackPeriod - 1;
+        bool hasSeenPlayerRecently = Time.time - selfEnemy.lastSeenPlayerTime <= 1f;
+
+        if (aboutToBeAbleToShoot)
+        { // is about to be allowed to shoot
+            if (hasSeenPlayerRecently)
+            {
+                warningIndicator.SetActive(true);
+                float timeTillShootReady = attackPeriod - timeSinceLastAttack;
+                timeTillShootReady = Math.Max(0, timeTillShootReady);
+                if(timeTillShootReady > 1){throw new Exception("");}
+                warningIndicator.transform.localScale = originalWarningIndicatorScale * (1-timeTillShootReady);
+            }
+            else
+            {
+                warningIndicator.SetActive(false);
+            }
         }
 
-        if (timeSinceLastAttack > attackPeriod)
+        if (waitedLongEnoughToShoot)
         {// has waited long enough to shoot
-            if (Time.time - selfEnemy.lastSeenPlayerTime <= 1f)
+            if (hasSeenPlayerRecently)
             { // has seen player within th last 1 second
                 var bullet = Instantiate(bulletPrefab,
                     bulletSpawnPos.transform.position,
                     transform.rotation
                 );
                 timeSinceLastAttack = Random.Range(-1f, 1f);
-
                 warningIndicator.SetActive(false);
-                warningIndicator.transform.localScale = originalWarningIndicatorScale; 
             }
             else
             { // player has recently droped out of view. Don't shoot
