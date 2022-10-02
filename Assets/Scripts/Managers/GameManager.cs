@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
             // Debug.Log("spawning coin at: " + enemy.transform.position);
             Instantiate(coinPrefab, enemy.transform.position, enemy.transform.rotation);
         }
+        AudioManager.Play("EnemyDeath");
         incrementScore();
         Destroy(enemy);
     }
@@ -93,7 +94,8 @@ public class GameManager : MonoBehaviour
         LeaderboardManager.instance.SendScore(score);
         deadUI.SetActive(true);
         HUD.SetActive(false);
-
+        
+        AudioManager.Play("PlayerDeath");
         // LeaderboardManager.instance.SendScore(score);
         // StartCoroutine(SwitchScene());
     }

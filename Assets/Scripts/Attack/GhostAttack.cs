@@ -8,6 +8,7 @@ public class GhostAttack : MonoBehaviour
 
     public void fire()
     {
+        AudioManager.Play("GhostPistol");
         var bullet = Instantiate(bulletPrefab,
                                  bulletSpawnPos.transform.position,
                                  transform.rotation
