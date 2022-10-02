@@ -16,19 +16,26 @@ public class Attack : MonoBehaviour
 
     public float coolDown = 5;
 
-    private bool lazerReady = true;
+    public bool lazerReady = true;
 
     private void Start()
     {
         _look = GetComponent<MouseLook>();
         _recorder = GetComponent<MovementRecorder>();
+        coolDownTimer.SetMax(coolDown);
 
     }
 
     private void Update()
     {
         fire();
-        coolDownTimer.updateSlider(GameManager.getEpochTime() - coolDownStartTime);
+
+        if (!lazerReady)
+        {
+            coolDownTimer.UpdateSlider(GameManager.getEpochTime() - coolDownStartTime);
+        }
+        else
+            coolDownTimer.UpdateSlider(coolDown);
     }
 
     public void fire()
