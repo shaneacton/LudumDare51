@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     private bool movingPlayerToTarget = false;
     public float spawnMoveSpeed = 4f;
 
+    public PostProcessing postProcessing;
+
     private void Awake()
     {
         instance = this;
@@ -163,7 +165,7 @@ public class GameManager : MonoBehaviour
 
     public void onBreakEnd()
     {
-        // movementRecorder.StartRecording();
+        postProcessing.lerpStart = Time.time;
         AudioManager.Play("TenSecSong");
         foreach (var g in _ghosts) { g.ResetPosition(); }
     }

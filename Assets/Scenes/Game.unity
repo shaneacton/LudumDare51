@@ -389,7 +389,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -404,6 +404,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2945115441466667717, guid: 0b982206e1261774ebe3971b37196add, type: 3}
   m_PrefabInstance: {fileID: 2945115441703637555}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1172578446 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6907352077157639582, guid: b198d0e8a04ec1d4e95e404630c6003b, type: 3}
+  m_PrefabInstance: {fileID: 6907352078381949785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b415f36b7f66f7a4099f93696bb45fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1495873234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -476,6 +487,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2048775203, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 847142555344448762, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: coolDownTimer
       value: 
@@ -949,6 +964,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6907352077157639582, guid: b198d0e8a04ec1d4e95e404630c6003b, type: 3}
+      propertyPath: targetLerpTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907352077157639582, guid: b198d0e8a04ec1d4e95e404630c6003b, type: 3}
+      propertyPath: frequencyMultiplier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907352077157639582, guid: b198d0e8a04ec1d4e95e404630c6003b, type: 3}
+      propertyPath: intensityMultiplier
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907352077157639582, guid: b198d0e8a04ec1d4e95e404630c6003b, type: 3}
+      propertyPath: xDistortionMultiplier
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6907352077157639583, guid: b198d0e8a04ec1d4e95e404630c6003b, type: 3}
       propertyPath: m_Name
       value: Global Volume
@@ -980,6 +1011,10 @@ PrefabInstance:
       propertyPath: scoreUI
       value: 
       objectReference: {fileID: 447196920}
+    - target: {fileID: 2584111619894071132, guid: 9b16ffa503a3c904f8e4242b003bed60, type: 3}
+      propertyPath: postProcessing
+      value: 
+      objectReference: {fileID: 1172578446}
     - target: {fileID: 6948770238725946029, guid: 9b16ffa503a3c904f8e4242b003bed60, type: 3}
       propertyPath: m_Name
       value: Environment

@@ -9,13 +9,20 @@ public class PostProcessing : MonoBehaviour
     public Volume volume;
     private LensDistortion lensDistortion;
 
-    //public float lifespanSeconds = 5;
-    //public float flashingSeconds = 2.5f;
+    public float lifespanSeconds = 5;
+    public float flashingSeconds = 2.5f;
     //public float flashFrequency = 3;
 
     public float frequencyMultiplier = 1;
-    public float intensityMultiplier = 0.5f;
-    public float xDistortionMultiplier = 0.2f;
+    public float intensityMultiplier = 1f;
+    public float xDistortionMultiplier = 0.5f;
+
+    public float defaultIntensity = 0.4f;
+    public float defaultX = 0.3f;
+
+    public float lerpStart;
+    public float targetLerpTime;
+
 
 
     private void Start()
@@ -28,11 +35,15 @@ public class PostProcessing : MonoBehaviour
         {
             DistortionFunction(SpawnManager.instance.breakTime);
         }
+
         else
         {
-            LensDistortionIntensity(intensityMultiplier);
-            LensDistortionXMultiplier(xDistortionMultiplier);
+           var intensity =  Mathf.Lerp(GetDistortionIntensit(), defaultIntensity, (Time.time - lerpStart) / targetLerpTime);
+            var xmag = Mathf.Lerp(GetDistortionXMultiplier(), defaultX, (Time.time - lerpStart) / targetLerpTime);
+            LensDistortionIntensity(intensity);
+            LensDistortionXMultiplier(xmag);
         }
+        
     }
 
     public void LensDistortionIntensity(float value)
@@ -43,12 +54,30 @@ public class PostProcessing : MonoBehaviour
         }
     }
 
+    public float GetDistortionIntensit()
+    {
+        if (volume.profile.TryGet<LensDistortion>(out lensDistortion))
+        {
+            return lensDistortion.intensity.value;
+        }
+        return defaultIntensity;
+    }
+
     public void LensDistortionXMultiplier(float value)
     {
         if (volume.profile.TryGet<LensDistortion>(out lensDistortion))
         {
             lensDistortion.xMultiplier.value = value;
         }
+    }
+
+    public float GetDistortionXMultiplier()
+    {
+        if (volume.profile.TryGet<LensDistortion>(out lensDistortion))
+        {
+            return lensDistortion.xMultiplier.value;
+        }
+        return defaultX;
     }
 
     public void DistortionFunction(long period)
@@ -59,15 +88,15 @@ public class PostProcessing : MonoBehaviour
         float timeSinceSpawn = Time.time - SpawnManager.instance.breakStartTime;
         //float deltT = timeSinceSpawn - lifespanSeconds + flashingSeconds;
         //float flashTimeLeft = (lifespanSeconds - timeSinceSpawn) / flashingSeconds;
-        //float x = deltT * flashFrequency / flashTimeLeft;
+        //float x = deltT * frequency / flashTimeLeft;
 
-        Debug.Log(timeSinceSpawn);
+       
 
-        float intensity = (Mathf.Cos(frequency* timeSinceSpawn)) * intensityMultiplier;
-        float x = (Mathf.Cos(frequency* timeSinceSpawn)) * xDistortionMultiplier;
+        float intensity = (Mathf.Cos(Time.time*frequencyMultiplier) + 1) * intensityMultiplier;
+        float xShift = (Mathf.Cos(Time.time*frequencyMultiplier) + 1) * xDistortionMultiplier;
 
         LensDistortionIntensity(intensity);
-        LensDistortionXMultiplier(x);
-        Debug.Log($"{intensity} {x}");
+        LensDistortionXMultiplier(xShift);
+        //Debug.Log($"{intensity} {x}");
     }
 }
