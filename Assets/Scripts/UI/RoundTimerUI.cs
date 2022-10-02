@@ -46,8 +46,8 @@ public class RoundTimerUI : MonoBehaviour
         }
         else if (value < 3)
         {
-            this.GetComponent<Image>().color = new Color(255, 0, 0); // red
-            batteryText.ChangeColour(new Color(255, 0, 0));
+            this.GetComponent<Image>().color = new Color(255, 50, 0); // red
+            batteryText.ChangeColour(new Color(255, 50, 0));
             batteryText.ChangeText("Battery Low");
         }
     }

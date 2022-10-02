@@ -16,7 +16,7 @@ public class CoolDownTimer : MonoBehaviour
         }
         else if (value < slider.maxValue / 2)
         {
-            ChangeColour(new Color(255, 0, 0)); //red
+            ChangeColour(new Color(255, 50, 0)); //red
         }
         else if (value == slider.maxValue)
         {
