@@ -93,14 +93,22 @@ public class GameManager : MonoBehaviour
     {
         alive = false;
         LeaderboardManager.instance.SendScore(score);
-        deadUI.SetActive(true);
+        StartCoroutine(showDeadUI());
         HUD.SetActive(false);
         
         AudioManager.Play("PlayerDeath");
         AudioManager.Play("MenuSong");
-        // LeaderboardManager.instance.SendScore(score);
+
+        player.transform.GetChild(0).GetComponent<Animator>().SetBool("isDead", true);
+
         // StartCoroutine(SwitchScene());
         Cursor.visible = true;
+    }
+
+    IEnumerator showDeadUI(){
+        yield return new WaitForSeconds(1f);
+        Destroy(player);
+        deadUI.SetActive(true);
     }
 
     public Tile OnStart()
