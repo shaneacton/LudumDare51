@@ -34,19 +34,19 @@ public class RoundTimerUI : MonoBehaviour
 
         if (value > 5)
         {
-            GameObject.Find("Fill").GetComponent<Image>().color = new Color(0, 255, 0);
+            this.GetComponent<Image>().color = new Color(0, 255, 0);
             this.batteryText.ChangeColour(new Color(0, 255, 0));
             batteryText.ChangeText("Battery High");
         }
         else if (value <= 6 && value > 3)
         {
-            GameObject.Find("Fill").GetComponent<Image>().color = new Color(255, 255, 0); // yellow
+            this.GetComponent<Image>().color = new Color(255, 255, 0); // yellow
             batteryText.ChangeColour(new Color(255, 255, 0));
             batteryText.ChangeText("Battery Mid");
         }
         else if (value < 3)
         {
-            GameObject.Find("Fill").GetComponent<Image>().color = new Color(255, 0, 0); // red
+            this.GetComponent<Image>().color = new Color(255, 0, 0); // red
             batteryText.ChangeColour(new Color(255, 0, 0));
             batteryText.ChangeText("Battery Low");
         }
