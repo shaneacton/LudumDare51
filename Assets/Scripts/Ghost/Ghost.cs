@@ -23,6 +23,7 @@ class Ghost : MonoBehaviour
 
     public Renderer renderer;
 
+    public Animator animator;
 
     private State state;
 
@@ -37,8 +38,18 @@ class Ghost : MonoBehaviour
         originalWarningIndicatorScale = warningIndicator.transform.localScale;
     }
 
+    void Update()
+    {
+        transform.GetChild(0).transform.rotation = Quaternion.identity;
+    }
+
+
     void FixedUpdate()
     {
+
+        animator.SetBool("isMoving", Vector3.Distance(transform.position, movements[_i].position) >= 0.01);
+        animator.SetFloat("direction", transform.rotation.z * 180);
+
         if (state == State.Normal) { FollowMovements(); }
         else if (state == State.Reverse) { ReverseMovements(); }
     }
@@ -49,6 +60,7 @@ class Ghost : MonoBehaviour
         if (movements.Count != 0 && _i < movements.Count && _i >= 0)
         {
             var step = movements[_i];
+
             transform.position = step.position;
             transform.rotation = step.rotation;
             // if (step.attacked)
@@ -63,6 +75,7 @@ class Ghost : MonoBehaviour
         if (movements.Count != 0 && _i < movements.Count)
         {
             var step = movements[_i];
+
             transform.position = step.position;
             transform.rotation = step.rotation;
 
@@ -72,7 +85,7 @@ class Ghost : MonoBehaviour
             if (nextAttack < 50 * this.indicatorSeconds && nextAttack != -1)
             { // less than 50 frames from now
                 warningIndicator.SetActive(true);
-                float scale = warningIndicatorGrowSpeed * nextAttack * nextAttack * Time.deltaTime;
+                float scale = warningIndicatorGrowSpeed * nextAttack * Time.deltaTime;
                 warningIndicator.transform.localScale += new Vector3(scale, scale, scale);
                 renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.7f));
             }
