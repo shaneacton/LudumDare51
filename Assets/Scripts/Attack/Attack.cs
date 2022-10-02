@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ public class Attack : MonoBehaviour
     public float coolDown = 5;
 
     public bool lazerReady = true;
-
+    public float lazerShootingTime = 0.5f;
     private void Start()
     {
         _look = GetComponent<MouseLook>();
@@ -56,6 +57,7 @@ public class Attack : MonoBehaviour
             lazerReady = false;
             coolDownStartTime = GameManager.getEpochTime();
             StartCoroutine(EndRoutine());
+            StartCoroutine(ShootingLazer());
         }
     }
 
@@ -69,6 +71,12 @@ public class Attack : MonoBehaviour
                            );
     }
 
+    IEnumerator ShootingLazer()
+    {
+        GameManager.instance.canMove = false;
+        yield return new WaitForSeconds(lazerShootingTime);
+        GameManager.instance.canMove = true;
+    }
 
     IEnumerator EndRoutine()
     {
