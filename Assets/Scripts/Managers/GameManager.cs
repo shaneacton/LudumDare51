@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject ghostPrefab;
     public bool alive = true;
     private MovementRecorder movementRecorder;
-    public TextMeshProUGUI deadUI;
+    public GameObject deadUI;
+    public GameObject HUD;
     public TextMeshProUGUI scoreUI;
     private int score = 0;
     private List<List<MovementData>> _ghostMovements = new List<List<MovementData>>();
@@ -32,12 +33,13 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         movementRecorder = player.GetComponent<MovementRecorder>();
-        deadUI.enabled = false;
+        deadUI.SetActive(false);
         playerCollider = player.GetComponent<Collider2D>();
     }
 
     private void Update()
     {
+        if (!alive) return;
         if (movingPlayerToTarget)
         {
             playerCollider.enabled = false;
@@ -58,7 +60,7 @@ public class GameManager : MonoBehaviour
                     spawnPoint.setColour(Color.white);
                 }
             }
-            
+
         }
     }
 
@@ -76,7 +78,8 @@ public class GameManager : MonoBehaviour
     public void OnPlayerDead()
     {
         alive = false;
-        deadUI.enabled = true;
+        deadUI.SetActive(true);
+        HUD.SetActive(false);
 
         // LeaderboardManager.instance.SendScore(score);
         // StartCoroutine(SwitchScene());
@@ -105,7 +108,7 @@ public class GameManager : MonoBehaviour
         movementRecorder.movements.Clear();
 
         var ghostGO = Instantiate(
-            ghostPrefab, 
+            ghostPrefab,
             ghostMovement[ghostMovement.Count - 1].position,
             ghostMovement[ghostMovement.Count - 1].rotation
         );
@@ -117,7 +120,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var b in _bullets)
         {
-            try { Destroy(b.gameObject); }catch(Exception e){}
+            try { Destroy(b.gameObject); } catch (Exception e) { }
         }
 
         nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);

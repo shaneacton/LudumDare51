@@ -74,13 +74,13 @@ class Ghost : MonoBehaviour
                 warningIndicator.SetActive(true);
                 float scale = warningIndicatorGrowSpeed * nextAttack * nextAttack;
                 warningIndicator.transform.localScale += new Vector3(scale, scale, scale);
-                renderer.material.SetColor("_Color", new Color(1f, 0.4f, 0.4f, 0.6f));
+                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.7f));
             }
             else
             { // not attacking soon
                 warningIndicator.SetActive(false);
                 warningIndicator.transform.localScale = originalWarningIndicatorScale;
-                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.06f));
+                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.4f));
             }
 
             _i++;

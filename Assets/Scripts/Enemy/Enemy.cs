@@ -10,12 +10,12 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D _rb;
     public float speed = 10;
-    
+
     private Renderer _renderer;
-    
+
     public GameObject coinPrefab;
 
-    
+
     void Start()
     {
         _player = GameManager.instance.player;
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
         _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<Renderer>();
-        
+
         EnemyManager.registerEnemy(this);
     }
 
@@ -52,8 +52,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void approachPlayer(float infrontMag=2f)
+    private void approachPlayer(float infrontMag = 2f)
     {
+        if (!GameManager.instance.alive) return;
         var player_vel = _player_rb.velocity.normalized * infrontMag;
         var target = _player.transform.position + new Vector3(player_vel.x, player_vel.y, 0f);
         aStarMoveTowards(target);
@@ -77,10 +78,10 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(newPos, target) < minimumDistance)
         { // too close, don't approach
             // Debug.Log("too close. Dist: " + Vector3.Distance(newPos, target));
-            safeMoveTowards(transform.position, minimumDistance:0f);
+            safeMoveTowards(transform.position, minimumDistance: 0f);
             return;
         }
-        
+
         if (Vector3.Distance(target, transform.position) > 0.001f)
         { // is moving
             List<Enemy> nearbyEnemies = EnemyManager.getNearbyEnemies(this);
@@ -92,16 +93,18 @@ public class Enemy : MonoBehaviour
                 newPos += 0.002f * nearToPos.normalized / Mathf.Pow(dist, 2f);
             }
         }
-        
+
         moveTowards(newPos);
     }
 
     public bool canEnemySeePlayer()
     {
-        Vector3 dir2Player = GameManager.instance.player.transform.position -transform.position;
+        if(!GameManager.instance.alive) return false;
+
+        Vector3 dir2Player = GameManager.instance.player.transform.position - transform.position;
         int layerMask = ~(LayerMask.GetMask("Enemy", "Ghost", "EnemyBullet", "PlayerBullet"));
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir2Player, Mathf.Infinity, layerMask);
-        
+
         if (hit.collider != null)
         {
             GameObject hitObj = hit.collider.gameObject;
@@ -120,7 +123,7 @@ public class Enemy : MonoBehaviour
         if (enemyToTarget.magnitude >= speed * Time.fixedDeltaTime)
         {
             Vector3 newPos = transform.position + enemyToTarget.normalized * speed * Time.fixedDeltaTime;
-            _rb.MovePosition(newPos);  
+            _rb.MovePosition(newPos);
         }
         else
         {

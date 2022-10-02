@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -10,7 +11,7 @@ public class LeaderboardManager : MonoBehaviour
     private const string _LeaderboardName = "Score";
 
     public static LeaderboardManager instance;
-    private string computerId;
+    public string computerId;
 
     public int LeaderboardSize = 10;
     public List<PlayerLeaderboardEntry> leaderboard;
@@ -28,14 +29,7 @@ public class LeaderboardManager : MonoBehaviour
 
     private void Start()
     {
-        computerId = PlayerPrefs.GetString("ComputerID"); ;
-
-        if (computerId == "")
-        {
-            computerId = SystemInfo.deviceUniqueIdentifier;
-            PlayerPrefs.SetString("ComputerID", computerId);
-        }
-
+        computerId = SystemInfo.deviceUniqueIdentifier;
         Login();
     }
 
@@ -49,7 +43,11 @@ public class LeaderboardManager : MonoBehaviour
         };
 
         PlayFabClientAPI.LoginWithCustomID(request,
-            response => { Debug.Log("Successful login"); },
+            response =>
+            {
+                Debug.Log("Successful login");
+                GetLeaderboard(EndUIManager.instance.DisplayLeaderboard);
+            },
             response => { Debug.Log($"Leaderboard update failed {response.GenerateErrorReport()}"); }
         );
     }
