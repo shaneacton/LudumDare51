@@ -26,7 +26,6 @@ public class SpawnManager : MonoBehaviour
     public GameObject breakTimer;
 
     public float PreWarnEnemySpawnTime;
-    public ParticleSystem EnemySpawnVFX;
 
     public enum State
     {

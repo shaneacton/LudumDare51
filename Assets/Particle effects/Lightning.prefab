@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!2083052967 &6064376358133601015
 VisualEffect:
@@ -56,7 +56,7 @@ VisualEffect:
       - m_Value: 30
         m_Name: speed
         m_Overridden: 1
-      - m_Value: 0.5
+      - m_Value: 0.25
         m_Name: lifetime
         m_Overridden: 1
       - m_Value: 0.5
@@ -80,7 +80,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0.34761727, y: 1.5449656, z: 9.849155, w: 0}
+      - m_Value: {x: 3.7659175, y: 16.139647, z: 102.75575, w: 0}
         m_Name: colour
         m_Overridden: 1
     m_Uint:
