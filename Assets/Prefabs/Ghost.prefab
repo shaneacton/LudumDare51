@@ -117,6 +117,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 847142555344448760, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 847142555344448760, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -140,6 +144,10 @@ PrefabInstance:
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 4822571741269214372, guid: 55ac99bdeebe13440b1e6a35198f7ed1, type: 3}
+    - target: {fileID: 847142555344448765, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 847142555344448765, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_Enabled
       value: 0

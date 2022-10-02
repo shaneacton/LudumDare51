@@ -15,6 +15,9 @@ public class Movement : MonoBehaviour
     Rigidbody2D rb;
 
     private MoveState _state;
+
+    public Animator animator;
+
     private enum MoveState
     {
         Normal,
@@ -42,6 +45,10 @@ public class Movement : MonoBehaviour
             if (Input.GetKey(KeyCode.Space)) { StartCoroutine(StartDodge(inputs)); }
         }
         else if (_state == MoveState.Dodging) { Dodge(inputs); }
+
+        if(rb.velocity.x > 0) animator.SetFloat("velocity", rb.velocity.x);
+        if(rb.velocity.y > 0) animator.SetFloat("velocity", rb.velocity.y);
+
     }
 
     Vector2 GetInputs()

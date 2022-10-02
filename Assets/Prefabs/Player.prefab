@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 847142553713381556}
   - component: {fileID: 847142553713381557}
+  - component: {fileID: 950375154}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Player
@@ -52,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: db6e4edc74ecaf9408c0ebace0cbbb69, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0dee2e38f098af243907bb078709fb7a, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.016062737, a: 1}
+  m_Sprite: {fileID: 741370705, guid: 708f558cb653b874895a3e328804f426, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &950375154
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847142553713381559}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9ddb648211c7cdc418e20f334ca3c27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &847142553814095115
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,12 +145,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 847142555344448768}
-  - component: {fileID: 847142555344448763}
   - component: {fileID: 847142555344448766}
   - component: {fileID: 847142555344448765}
   - component: {fileID: 847142555344448762}
   - component: {fileID: 847142555344448760}
   - component: {fileID: 847142555344448761}
+  - component: {fileID: 2048775203}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -146,43 +167,14 @@ Transform:
   m_GameObject: {fileID: 847142555344448770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.13, y: 4.28, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 847142553713381556}
   - {fileID: 847142553814095112}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &847142555344448763
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847142555344448770}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -5.168474, y: -6.1596074}
-      - {x: 5.1494374, y: -0.02989912}
-      - {x: -5.163155, y: 6.011674}
-  m_UseDelaunayMesh: 0
 --- !u!50 &847142555344448766
 Rigidbody2D:
   serializedVersion: 4
@@ -218,6 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dir: {x: 0, y: 0, z: 0}
   angle: 0
+  animator: {fileID: 950375154}
 --- !u!114 &847142555344448762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,8 +225,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7357497731098227277, guid: a4636e4ade8a4354ba1c8a5849d3bb0c, type: 3}
   bulletSpawnPos: {fileID: 847142553814095115}
-  lazerPrefab: {fileID: 0}
+  lazerPrefab: {fileID: 3255117027061317592, guid: 4ae8ca7bc062e2548988e8f766279dfc, type: 3}
+  coolDownTimer: {fileID: 0}
   coolDown: 5
+  lazerReady: 1
 --- !u!114 &847142555344448760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +244,7 @@ MonoBehaviour:
   movementSpeed: 5
   dodgeSpeed: 50
   dodgeTime: 0.05
+  animator: {fileID: 950375154}
 --- !u!114 &847142555344448761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,3 +257,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4818463e2950f41a982650a797cd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &2048775203
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847142555344448770}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.054843463, y: 0.00071626256}
+  m_Size: {x: 0.5470144, y: 0.5313442}
+  m_Direction: 1
