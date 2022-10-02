@@ -12,6 +12,7 @@ public class EndUIManager : MonoBehaviour
     public string playerName;
 
     public TextMeshProUGUI _LeaderboardUI;
+    public TextMeshProUGUI ScoreUI;
 
     void Awake()
     {
@@ -24,7 +25,15 @@ public class EndUIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        if (GameManager.instance == null) return;  // in main menu
+
         LeaderboardManager.instance.GetLeaderboard(DisplayLeaderboard);
+        if (!GameManager.instance.alive) 
+        {
+            ScoreUI.text = $"You scored: {GameManager.instance.score}";
+            ScoreUI.enabled = true;
+        }
+
     }
 
     public void DisplayLeaderboard(GetLeaderboardResult result)
@@ -43,7 +52,8 @@ public class EndUIManager : MonoBehaviour
             }
         }
 
-        leaderboard.Insert(0, "<b>Pos.\tName: Score</b>\n_________________");
+        leaderboard.Insert(0, "<b><color=white>Pos.\tName: Score</color></b>\n_________________");
+        Debug.Log(_LeaderboardUI);
         _LeaderboardUI.SetText(string.Join('\n', leaderboard));
     }
 
@@ -60,6 +70,6 @@ public class EndUIManager : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Game");
     }
 }

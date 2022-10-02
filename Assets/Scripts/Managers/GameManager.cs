@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject HUD;
     public TextMeshProUGUI scoreUI;
     public Texture2D cursorTexture;
-    private int score = 0;
+    public int score = 0;
     private List<List<MovementData>> _ghostMovements = new List<List<MovementData>>();
     private List<Ghost> _ghosts = new List<Ghost>();
 
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         movementRecorder = player.GetComponent<MovementRecorder>();
-        deadUI.SetActive(false);
+        // deadUI.SetActive(false);
         playerCollider = player.GetComponent<Collider2D>();
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
     }
