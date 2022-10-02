@@ -15,6 +15,11 @@ public class Movement : MonoBehaviour
     Rigidbody2D rb;
 
     private MoveState _state;
+
+    public Animator animator;
+
+    private bool isMoving = false;
+
     private enum MoveState
     {
         Normal,
@@ -42,6 +47,16 @@ public class Movement : MonoBehaviour
             if (Input.GetKey(KeyCode.Space)) { StartCoroutine(StartDodge(inputs)); }
         }
         else if (_state == MoveState.Dodging) { Dodge(inputs); }
+
+        if(isMoving == false && (inputs.x != 0 || inputs.y != 0)){
+            isMoving = true;
+            animator.SetBool("isMoving", true);
+        }
+        else if(isMoving == true && (inputs.x == 0 && inputs.y == 0)){
+            isMoving = false;
+            animator.SetBool("isMoving", false);
+        }
+
     }
 
     Vector2 GetInputs()

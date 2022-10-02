@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var b in _bullets)
         {
-            try { Destroy(b.gameObject); } catch (Exception e) { }
+            try { Destroy(b.gameObject); } catch (Exception e) {Debug.LogError(e);}
         }
 
         nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
