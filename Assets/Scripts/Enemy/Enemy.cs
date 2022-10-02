@@ -53,6 +53,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
+            if(isDead){return;}
             GameManager.instance.OnPlayerDead();
             Destroy(other.gameObject);
         }
