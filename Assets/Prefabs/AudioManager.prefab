@@ -54,14 +54,14 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Pistol
     clip: {fileID: 8300000, guid: 13177f52a5d4e5b409ca7f8fbaa2bdac, type: 3}
-    volume: 1
+    volume: 0.861
     pitch: 1
     speed: 0
     loop: 0
     source: {fileID: 0}
   - name: EnemyPistol
     clip: {fileID: 8300000, guid: 002912d13d9f92f4b9092df827415abe, type: 3}
-    volume: 1
+    volume: 0.809
     pitch: 1
     speed: 0
     loop: 0
@@ -83,6 +83,27 @@ MonoBehaviour:
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: 225587e54981539438e4d4306322f967, type: 3}
     volume: 1
+    pitch: 1
+    speed: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Rewind
+    clip: {fileID: 8300000, guid: 90bc48e8d30176f44b23d8f92ed56c24, type: 3}
+    volume: 1
+    pitch: 1
+    speed: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: TenSecSong
+    clip: {fileID: 8300000, guid: ed087922d36bf604eb91a2ef24f4ab53, type: 3}
+    volume: 0.738
+    pitch: 1
+    speed: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuSong
+    clip: {fileID: 8300000, guid: 0dc25385ee273654b9cf073df1a7d236, type: 3}
+    volume: 0.331
     pitch: 1
     speed: 0
     loop: 0

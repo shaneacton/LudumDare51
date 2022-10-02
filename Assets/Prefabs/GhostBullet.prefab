@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GhostBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 7357497731098227277, guid: a4636e4ade8a4354ba1c8a5849d3bb0c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a4636e4ade8a4354ba1c8a5849d3bb0c, type: 3}
