@@ -54,6 +54,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public void SendScore(int score)
     {
+        Debug.Log("Sending score");
         var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate> {
@@ -66,7 +67,11 @@ public class LeaderboardManager : MonoBehaviour
 
         PlayFabClientAPI.UpdatePlayerStatistics(
             request,
-            response => { Debug.Log("Leaderboard update success"); },
+            response =>
+            {
+                Debug.Log("Leaderboard update success");
+                GetLeaderboard(EndUIManager.instance.DisplayLeaderboard);
+            },
             response => { Debug.Log($"Leaderboard update failed {response.GenerateErrorReport()}"); }
         );
     }

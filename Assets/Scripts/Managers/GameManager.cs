@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     public void OnPlayerDead()
     {
         alive = false;
+        LeaderboardManager.instance.SendScore(score);
         deadUI.SetActive(true);
         HUD.SetActive(false);
 

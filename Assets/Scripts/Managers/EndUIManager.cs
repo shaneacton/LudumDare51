@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using PlayFab.ClientModels;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 public class EndUIManager : MonoBehaviour
 {
     public static EndUIManager instance;
@@ -18,18 +15,15 @@ public class EndUIManager : MonoBehaviour
 
     void Awake()
     {
-        playerName = System.Environment.MachineName;
         instance = this;
+
+        playerName = PlayerPrefs.GetString("PlayerName");
+        if (playerName == "")
+            playerName = SystemInfo.deviceName;
     }
 
     private void OnEnable()
     {
-        LeaderboardManager.instance.GetLeaderboard(DisplayLeaderboard);
-    }
-
-    IEnumerator GetLeaderboard()
-    {
-        yield return new WaitForSeconds(2);
         LeaderboardManager.instance.GetLeaderboard(DisplayLeaderboard);
     }
 
@@ -40,8 +34,6 @@ public class EndUIManager : MonoBehaviour
         result.Leaderboard.Sort((x, y) => x.Position.CompareTo(y.Position));
         var leaderboard = result.Leaderboard.Select(x => $"{x.Position}.\t{x.DisplayName}: {x.StatValue}").ToArray();
 
-        Debug.Log(leaderboard.Length);
-
         for (int i = 0; i < leaderboard.Length - 1; i++)
         {
             if (result.Leaderboard[i].PlayFabId == LeaderboardManager.instance.computerId)
@@ -51,17 +43,16 @@ public class EndUIManager : MonoBehaviour
             }
         }
 
-        Debug.Log(leaderboard);
-        Debug.Log(_LeaderboardUI);
-
         _LeaderboardUI.SetText(string.Join('\n', leaderboard));
     }
 
     public void SetName()
     {
+        Debug.Log($"Setting name {NameField.text}");
         if (NameField.text == "") { return; }
 
         playerName = NameField.text;
+        PlayerPrefs.SetString("PlayerName", playerName);
 
         LeaderboardManager.instance.UpdateName(playerName);
     }
