@@ -656,6 +656,10 @@ PrefabInstance:
       propertyPath: breakTimer
       value: 
       objectReference: {fileID: 306108305}
+    - target: {fileID: 5463945592432387521, guid: 401e550e82f06f943b73f200b44200c8, type: 3}
+      propertyPath: PreWarnEnemySpawnTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5463945592432387526, guid: 401e550e82f06f943b73f200b44200c8, type: 3}
       propertyPath: m_RootOrder
       value: 4

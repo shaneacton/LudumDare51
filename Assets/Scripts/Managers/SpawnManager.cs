@@ -25,6 +25,9 @@ public class SpawnManager : MonoBehaviour
     public GameObject loopTimer;
     public GameObject breakTimer;
 
+    public float PreWarnEnemySpawnTime;
+    public ParticleSystem EnemySpawnVFX;
+
     public enum State
     {
         Break,
@@ -75,13 +78,13 @@ public class SpawnManager : MonoBehaviour
         float waveOneTime = UnityEngine.Random.Range(2.5f, 3.5f);
 
         SpawnPoints.Remove(playerSpawnPt);
-        SpawnEnemies(numWaveZero);
+        StartCoroutine(SpawnEnemies(numWaveZero));
         SpawnPoints.Add(playerSpawnPt);
 
-        yield return new WaitForSeconds(waveZeroTime);
-        SpawnEnemies(numWaveOne);
-        yield return new WaitForSeconds(waveOneTime);
-        SpawnEnemies(numWaveTwo);
+        yield return new WaitForSeconds(waveZeroTime - PreWarnEnemySpawnTime);
+        StartCoroutine(SpawnEnemies(numWaveOne));
+        yield return new WaitForSeconds(waveOneTime - PreWarnEnemySpawnTime);
+        StartCoroutine(SpawnEnemies(numWaveTwo));
         yield return new WaitForSeconds(10 - waveOneTime - waveZeroTime);
 
         loopTimer.GetComponent<LoopTimer>().Hide();
@@ -111,7 +114,6 @@ public class SpawnManager : MonoBehaviour
 
         GameManager.instance.onBreakEnd();
 
-        // GameManager.instance.canMove = true;
         GameManager.instance.EnablePlayerMovement();
 
         breakTimer.GetComponent<BreakTimer>().Hide();
@@ -127,13 +129,13 @@ public class SpawnManager : MonoBehaviour
         float waveOneTime = UnityEngine.Random.Range(2.5f, 3.5f);
 
         SpawnPoints.Remove(playerSpawnPt);
-        SpawnEnemies(numWaveZero);
+        StartCoroutine(SpawnEnemies(numWaveZero));
         SpawnPoints.Add(playerSpawnPt);
 
-        yield return new WaitForSeconds(waveZeroTime);
-        SpawnEnemies(numWaveOne);
-        yield return new WaitForSeconds(waveOneTime);
-        SpawnEnemies(numWaveTwo);
+        yield return new WaitForSeconds(waveZeroTime - PreWarnEnemySpawnTime);
+        StartCoroutine(SpawnEnemies(numWaveOne));
+        yield return new WaitForSeconds(waveOneTime - PreWarnEnemySpawnTime);
+        StartCoroutine(SpawnEnemies(numWaveTwo));
         yield return new WaitForSeconds(10 - waveOneTime - waveZeroTime);
 
         loopTimer.GetComponent<LoopTimer>().Hide();
@@ -144,13 +146,26 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnLoop());
     }
 
-    public void SpawnEnemies(int n)
+    IEnumerator SpawnEnemies(int n)
     {
+        List<Transform> transforms = new List<Transform>();
+
         for (int i = 0; i < n; i++)
         {
             var spawnPtIdx = UnityEngine.Random.Range(0, SpawnPoints.Count);
             var spawnPt = SpawnPoints[spawnPtIdx].transform;
-            Vector3 pos = spawnPt.position;
+            transforms.Add(spawnPt);
+
+            // TODO Play spawn effect
+            spawnPt.GetComponent<SpawnTile>().EnemySpawnVFX.Play();
+        }
+
+        yield return new WaitForSeconds(PreWarnEnemySpawnTime);
+
+        foreach (var spawnPt in transforms)
+        {
+            spawnPt.GetComponent<SpawnTile>().EnemySpawnVFX.Stop();
+            var pos = spawnPt.position;
             pos.z = 0;
             var enemyGO = Instantiate(enemy, pos, Quaternion.identity, spawnPt);
 

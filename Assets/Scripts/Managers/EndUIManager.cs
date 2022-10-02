@@ -25,6 +25,8 @@ public class EndUIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        NameField.text = playerName;
+        
         if (GameManager.instance == null) return;  // in main menu
 
         LeaderboardManager.instance.GetLeaderboard(DisplayLeaderboard);
