@@ -38,7 +38,8 @@ public class GameManager : MonoBehaviour
         movementRecorder = player.GetComponent<MovementRecorder>();
         // deadUI.SetActive(false);
         playerCollider = player.GetComponent<Collider2D>();
-        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        // Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -101,6 +102,7 @@ public class GameManager : MonoBehaviour
         player.transform.GetChild(0).GetComponent<Animator>().SetBool("isDead", true);
 
         // StartCoroutine(SwitchScene());
+        Cursor.visible = true;
     }
 
     IEnumerator showDeadUI(){
@@ -111,6 +113,8 @@ public class GameManager : MonoBehaviour
 
     public Tile OnStart()
     {
+        Cursor.visible = false;
+
         movementRecorder.StopRecording();
         AudioManager.Stop("MenuSong");
         // AudioManager.Play("TenSecSong");
