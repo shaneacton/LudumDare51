@@ -69,24 +69,18 @@ class Ghost : MonoBehaviour
             if (step.attacked) { _attack.fire(); }
 
             nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attacked);
-            if (nextAttack < 50 * 2.5f && nextAttack != -1)
-            {
-                renderer.material.SetColor("_Color", new Color(1f, 0.4f, 0.4f, 0.6f));
-            }
-            else
-            {
-                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.06f));
-            }
             if (nextAttack < 50 * this.indicatorSeconds && nextAttack != -1)
             { // less than 50 frames from now
                 warningIndicator.SetActive(true);
                 float scale = warningIndicatorGrowSpeed * nextAttack * nextAttack;
                 warningIndicator.transform.localScale += new Vector3(scale, scale, scale);
+                renderer.material.SetColor("_Color", new Color(1f, 0.4f, 0.4f, 0.6f));
             }
             else
             { // not attacking soon
                 warningIndicator.SetActive(false);
                 warningIndicator.transform.localScale = originalWarningIndicatorScale;
+                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.06f));
             }
 
             _i++;
