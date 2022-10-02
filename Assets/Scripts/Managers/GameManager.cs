@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
         HUD.SetActive(false);
         
         AudioManager.Play("PlayerDeath");
+        AudioManager.Play("MenuSong");
         // LeaderboardManager.instance.SendScore(score);
         // StartCoroutine(SwitchScene());
     }
@@ -103,6 +104,8 @@ public class GameManager : MonoBehaviour
     public Tile OnStart()
     {
         movementRecorder.StopRecording();
+        AudioManager.Stop("MenuSong");
+        // AudioManager.Play("TenSecSong");
 
         Tile nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         Vector3 pos = nearestSpawn.transform.position;
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
     {
         // Start of break
         // movementRecorder.StopRecording();
+        AudioManager.Play("Rewind");
 
         var ghostMovement = new List<MovementData>(movementRecorder.movements);
         _ghostMovements.Add(ghostMovement);
@@ -148,6 +152,7 @@ public class GameManager : MonoBehaviour
     public void onBreakEnd()
     {
         // movementRecorder.StartRecording();
+        AudioManager.Play("TenSecSong");
         foreach (var g in _ghosts) { g.ResetPosition(); }
     }
 

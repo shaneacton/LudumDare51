@@ -87,3 +87,24 @@ MonoBehaviour:
     speed: 0
     loop: 0
     source: {fileID: 0}
+  - name: Rewind
+    clip: {fileID: 8300000, guid: 90bc48e8d30176f44b23d8f92ed56c24, type: 3}
+    volume: 1
+    pitch: 1
+    speed: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: TenSecSong
+    clip: {fileID: 8300000, guid: ed087922d36bf604eb91a2ef24f4ab53, type: 3}
+    volume: 1
+    pitch: 1
+    speed: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuSong
+    clip: {fileID: 8300000, guid: 0dc25385ee273654b9cf073df1a7d236, type: 3}
+    volume: 1
+    pitch: 1
+    speed: 0
+    loop: 0
+    source: {fileID: 0}

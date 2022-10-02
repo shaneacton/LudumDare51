@@ -19,7 +19,6 @@ public class AudioManager: MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-            s.speed = s.speed;
         }
     }
     
@@ -33,7 +32,20 @@ public class AudioManager: MonoBehaviour
         }
 
         s.source.Play();
-        Debug.Log("playing " + name);
+        // Debug.Log("playing " + name);
+    }
+    
+    public static void Stop(string name)
+    {
+        Sound s = Array.Find(instance.sounds, sound => sound.name == name);
+        if(s == null)
+        {
+            Debug.LogError("Sound: " + name + " not found");
+            return;
+        }
+
+        s.source.Stop();
+        // Debug.Log("playing " + name);
     }
 
     public static void PlayRandom(string[] names)
