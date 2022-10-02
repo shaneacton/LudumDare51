@@ -26,10 +26,12 @@ public class Attack : MonoBehaviour
     private float lastShotTime;
 
     public float lazerShootingTime = 0.35f;
-    
+
     public float lazerChargeTime = 0.5f;
 
     private float timeCharging = -1;
+
+    public CameraShake shake;
 
     private void Start()
     {
@@ -59,14 +61,19 @@ public class Attack : MonoBehaviour
             _recorder.Attacked(AttackType.Shoot);
             AudioManager.Play("Pistol");
             InstantiateProjectile(bulletPrefab);
-            animator.SetBool("isAttacking", true); 
+            animator.SetBool("isAttacking", true);
             lastShotTime = Time.time;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            StartCoroutine(shake.Shake(lazerChargeTime, 0.1f));
         }
 
         bool holdingLazer = Input.GetMouseButton(1) && lazerReady;
         if (holdingLazer)
         {
-            chargeUpBar.gameObject.SetActive( true);
+            chargeUpBar.gameObject.SetActive(true);
             chargeUpBar.value = timeCharging / lazerChargeTime;
             chargeUpBar.gameObject.GetComponent<RectTransform>().position = transform.position;
             if (lazerReady && timeCharging > lazerChargeTime)
@@ -75,7 +82,7 @@ public class Attack : MonoBehaviour
                 _recorder.Attacked(AttackType.Lazer);
                 InstantiateProjectile(lazerPrefab);
                 lazerReady = false;
-                chargeUpBar.gameObject.SetActive( false);
+                chargeUpBar.gameObject.SetActive(false);
                 coolDownStartTime = GameManager.getEpochTime();
                 StartCoroutine(EndRoutine());
                 StartCoroutine(ShootingLazer());
@@ -92,7 +99,8 @@ public class Attack : MonoBehaviour
             timeCharging = 0;
         }
 
-        if((Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)) || Time.time - lastShotTime > 0.5f){
+        if ((Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)) || Time.time - lastShotTime > 0.5f)
+        {
             animator.SetBool("isAttacking", false);
         }
     }
