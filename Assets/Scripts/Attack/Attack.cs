@@ -11,6 +11,7 @@ public class Attack : MonoBehaviour
     public GameObject bulletSpawnPos;
     public GameObject lazerPrefab;
     public CoolDownTimer coolDownTimer;
+    public Animator animator;
 
     [System.NonSerialized]
     public long coolDownStartTime = 0;
@@ -18,6 +19,9 @@ public class Attack : MonoBehaviour
     public float coolDown = 5;
 
     public bool lazerReady = true;
+
+    private float lastShotTime;
+
     public float lazerShootingTime = 0.35f;
     
     public float lazerChargeTime = 0.5f;
@@ -52,6 +56,8 @@ public class Attack : MonoBehaviour
             _recorder.Attacked(AttackType.Shoot);
             AudioManager.Play("Pistol");
             InstantiateProjectile(bulletPrefab);
+            animator.SetBool("isAttacking", true); 
+            lastShotTime = Time.time;
         }
 
         bool holdingLazer = Input.GetMouseButton(1) && lazerReady;
@@ -71,6 +77,10 @@ public class Attack : MonoBehaviour
         else
         {
             timeCharging = 0;
+        }
+
+        if((Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)) || Time.time - lastShotTime > 0.5f){
+            animator.SetBool("isAttacking", false);
         }
     }
 
