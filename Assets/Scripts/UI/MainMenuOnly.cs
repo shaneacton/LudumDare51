@@ -10,9 +10,4 @@ public class MainMenuOnly : MonoBehaviour
        AudioManager.Play("MenuSong"); 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

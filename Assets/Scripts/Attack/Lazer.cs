@@ -11,7 +11,6 @@ public class Lazer : MonoBehaviour
         x_scale = transform.localScale.x;
     }
 
-
     public void IncreaseBeamSize()
     {
         x_scale += scaleFactor / 100;

@@ -18,13 +18,17 @@ public class Attack : MonoBehaviour
     public float coolDown = 5;
 
     public bool lazerReady = true;
-    public float lazerShootingTime = 0.5f;
+    public float lazerShootingTime = 0.35f;
+    
+    public float lazerChargeTime = 0.5f;
+
+    private float timeCharging = -1;
+
     private void Start()
     {
         _look = GetComponent<MouseLook>();
         _recorder = GetComponent<MovementRecorder>();
         coolDownTimer.SetMax(coolDown);
-
     }
 
     private void Update()
@@ -50,14 +54,23 @@ public class Attack : MonoBehaviour
             InstantiateProjectile(bulletPrefab);
         }
 
-        if (Input.GetMouseButtonDown(1) && lazerReady) // fire lazer
+        bool holdingLazer = Input.GetMouseButton(1) && lazerReady;
+        if (holdingLazer)
         {
-            _recorder.Attacked(AttackType.Lazer);
-            InstantiateProjectile(lazerPrefab);
-            lazerReady = false;
-            coolDownStartTime = GameManager.getEpochTime();
-            StartCoroutine(EndRoutine());
-            StartCoroutine(ShootingLazer());
+            timeCharging += Time.deltaTime;
+            if (lazerReady && timeCharging > lazerChargeTime)
+            {
+                _recorder.Attacked(AttackType.Lazer);
+                InstantiateProjectile(lazerPrefab);
+                lazerReady = false;
+                coolDownStartTime = GameManager.getEpochTime();
+                StartCoroutine(EndRoutine());
+                StartCoroutine(ShootingLazer());
+            }
+        }
+        else
+        {
+            timeCharging = 0;
         }
     }
 
