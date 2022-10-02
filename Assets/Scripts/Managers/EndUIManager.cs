@@ -28,7 +28,7 @@ public class EndUIManager : MonoBehaviour
         if (GameManager.instance == null) return;  // in main menu
 
         LeaderboardManager.instance.GetLeaderboard(DisplayLeaderboard);
-        if (!GameManager.instance.alive) 
+        if (!GameManager.instance.alive)
         {
             ScoreUI.text = $"You scored: {GameManager.instance.score}";
             ScoreUI.enabled = true;
@@ -68,8 +68,7 @@ public class EndUIManager : MonoBehaviour
         LeaderboardManager.instance.UpdateName(playerName);
     }
 
-    public void PlayGame()
-    {
-        SceneManager.LoadScene("Game");
-    }
+    public void PlayGame() { SceneManager.LoadScene("Game"); }
+
+    public void QuitGame() { Application.Quit(); }
 }
