@@ -52,6 +52,7 @@ public class EnemyAttack : MonoBehaviour
                     bulletSpawnPos.transform.position,
                     transform.rotation
                 );
+                AudioManager.Play("EnemyPistol");
                 timeSinceLastAttack = Random.Range(-1f, 1f);
                 warningIndicator.SetActive(false);
             }
