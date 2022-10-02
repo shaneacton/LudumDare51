@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4822571741269214372, guid: 55ac99bdeebe13440b1e6a35198f7ed1, type: 3}
+  lazerPrefab: {fileID: 3255117027061317592, guid: 4ae8ca7bc062e2548988e8f766279dfc, type: 3}
   bulletSpawnPos: {fileID: 3955783186188390986}
 --- !u!1 &3955783186188390986 stripped
 GameObject:

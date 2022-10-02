@@ -4,7 +4,7 @@ using UnityEngine;
 class MovementRecorder : MonoBehaviour
 {
     public List<MovementData> movements = new List<MovementData>();
-    private bool _attacked = false;
+    private AttackType _attackType = AttackType.Nothing;
     private bool _canRecord = true;
     private void Awake()
     {
@@ -16,11 +16,11 @@ class MovementRecorder : MonoBehaviour
     {
         if (!_canRecord) { return; }
 
-        movements.Add(new MovementData(transform.position, transform.rotation, _attacked));
-        _attacked = false;
+        movements.Add(new MovementData(transform.position, transform.rotation, _attackType));
+        _attackType = AttackType.Nothing;
     }
 
-    public void Attacked() { _attacked = true; }
+    public void Attacked(AttackType attackType) { _attackType = attackType; }
 
     public void StartRecording() { _canRecord = true; }
 

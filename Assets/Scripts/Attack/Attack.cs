@@ -44,12 +44,14 @@ public class Attack : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // fire bullet
         {
+            _recorder.Attacked(AttackType.Shoot);
             AudioManager.Play("Pistol");
             InstantiateProjectile(bulletPrefab);
         }
 
         if (Input.GetMouseButtonDown(1) && lazerReady) // fire lazer
         {
+            _recorder.Attacked(AttackType.Lazer);
             InstantiateProjectile(lazerPrefab);
             lazerReady = false;
             coolDownStartTime = GameManager.getEpochTime();
@@ -60,7 +62,6 @@ public class Attack : MonoBehaviour
 
     private void InstantiateProjectile(GameObject obj)
     {
-        _recorder.Attacked();
 
         var bullet = Instantiate(obj,
                            bulletSpawnPos.transform.position,

@@ -56,7 +56,7 @@ class Ghost : MonoBehaviour
 
     private void ReverseMovements()
     {
-        renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.06f));
+        renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.4f));
         if (movements.Count != 0 && _i < movements.Count && _i >= 0)
         {
             var step = movements[_i];
@@ -79,9 +79,10 @@ class Ghost : MonoBehaviour
             transform.position = step.position;
             transform.rotation = step.rotation;
 
-            if (step.attacked) { _attack.fire(); }
+            if (step.attackType == AttackType.Shoot) { _attack.fire(); }
+            else if (step.attackType == AttackType.Lazer) { _attack.lazer(); }
 
-            nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attacked);
+            nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attackType != AttackType.Nothing);
             if (nextAttack < 50 * this.indicatorSeconds && nextAttack != -1)
             { // less than 50 frames from now
                 warningIndicator.SetActive(true);
