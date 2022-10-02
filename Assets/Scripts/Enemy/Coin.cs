@@ -8,4 +8,9 @@ public class Coin : PickUp
         // Debug.Log("got coin");
         GameManager.incrementScore(2);
     }
+
+    public override void playSound()
+    {
+        AudioManager.Play("Coin");
+    }
 }

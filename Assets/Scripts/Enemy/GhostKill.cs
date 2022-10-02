@@ -5,4 +5,9 @@ public class GhostKill: PickUp
     {
         // todo
     }
+
+    public override void playSound()
+    {
+        throw new System.NotImplementedException();
+    }
 }

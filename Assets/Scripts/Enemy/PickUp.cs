@@ -10,6 +10,7 @@ public abstract class PickUp: MonoBehaviour
     public Renderer renderer;
 
     public abstract void pickUp();
+    public abstract void playSound();
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public abstract class PickUp: MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             pickUp();
+            playSound();
             Destroy(gameObject);
         }
     }

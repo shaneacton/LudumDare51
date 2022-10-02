@@ -48,12 +48,12 @@ MonoBehaviour:
   - name: Coin
     clip: {fileID: 8300000, guid: 0d32a2f9bdf53da44a527e1a24831c57, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Pistol
     clip: {fileID: 8300000, guid: 13177f52a5d4e5b409ca7f8fbaa2bdac, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
