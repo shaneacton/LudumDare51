@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 using Color = UnityEngine.Color;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
@@ -15,6 +12,9 @@ public class Enemy : MonoBehaviour
     public float speed = 10;
     
     private Renderer _renderer;
+    
+    public GameObject coinPrefab;
+
     
     void Start()
     {
@@ -140,6 +140,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        Instantiate(coinPrefab, transform.position, transform.rotation);
         EnemyManager.removeEnemy(this);
     }
 }

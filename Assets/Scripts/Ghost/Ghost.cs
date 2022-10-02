@@ -45,6 +45,7 @@ class Ghost : MonoBehaviour
 
     private void ReverseMovements()
     {
+        renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.06f));
         if (movements.Count != 0 && _i < movements.Count && _i >= 0)
         {
             var step = movements[_i];

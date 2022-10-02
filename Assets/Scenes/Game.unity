@@ -1242,8 +1242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 033c2e76a943cb547bb6ffcd285464da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 638058406}
+  slider: {fileID: 0}
   max: 10
+  fill: {fileID: 0}
 --- !u!114 &1086598281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1401,6 +1402,7 @@ MonoBehaviour:
   numEnemies: 1
   loopTimer: {fileID: 845160694}
   breakTimer: {fileID: 306108305}
+  _state: 0
 --- !u!1 &1923478490
 GameObject:
   m_ObjectHideFlags: 0
