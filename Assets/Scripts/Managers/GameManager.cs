@@ -133,7 +133,8 @@ public class GameManager : MonoBehaviour
 
         Tile nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         Vector3 pos = nearestSpawn.transform.position;
-        pos.z = 0;
+        Node tilePos = MapManager.getTileLocation(pos);
+        pos.z = 1 + (tilePos.y/(float)MapManager.singleton.mapDef.numYTiles);
         player.transform.position = pos;
 
         return nearestSpawn;

@@ -81,8 +81,12 @@ public class Movement : MonoBehaviour
 
         Vector2 movement = inputs.normalized * speed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
-
+        
         rb.MovePosition(newPos);
+        Vector3 pos = transform.position;
+        Node tilePos = MapManager.getTileLocation(pos-new Vector3(0, 0.1f, 0));
+        pos.z = 1 + (tilePos.y/(float)MapManager.singleton.mapDef.numYTiles);
+        transform.position = pos;
     }
 
     // IEnumerator StartDodge(Vector2 inputs) // BROKEN!

@@ -227,10 +227,12 @@ MonoBehaviour:
   bulletSpawnPos: {fileID: 847142553814095115}
   lazerPrefab: {fileID: 3255117027061317592, guid: 4ae8ca7bc062e2548988e8f766279dfc, type: 3}
   coolDownTimer: {fileID: 0}
+  chargeUpBar: {fileID: 0}
   animator: {fileID: 950375154}
   coolDown: 5
   lazerReady: 1
   lazerShootingTime: 0.5
+  lazerChargeTime: 0.5
 --- !u!114 &847142555344448760
 MonoBehaviour:
   m_ObjectHideFlags: 0
