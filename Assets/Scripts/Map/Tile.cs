@@ -10,11 +10,6 @@ public class Tile : MonoBehaviour
 
     public Renderer renderer;
 
-    private void Awake()
-    {
-        renderer = transform.GetChild(0).gameObject.GetComponent<Renderer>();
-    }
-
     public override string ToString()
     {
         return "Tile " + X + ", " + Y + " at pos: " + transform.position;

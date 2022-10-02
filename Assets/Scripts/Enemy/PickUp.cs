@@ -7,14 +7,13 @@ public abstract class PickUp: MonoBehaviour
     public float flashingSeconds=2.5f;
     public float flashFrequency=3;
     private float startTime;
-    private Renderer _renderer;
+    public Renderer renderer;
 
     public abstract void pickUp();
 
     private void Start()
     {
         startTime = Time.time;
-        _renderer = GetComponent<Renderer>();
     }
     
     private void Update()
@@ -31,8 +30,8 @@ public abstract class PickUp: MonoBehaviour
             float x = deltT * flashFrequency  / flashTimeLeft ;
             float y = (Mathf.Cos(x) +1) * 0.5f;
             // Debug.Log("t: " + deltT + " x: " + x + " y: " + y);
-            _renderer.material.SetColor("_Color", new Color(1,1,0,y));
-            _renderer.material.SetColor("_EmissionColor", new Color(1,1,0,y));
+            renderer.material.SetColor("_Color", new Color(1f,1f,1f,y));
+            renderer.material.SetColor("_EmissionColor", new Color(1f,1f,1f,y));
         }
     }
 
