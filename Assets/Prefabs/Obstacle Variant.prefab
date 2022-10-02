@@ -192,10 +192,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1936640923629463453, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.096
+      objectReference: {fileID: 0}
     - target: {fileID: 3384258728426127006, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2d92f4576ee55a84c9174ce0fea2eefc, type: 3}
+      objectReference: {fileID: 21300000, guid: 0ba3b58ee8ef64f4cb091aa37649c3c1, type: 3}
     - target: {fileID: 7470609764395573249, guid: 408bbd17155c50f41a205ce75184a116, type: 3}
       propertyPath: m_RootOrder
       value: 0
