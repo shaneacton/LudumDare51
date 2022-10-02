@@ -129,7 +129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847142553814095115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.627, y: 0, z: 0}
+  m_LocalPosition: {x: 0.43, y: -0.026, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -227,6 +227,7 @@ MonoBehaviour:
   bulletSpawnPos: {fileID: 847142553814095115}
   lazerPrefab: {fileID: 3255117027061317592, guid: 4ae8ca7bc062e2548988e8f766279dfc, type: 3}
   coolDownTimer: {fileID: 0}
+  animator: {fileID: 950375154}
   coolDown: 5
   lazerReady: 1
   lazerShootingTime: 0.5
