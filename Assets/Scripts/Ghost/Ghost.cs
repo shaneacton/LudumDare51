@@ -72,7 +72,7 @@ class Ghost : MonoBehaviour
             if (nextAttack < 50 * this.indicatorSeconds && nextAttack != -1)
             { // less than 50 frames from now
                 warningIndicator.SetActive(true);
-                float scale = warningIndicatorGrowSpeed * nextAttack * nextAttack;
+                float scale = warningIndicatorGrowSpeed * nextAttack * nextAttack * Time.deltaTime;
                 warningIndicator.transform.localScale += new Vector3(scale, scale, scale);
                 renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.7f));
             }

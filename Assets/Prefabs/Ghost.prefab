@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5800150648635649440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3955783184932678209}
@@ -175,15 +175,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 847142555344448768, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.05
+      value: 0.90000004
       objectReference: {fileID: 0}
     - target: {fileID: 847142555344448768, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.05
+      value: 0.90000004
       objectReference: {fileID: 0}
     - target: {fileID: 847142555344448768, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.05
+      value: 0.90000004
       objectReference: {fileID: 0}
     - target: {fileID: 847142555344448768, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorSeconds: 1
   warningIndicator: {fileID: 5800150648635649440}
-  warningIndicatorGrowSpeed: 0.0001
+  warningIndicatorGrowSpeed: 0.005
   renderer: {fileID: 3955783186557442036}
 --- !u!114 &-7760966744378250543
 MonoBehaviour:
