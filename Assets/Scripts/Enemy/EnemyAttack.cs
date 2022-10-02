@@ -14,6 +14,7 @@ public class EnemyAttack : MonoBehaviour
     public GameObject warningIndicator;
     private Vector3 originalWarningIndicatorScale;
     public float warningIndicatorGrowSpeed = 0.001f;
+    public Animator animator;
 
     private Enemy selfEnemy;
     private void Start()
@@ -32,7 +33,13 @@ public class EnemyAttack : MonoBehaviour
         { // is about to be allowed to shoot
             if (hasSeenPlayerRecently)
             {
+                if(selfEnemy.isDead){
+                    warningIndicator.SetActive(false);
+                    return;
+                }
+
                 warningIndicator.SetActive(true);
+                animator.SetBool("isAttacking", true);
                 float timeTillShootReady = attackPeriod - timeSinceLastAttack;
                 timeTillShootReady = Math.Max(0, timeTillShootReady);
                 if(timeTillShootReady > 1){throw new Exception("");}
@@ -40,6 +47,7 @@ public class EnemyAttack : MonoBehaviour
             }
             else
             {
+                animator.SetBool("isAttacking", false);
                 warningIndicator.SetActive(false);
             }
         }

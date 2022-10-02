@@ -16,6 +16,11 @@ public class Enemy : MonoBehaviour
     public static float spawnChance = 0.3333f;
 
     public float lastSeenPlayerTime = -1;
+
+    public Animator animator;
+
+    [System.NonSerialized]
+    public bool isDead = false;
     
     void Start()
     {
@@ -142,7 +147,12 @@ public class Enemy : MonoBehaviour
 
     private void moveTowards(Vector3 target)
     {
+        if(isDead) {return;}
+        
         Vector3 enemyToTarget = target - transform.position;
+        float angle = Mathf.Atan2(enemyToTarget.y, enemyToTarget.x) * Mathf.Rad2Deg;
+        animator.SetFloat("direction", angle);
+
         if (enemyToTarget.magnitude >= speed * Time.fixedDeltaTime)
         { // can move full amount
             float speedMod = 1f;

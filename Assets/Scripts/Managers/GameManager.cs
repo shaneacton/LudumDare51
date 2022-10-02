@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void OnKillEnemy(GameObject enemy)
     {
+
         float coinSpawnFac = Random.Range(0f, 1f);
         // Debug.Log("coin spawn fac: " + coinSpawnFac);
         if (coinSpawnFac < Enemy.spawnChance)
@@ -86,12 +87,21 @@ public class GameManager : MonoBehaviour
         }
         AudioManager.Play("EnemyDeath");
         incrementScore();
+        enemy.GetComponent<Enemy>().isDead = true;
+        enemy.GetComponent<Animator>().SetBool("isDead", true);
+        StartCoroutine(DestroyEnemy(enemy));
+    }
+
+    IEnumerator DestroyEnemy(GameObject enemy){
+        yield return new WaitForSeconds(1);
         Destroy(enemy);
     }
 
     public void OnPlayerDead()
     {
         alive = false;
+        canMove = false;
+
         LeaderboardManager.instance.SendScore(score);
         StartCoroutine(showDeadUI());
         HUD.SetActive(false);
