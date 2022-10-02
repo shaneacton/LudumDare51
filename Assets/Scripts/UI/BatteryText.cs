@@ -26,7 +26,6 @@ public class BatteryText : MonoBehaviour
     public void ChangeColour(Color color)
     {
         this.GetComponent<TextMeshProUGUI>().color = color;
-        //this.txtAdsStatus.
     }
 
 }

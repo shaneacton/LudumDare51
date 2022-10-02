@@ -9,6 +9,10 @@ public class Attack : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject bulletSpawnPos;
     public GameObject lazerPrefab;
+    public CoolDownTimer coolDownTimer;
+
+    [System.NonSerialized]
+    public long coolDownStartTime = 0;
 
     public float coolDown = 5;
 
@@ -24,6 +28,7 @@ public class Attack : MonoBehaviour
     private void Update()
     {
         fire();
+        coolDownTimer.updateSlider(GameManager.getEpochTime() - coolDownStartTime);
     }
 
     public void fire()
@@ -39,6 +44,7 @@ public class Attack : MonoBehaviour
         {
             InstantiateProjectile(lazerPrefab);
             lazerReady = false;
+            coolDownStartTime = GameManager.getEpochTime();
             StartCoroutine(EndRoutine());
         }
     }
@@ -57,12 +63,9 @@ public class Attack : MonoBehaviour
 
     IEnumerator EndRoutine()
     {
-
         yield return new WaitForSeconds(coolDown);
 
         lazerReady = true;
-
-        Debug.Log("lazer ready");
     }
 
 }
