@@ -101,6 +101,10 @@ class Ghost : MonoBehaviour
 
             _i++;
         }
+        Vector3 pos = transform.position;
+        Node tilePos = MapManager.getTileLocation(pos-new Vector3(0, 0.1f, 0));
+        pos.z = 1 + (tilePos.y/(float)MapManager.singleton.mapDef.numYTiles);
+        transform.position = pos;
     }
 
 

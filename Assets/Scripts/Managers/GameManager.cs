@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         AudioManager.Play("EnemyDeath");
         incrementScore();
         enemy.GetComponent<Enemy>().isDead = true;
+        enemy.GetComponent<Collider2D>().enabled = false;
         enemy.GetComponent<Animator>().SetBool("isDead", true);
         StartCoroutine(DestroyEnemy(enemy));
     }

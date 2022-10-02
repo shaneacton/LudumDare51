@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            _renderer.material.SetColor("_Color", Color.black);
+            _renderer.material.SetColor("_Color", Color.gray);
             // Debug.Log("cannot see player");
         }
     }
@@ -168,6 +168,11 @@ public class Enemy : MonoBehaviour
         { // will overshoot. Just move to target
             _rb.MovePosition(target);
         }
+
+        Vector3 pos = transform.position;
+        Node tilePos = MapManager.getTileLocation(pos-new Vector3(0, 0.1f, 0));
+        pos.z = 1 + (tilePos.y/(float)MapManager.singleton.mapDef.numYTiles);
+        transform.position = pos;
     }
 
     private void DestroyOutOfBounds()
