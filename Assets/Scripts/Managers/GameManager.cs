@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     private Collider2D playerCollider;
     public GameObject ghostPrefab;
+    public GameObject coinPrefab;
     public bool alive = true;
     private MovementRecorder movementRecorder;
     public GameObject deadUI;
@@ -72,9 +74,17 @@ public class GameManager : MonoBehaviour
         instance.scoreUI.SetText($"Score: {instance.score}");
     }
 
-    public void OnKillEnemy()
+    public void OnKillEnemy(GameObject enemy)
     {
+        float coinSpawnFac = Random.Range(0f, 1f);
+        // Debug.Log("coin spawn fac: " + coinSpawnFac);
+        if (coinSpawnFac < Enemy.spawnChance)
+        {
+            // Debug.Log("spawning coin at: " + enemy.transform.position);
+            Instantiate(coinPrefab, enemy.transform.position, enemy.transform.rotation);
+        }
         incrementScore();
+        Destroy(enemy);
     }
 
     public void OnPlayerDead()

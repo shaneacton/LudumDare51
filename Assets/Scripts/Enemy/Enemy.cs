@@ -13,8 +13,9 @@ public class Enemy : MonoBehaviour
 
     private Renderer _renderer;
 
-    public GameObject coinPrefab;
-    public float spawnChance = 0.3333f;
+    public static float spawnChance = 0.3333f;
+
+    public float lastSeenPlayerTime = -1;
     
     void Start()
     {
@@ -57,17 +58,24 @@ public class Enemy : MonoBehaviour
         if (!GameManager.instance.alive) return;
         var player_vel = _player_rb.velocity.normalized * infrontMag;
         var target = _player.transform.position + new Vector3(player_vel.x, player_vel.y, 0f);
-        aStarMoveTowards(target);
+        if (canEnemySeePlayer())
+        {            
+            hordeSafeMoveTowards(target);
+        }
+        else
+        {
+            aStarMoveTowards(target);
+        }
     }
 
     void aStarMoveTowards(Vector3 target)
     {
-        Vector3 nextTileTarget = MapManager.getNextTarget(this, target);
+        Vector3 nextTileTarget = MapManager.getNextTargetTilePos(this, target);
         // Debug.Log("moving to " + nextTile + " from pos: " + transform.position + " and tile: " + MapManager.getTileLocation(transform.position));
-        safeMoveTowards(nextTileTarget);
+        hordeSafeMoveTowards(nextTileTarget, minimumDistance:0.15f);
     }
 
-    private void safeMoveTowards(Vector3 target, float minimumDistance = 0.15f)
+    private void hordeSafeMoveTowards(Vector3 target, float minimumDistance = 3f)
     {
         /*
          * First makes sure enemy is not already too close
@@ -78,7 +86,7 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(newPos, target) < minimumDistance)
         { // too close, don't approach
             // Debug.Log("too close. Dist: " + Vector3.Distance(newPos, target));
-            safeMoveTowards(transform.position, minimumDistance: 0f);
+            hordeSafeMoveTowards(transform.position, minimumDistance: 0f);
             return;
         }
 
@@ -100,33 +108,53 @@ public class Enemy : MonoBehaviour
     public bool canEnemySeePlayer()
     {
         if(!GameManager.instance.alive) return false;
+        Vector2 dir2Player = (GameManager.instance.player.transform.position - transform.position).normalized;
+        Vector2 dirPerp = new Vector2(dir2Player.y, -dir2Player.x) * 0.5f;
 
-        Vector3 dir2Player = GameManager.instance.player.transform.position - transform.position;
+        Vector2[] offsets = {-dirPerp, Vector2.zero, dirPerp};
         int layerMask = ~(LayerMask.GetMask("Enemy", "Ghost", "EnemyBullet", "PlayerBullet"));
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir2Player, Mathf.Infinity, layerMask);
-
-        if (hit.collider != null)
+        foreach (Vector2 offset in offsets)
         {
-            GameObject hitObj = hit.collider.gameObject;
-            // Debug.Log("can see " + hitObj);
-            if (hitObj.tag == "Player")
+            dir2Player = ((Vector2) GameManager.instance.player.transform.position -
+                          ((Vector2) transform.position + offset)).normalized;
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + offset, dir2Player, Mathf.Infinity, layerMask);
+            Debug.DrawRay((Vector2)transform.position + offset, dir2Player);
+            bool hitPlayer = false;
+            if (hit.collider != null)
             {
-                return true;
+                GameObject hitObj = hit.collider.gameObject;
+                // Debug.Log("can see " + hitObj);
+                if (hitObj.CompareTag("Player"))
+                {
+                    hitPlayer = true;
+                }
+            }
+
+            if (!hitPlayer)
+            {
+                return false;
             }
         }
-        return false;
+
+        lastSeenPlayerTime = Time.time;
+        return true;
     }
 
     private void moveTowards(Vector3 target)
     {
         Vector3 enemyToTarget = target - transform.position;
         if (enemyToTarget.magnitude >= speed * Time.fixedDeltaTime)
-        {
-            Vector3 newPos = transform.position + enemyToTarget.normalized * speed * Time.fixedDeltaTime;
+        { // can move full amount
+            float speedMod = 1f;
+            if (canEnemySeePlayer())
+            {
+                speedMod = 0.25f;
+            }
+            Vector3 newPos = transform.position + enemyToTarget.normalized * speed * speedMod * Time.fixedDeltaTime;
             _rb.MovePosition(newPos);
         }
         else
-        {
+        { // will overshoot. Just move to target
             _rb.MovePosition(target);
         }
     }
@@ -143,10 +171,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (Random.Range(0f, 1f) < spawnChance)
-        {
-            Instantiate(coinPrefab, transform.position, transform.rotation);
-        }
         EnemyManager.removeEnemy(this);
     }
 }

@@ -1084,6 +1084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2048775195}
   ghostPrefab: {fileID: 3955783184932678211, guid: 1f3edf47e3a4d25499be2410404534cf, type: 3}
+  coinPrefab: {fileID: 5146615921676078667, guid: 9157165ea469626429c84e5fa1cc1c7e, type: 3}
   alive: 1
   deadUI: {fileID: 1546321152}
   HUD: {fileID: 461635923}
@@ -1800,7 +1801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1592470475
 Transform:
   m_ObjectHideFlags: 0

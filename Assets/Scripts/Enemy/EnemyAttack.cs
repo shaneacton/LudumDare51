@@ -13,9 +13,11 @@ public class EnemyAttack : MonoBehaviour
     private Vector3 originalWarningIndicatorScale;
     public float warningIndicatorGrowSpeed = 0.001f;
 
+    private Enemy selfEnemy;
     private void Start()
     {
         originalWarningIndicatorScale = warningIndicator.transform.localScale;
+        selfEnemy = GetComponent<Enemy>();
     }
 
     void Update()
@@ -27,16 +29,24 @@ public class EnemyAttack : MonoBehaviour
         }
 
         if (timeSinceLastAttack > attackPeriod)
-        {
-            // TODO: raycast
-            var bullet = Instantiate(bulletPrefab,
-                                     bulletSpawnPos.transform.position,
-                                     transform.rotation
-                                    );
-            timeSinceLastAttack = Random.Range(-1f, 1f);
+        {// has waited long enough to shoot
+            if (Time.time - selfEnemy.lastSeenPlayerTime <= 1f)
+            { // has seen player within th last 1 second
+                var bullet = Instantiate(bulletPrefab,
+                    bulletSpawnPos.transform.position,
+                    transform.rotation
+                );
+                timeSinceLastAttack = Random.Range(-1f, 1f);
 
-            warningIndicator.SetActive(false);
-            warningIndicator.transform.localScale = originalWarningIndicatorScale;
+                warningIndicator.SetActive(false);
+                warningIndicator.transform.localScale = originalWarningIndicatorScale; 
+            }
+            else
+            { // player has recently droped out of view. Don't shoot
+                //wait a little longer to shoot after seeing player again
+                timeSinceLastAttack = attackPeriod / 2f;
+            }
+
         }
 
         timeSinceLastAttack += Time.deltaTime;

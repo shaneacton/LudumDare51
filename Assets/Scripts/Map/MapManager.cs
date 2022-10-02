@@ -14,7 +14,7 @@ public class MapManager: MonoBehaviour
         mapDef.spawnTiles();
     }
 
-    public static Vector3 getNextTarget(Enemy enemy, Vector3 target)
+    public static Vector3 getNextTargetTilePos(Enemy enemy, Vector3 target)
     {
         Node targetTile = getTileLocation(target);
         Node enemyTile = getTileLocation(enemy.transform.position);

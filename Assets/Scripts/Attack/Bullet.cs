@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
     [SerializeField] protected float _speed = 500;
+
     private void Start()
     {   
         GameManager.instance._bullets.Add(this);
@@ -17,8 +16,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.transform.CompareTag("Enemy")) 
         {
-            Destroy(other.gameObject);
-            GameManager.instance.OnKillEnemy();
+            GameManager.instance.OnKillEnemy(other.gameObject);
         }
         else if (other.transform.CompareTag("Player"))
         {

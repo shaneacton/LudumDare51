@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 500
+  coinPrefab: {fileID: 5146615921676078667, guid: 9157165ea469626429c84e5fa1cc1c7e, type: 3}

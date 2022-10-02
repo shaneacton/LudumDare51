@@ -30,8 +30,7 @@ public class LazerBeam : MonoBehaviour
         }
         if (other.transform.CompareTag("Enemy")) 
         {
-            Destroy(other.gameObject);
-            GameManager.instance.OnKillEnemy();
+            GameManager.instance.OnKillEnemy(other.gameObject);
         }
         else if (other.transform.CompareTag("Player"))
         {
