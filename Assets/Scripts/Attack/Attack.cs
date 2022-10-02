@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(MouseLook), typeof(MovementRecorder))]
 public class Attack : MonoBehaviour
@@ -11,6 +12,8 @@ public class Attack : MonoBehaviour
     public GameObject bulletSpawnPos;
     public GameObject lazerPrefab;
     public CoolDownTimer coolDownTimer;
+    public Slider chargeUpBar;
+
     public Animator animator;
 
     [System.NonSerialized]
@@ -63,19 +66,28 @@ public class Attack : MonoBehaviour
         bool holdingLazer = Input.GetMouseButton(1) && lazerReady;
         if (holdingLazer)
         {
-            timeCharging += Time.deltaTime;
+            chargeUpBar.gameObject.SetActive( true);
+            chargeUpBar.value = timeCharging / lazerChargeTime;
+            chargeUpBar.gameObject.GetComponent<RectTransform>().position = transform.position;
             if (lazerReady && timeCharging > lazerChargeTime)
             {
                 _recorder.Attacked(AttackType.Lazer);
                 InstantiateProjectile(lazerPrefab);
                 lazerReady = false;
+                chargeUpBar.gameObject.SetActive( false);
                 coolDownStartTime = GameManager.getEpochTime();
                 StartCoroutine(EndRoutine());
                 StartCoroutine(ShootingLazer());
+                timeCharging = 0;
+            }
+            else
+            {
+                timeCharging += Time.deltaTime;
             }
         }
         else
         {
+            chargeUpBar.gameObject.SetActive(false);
             timeCharging = 0;
         }
 
@@ -85,13 +97,14 @@ public class Attack : MonoBehaviour
     }
 
 
-    private void InstantiateProjectile(GameObject obj)
+    private GameObject InstantiateProjectile(GameObject obj)
     {
 
         var bullet = Instantiate(obj,
                            bulletSpawnPos.transform.position,
                            transform.rotation
                            );
+        return bullet;
     }
 
     IEnumerator ShootingLazer()
