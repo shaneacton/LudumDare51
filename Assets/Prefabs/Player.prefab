@@ -73,9 +73,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 741370705, guid: 708f558cb653b874895a3e328804f426, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 0dee2e38f098af243907bb078709fb7a, type: 3}
+  m_Color: {r: 0, g: 1, b: 0.016062737, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7357497731098227277, guid: a4636e4ade8a4354ba1c8a5849d3bb0c, type: 3}
   bulletSpawnPos: {fileID: 847142553814095115}
-  lazerPrefab: {fileID: 3255117027061317592, guid: 4ae8ca7bc062e2548988e8f766279dfc, type: 3}
+  lazerPrefab: {fileID: 0}
   coolDownTimer: {fileID: 0}
   coolDown: 5
   lazerReady: 1
