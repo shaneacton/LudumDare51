@@ -109,7 +109,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Lazer
-    clip: {fileID: 8300000, guid: 21493eb025533ec46b82f3bbe725165f, type: 3}
+    clip: {fileID: 8300000, guid: 4b9a78547ad57b341a41337475759803, type: 3}
     volume: 1
     pitch: 1
     speed: 0
