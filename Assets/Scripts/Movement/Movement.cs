@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour
 
     public Animator animator;
 
+    private bool isMoving = false;
+
     private enum MoveState
     {
         Normal,
@@ -46,8 +48,14 @@ public class Movement : MonoBehaviour
         }
         else if (_state == MoveState.Dodging) { Dodge(inputs); }
 
-        if(rb.velocity.x > 0) animator.SetFloat("velocity", rb.velocity.x);
-        if(rb.velocity.y > 0) animator.SetFloat("velocity", rb.velocity.y);
+        if(isMoving == false && (inputs.x != 0 || inputs.y != 0)){
+            isMoving = true;
+            animator.SetBool("isMoving", true);
+        }
+        else if(isMoving == true && (inputs.x == 0 && inputs.y == 0)){
+            isMoving = false;
+            animator.SetBool("isMoving", false);
+        }
 
     }
 
