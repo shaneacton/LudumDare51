@@ -65,7 +65,7 @@ public class Attack : MonoBehaviour
             lastShotTime = Time.time;
         }
 
-        if (Input.GetMouseButtonDown(1))
+    if (Input.GetMouseButtonDown(1) && lazerReady)
         {
             StartCoroutine(shake.Shake(lazerChargeTime, 0.1f));
         }
