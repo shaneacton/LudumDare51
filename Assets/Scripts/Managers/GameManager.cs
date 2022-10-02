@@ -62,10 +62,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void incrementScore()
+    {
+        instance.score++;
+        instance.scoreUI.SetText($"Score: {instance.score}");
+    }
+
     public void OnKillEnemy()
     {
-        score++;
-        scoreUI.SetText($"Score: {score}");
+        incrementScore();
     }
 
     public void OnPlayerDead()
