@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
         {
             if(isDead){return;}
             GameManager.instance.OnPlayerDead();
-            Destroy(other.gameObject);
+            // Destroy(other.gameObject);
         }
     }
 

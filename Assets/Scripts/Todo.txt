@@ -4,10 +4,8 @@
 ----------------------------------------      Bugs      --------------------------------------------
 * Fix the laser charge up controls ???
 * A* Bug  <-- shane
-* Death animations don't play after collision death. only bullets
 
 ----------------------------------------       UX       --------------------------------------------
-* VFX for player charging
 * Leaderboard support for many scores
     * there may be dozens or (hopefully) hundreds of scores posted
     * need to guarentee that the player can see their own ranking, even 
@@ -19,8 +17,6 @@
 * Enemy Bullets
 * Enemy shoot animation
     * serves as signposting for enemy shooting
-* Player charging VFX
-* New enemy spawn VFX
 
 
 ----------------------------------------    Sounds    --------------------------------------------
@@ -45,3 +41,7 @@
 * Lobby UI fixes - anchor points
 * Laser charge sound
 * More signposting for Enemy Spawn
+* Player charging VFX
+* New enemy spawn VFX
+* VFX for player charging
+* Death animations don't play after collision death. only bullets
