@@ -15,6 +15,9 @@ public class EndUIManager : MonoBehaviour
     public TextMeshProUGUI _LeaderboardUI;
     public TextMeshProUGUI ScoreUI;
 
+    public GameObject MainPanel;
+    public GameObject ExplainPanel;
+
     void Awake()
     {
         instance = this;
@@ -79,4 +82,16 @@ public class EndUIManager : MonoBehaviour
     public void PlayGame() { SceneManager.LoadScene("Game"); }
 
     public void QuitGame() { Application.Quit(); }
+
+    public void DisplayExplaination()
+    {
+        ExplainPanel.SetActive(true);
+        MainPanel.SetActive(false);
+    }
+
+    public void DisplayMainPanel()
+    {
+        ExplainPanel.SetActive(false);
+        MainPanel.SetActive(true);
+    }
 }
