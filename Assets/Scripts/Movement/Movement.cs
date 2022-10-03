@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -49,12 +48,7 @@ public class Movement : MonoBehaviour
         }
         var inputs = GetInputs();
 
-        if (_state == MoveState.Normal)
-        {
-            Move(inputs, movementSpeed);
-
-            // if (Input.GetKey(KeyCode.Space)) { StartCoroutine(StartDodge(inputs)); }
-        }
+        Move(inputs, movementSpeed);
 
         if (isMoving == false && (inputs.x != 0 || inputs.y != 0))
         {
@@ -81,15 +75,17 @@ public class Movement : MonoBehaviour
 
     void Move(Vector2 inputs, float speed)
     {
+        // Debug.Log($"Move inputs:{inputs}");
         Vector2 currentPos = rb.position;
 
         Vector2 movement = inputs.normalized * speed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
-        
+
         rb.MovePosition(newPos);
+
         Vector3 pos = transform.position;
-        Node tilePos = MapManager.getTileLocation(pos-new Vector3(0, 0.1f, 0));
-        pos.z = 1 + (tilePos.y/(float)MapManager.singleton.mapDef.numYTiles);
+        Node tilePos = MapManager.getTileLocation(pos - new Vector3(0, 0.1f, 0));
+        pos.z = 1 + (tilePos.y / (float)MapManager.singleton.mapDef.numYTiles);
         transform.position = pos;
     }
 

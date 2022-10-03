@@ -13,7 +13,7 @@ public class LoopTimer : MonoBehaviour
 
     private void Start() {
         timeText = gameObject.GetComponent<TextMeshProUGUI>();
-        maxSeconds = SpawnManager.instance.spawnTime;
+        maxSeconds = SpawnManager.instance.waveTime;
     }
 
     // Update is called once per frame

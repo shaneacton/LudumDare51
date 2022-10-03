@@ -361,11 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b415f36b7f66f7a4099f93696bb45fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &306108305 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2945115442009441698, guid: 0b982206e1261774ebe3971b37196add, type: 3}
-  m_PrefabInstance: {fileID: 2945115441703637555}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &447196920 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2945115441882004683, guid: 0b982206e1261774ebe3971b37196add, type: 3}
@@ -513,11 +508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112018c38e76fdb46ba97d936f0dc5ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &845160694 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2945115441466667717, guid: 0b982206e1261774ebe3971b37196add, type: 3}
-  m_PrefabInstance: {fileID: 2945115441703637555}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &966845553
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,6 +734,10 @@ PrefabInstance:
       propertyPath: coolDownTimer
       value: 
       objectReference: {fileID: 176665692}
+    - target: {fileID: 847142555344448762, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+      propertyPath: lazerShootingTime
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 847142555344448768, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1153,6 +1147,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b982206e1261774ebe3971b37196add, type: 3}
+--- !u!114 &2945115441703637556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2945115442009441701, guid: 0b982206e1261774ebe3971b37196add, type: 3}
+  m_PrefabInstance: {fileID: 2945115441703637555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89acb5cfab37da449a4fafb9e60d312e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2945115441703637557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2945115441466667723, guid: 0b982206e1261774ebe3971b37196add, type: 3}
+  m_PrefabInstance: {fileID: 2945115441703637555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f462e125300213409c9601dc3c599f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5463945593591516685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1168,11 +1184,11 @@ PrefabInstance:
     - target: {fileID: 5463945592432387521, guid: 401e550e82f06f943b73f200b44200c8, type: 3}
       propertyPath: loopTimer
       value: 
-      objectReference: {fileID: 845160694}
+      objectReference: {fileID: 2945115441703637557}
     - target: {fileID: 5463945592432387521, guid: 401e550e82f06f943b73f200b44200c8, type: 3}
       propertyPath: breakTimer
       value: 
-      objectReference: {fileID: 306108305}
+      objectReference: {fileID: 2945115441703637556}
     - target: {fileID: 5463945592432387521, guid: 401e550e82f06f943b73f200b44200c8, type: 3}
       propertyPath: PreWarnEnemySpawnTime
       value: 0.75

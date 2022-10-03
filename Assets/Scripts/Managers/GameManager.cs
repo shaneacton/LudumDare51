@@ -131,12 +131,12 @@ public class GameManager : MonoBehaviour
     {
         // Cursor.visible = false;
 
-        movementRecorder.StopRecording();
         AudioManager.Stop("MenuSong");
-        // AudioManager.Play("TenSecSong");
 
         if (!alive) { return new Tile(); }
-        
+
+        DisablePlayerMovementAndStopRecording();
+
         Tile nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         Vector3 pos = nearestSpawn.transform.position;
         Node tilePos = MapManager.getTileLocation(pos);
@@ -150,9 +150,9 @@ public class GameManager : MonoBehaviour
     public Tile OnReset()
     {
         // Start of break
-        // movementRecorder.StopRecording();
         AudioManager.Play("Rewind");
 
+        // Spawn new ghost
         var ghostMovement = new List<MovementData>(movementRecorder.movements);
         _ghostMovements.Add(ghostMovement);
         movementRecorder.movements.Clear();
@@ -166,19 +166,20 @@ public class GameManager : MonoBehaviour
         ghost.movements = ghostMovement;
         _ghosts.Add(ghost);
 
+        // put ghosts in reverse mode
         foreach (var g in _ghosts) { g.ReverseMovement(); }
 
+        // Destroy all bullets
         foreach (var b in _bullets)
-        {
-            try { Destroy(b.gameObject); } catch (Exception e) { Debug.LogError(e); }
-        }
+        { try { Destroy(b.gameObject); } catch (Exception e) { Debug.LogError(e); } }
 
+        // Move player to new spawn point
         if (alive)
         {
+            DisablePlayerMovementAndStopRecording();
             nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
             movingPlayerToTarget = true;
             player.GetComponent<Attack>().chargeUpBar.gameObject.SetActive(false);
-            // player.transform.position = nearestSpawn.position;
         }
 
         return nearestSpawnToPlayer;
@@ -205,13 +206,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EnablePlayerMovement()
+    public void EnablePlayerMovementAndStartRecording()
     {
         canMove = true;
         movementRecorder.StartRecording();
     }
 
-    public void DisablePlayerMovement()
+    public void DisablePlayerMovementAndStopRecording()
     {
         canMove = false;
         movementRecorder.StopRecording();
