@@ -89,18 +89,25 @@ class Ghost : MonoBehaviour
             else if (step.attackType == AttackType.Lazer) { _attack.lazer(); }
 
             nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attackType != AttackType.Nothing);
-            if (nextAttack < 50 * this.indicatorSeconds && nextAttack != -1)
+            if (nextAttack < 2*50 * indicatorSeconds && nextAttack != -1)
+            {
+                renderer.material.SetColor("_Color", new Color(1f, 0.25f, 0.25f, 1f));
+            }
+            else
+            {
+                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.5f));
+            }
+
+            if (nextAttack < 50 * indicatorSeconds && nextAttack != -1)
             { // less than 50 frames from now
                 warningIndicator.SetActive(true);
                 float scale = warningIndicatorGrowSpeed * nextAttack * Time.deltaTime;
                 warningIndicator.transform.localScale += new Vector3(scale, scale, scale);
-                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.7f));
             }
             else
             { // not attacking soon
                 warningIndicator.SetActive(false);
                 warningIndicator.transform.localScale = originalWarningIndicatorScale;
-                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.4f));
             }
 
             _i++;
