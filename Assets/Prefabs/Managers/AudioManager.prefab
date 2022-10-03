@@ -121,7 +121,7 @@ MonoBehaviour:
     source: {fileID: 0}
     altClips: []
   - name: Lazer
-    clip: {fileID: 8300000, guid: 4b9a78547ad57b341a41337475759803, type: 3}
+    clip: {fileID: 8300000, guid: 9953771a686914b44b7674716e7d5072, type: 3}
     volume: 1
     pitch: 1
     randomPitchFac: 0
