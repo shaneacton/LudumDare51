@@ -78,15 +78,15 @@ public class LeaderboardManager : MonoBehaviour
         );
     }
 
-    public void GetLeaderboard(Action<GetLeaderboardAroundCharacterResult> resultCallback)
+    public void GetLeaderboard(Action<GetLeaderboardResult> resultCallback)
     {
-        var request = new GetLeaderboardAroundCharacterRequest
+        var request = new GetLeaderboardRequest
         {
             StatisticName = _LeaderboardName,
             MaxResultsCount = LeaderboardSize,
         };
 
-        PlayFabClientAPI.GetLeaderboardAroundCharacter(
+        PlayFabClientAPI.GetLeaderboard(
             request,
             resultCallback,
             response => { Debug.Log($"Get leaderboard failed {response.GenerateErrorReport()}"); }

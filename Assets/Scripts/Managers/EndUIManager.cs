@@ -39,7 +39,7 @@ public class EndUIManager : MonoBehaviour
 
     }
 
-    public void DisplayLeaderboard(GetLeaderboardAroundCharacterResult result)
+    public void DisplayLeaderboard(GetLeaderboardResult result)
     {
         Debug.Log("Got leaderboard succesfully" + result.Leaderboard.Count);
 
@@ -56,7 +56,6 @@ public class EndUIManager : MonoBehaviour
         }
 
         leaderboard.Insert(0, "<b><color=white>Pos.\tName: Score</color></b>\n_________________");
-        Debug.Log(_LeaderboardUI);
         _LeaderboardUI.SetText(string.Join('\n', leaderboard));
     }
 
