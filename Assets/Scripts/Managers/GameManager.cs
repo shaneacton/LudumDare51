@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
         // Cursor.visible = false;
 
         AudioManager.Stop("MenuSong");
+        AudioManager.Play("Rewind");
 
         if (!alive) { return new Tile(); }
 

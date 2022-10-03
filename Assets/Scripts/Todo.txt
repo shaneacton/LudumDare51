@@ -14,14 +14,13 @@
         
 ----------------------------------------    Visuals    --------------------------------------------
 * Lighting - ongoing
-* Enemy Bullets
-* Enemy shoot animation
+* Enemy shoot animation  (Seems hard)
     * serves as signposting for enemy shooting
+* Give the lazer more love (lighting)
 
 
 ----------------------------------------    Sounds    --------------------------------------------
 * Better Enemy Shoot and Die
-* Sounds at round start
 
 ---------------------------------------- Optional Features -----------------------------------------
 * Shield
@@ -45,3 +44,5 @@
 * New enemy spawn VFX
 * VFX for player charging
 * Death animations don't play after collision death. only bullets
+* Sounds at round start
+* Enemy Bullets
