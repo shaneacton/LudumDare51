@@ -73,3 +73,12 @@ crashlytics-build.properties
 
 # vscode
 .vscode
+
+# build
+**/*[Bb]uild*
+**/webgl*
+
+webgl build.zip
+webgl build/Build/webgl build.data
+webgl build/Build/webgl build.framework.js
+webgl build/Build/webgl build.wasm
