@@ -8,7 +8,7 @@
 * Fix the laser charge up controls
 * Stuck on Spawn Point
 * A* Bug
-
+* Death animations don't play after collision death. only bullets
 
 
 
@@ -24,6 +24,11 @@
 ----------------------------------------    Visuals    --------------------------------------------
 * Lighting
 * Enemy Bullets
+* Enemy shoot animation
+    * serves as signposting for enemy shooting
+
+----------------------------------------    Sounds    --------------------------------------------
+* Better Enemy Shoot and Die
 
 
 
