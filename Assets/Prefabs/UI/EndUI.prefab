@@ -605,16 +605,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You are a robot defending your ship, but you need to recharge every 10
+  m_text: 'You''re a robot on an invaded ship, but you need to recharge every 10
     seconds.
 
 
-    While you are fighting your actions are recorded and replayed
-    by your holograms, so be careful that you don''t end up shooting yourself!
+    Kill enemies to survive, but watch out the ship never forgets.
 
 
-    Kill
-    as many enemies as possible to earn a spot on the leaderboards.'
+    While
+    you are fighting your actions are recorded and replayed by your holograms, so
+    be careful that you don''t end up shooting yourself!
+
+
+    Kill as many enemies
+    as possible to earn a spot on the leaderboards.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 276f0a0891197564ca2c58282e0fbffb, type: 2}
   m_sharedMaterial: {fileID: -3623973205434234268, guid: 276f0a0891197564ca2c58282e0fbffb, type: 2}
@@ -2908,7 +2912,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5949287884259402965
@@ -3057,7 +3061,7 @@ RectTransform:
   - {fileID: 5949287884795596667}
   - {fileID: 3887615377184041693}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
