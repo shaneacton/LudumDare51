@@ -5,6 +5,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LeaderboardManager : MonoBehaviour
 {
@@ -30,7 +31,14 @@ public class LeaderboardManager : MonoBehaviour
 
     private void Start()
     {
-        computerId = SystemInfo.deviceUniqueIdentifier;
+        computerId = PlayerPrefs.GetString("ComputerID"); 
+        if(computerId == "")
+        {
+            computerId = System.Guid.NewGuid().ToString();
+            PlayerPrefs.SetString("ComputerID", computerId);
+        }
+        // better but doesn't work in webgl
+        // computerId = SystemInfo.deviceUniqueIdentifier;
         Login();
     }
 
