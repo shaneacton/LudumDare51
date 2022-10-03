@@ -47,14 +47,14 @@ MonoBehaviour:
   sounds:
   - name: Coin
     clip: {fileID: 8300000, guid: 0d32a2f9bdf53da44a527e1a24831c57, type: 3}
-    volume: 1
+    volume: 0.594
     pitch: 1
     speed: 0
     loop: 0
     source: {fileID: 0}
   - name: Pistol
     clip: {fileID: 8300000, guid: 13177f52a5d4e5b409ca7f8fbaa2bdac, type: 3}
-    volume: 0.861
+    volume: 0.201
     pitch: 1
     speed: 0
     loop: 0
@@ -68,14 +68,14 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: GhostPistol
     clip: {fileID: 8300000, guid: 2881f84aebb7b2940aefbbdfca2d4ed1, type: 3}
-    volume: 1
+    volume: 0.923
     pitch: 1
     speed: 0
     loop: 0
     source: {fileID: 0}
   - name: EnemyDeath
     clip: {fileID: 8300000, guid: 02b4886a0828e3b4f89c0604a8356b92, type: 3}
-    volume: 1
+    volume: 0.803
     pitch: 3
     speed: 0
     loop: 0

@@ -1,17 +1,14 @@
 ﻿----------------------------------------    Features    --------------------------------------------
-* Laser charge sound
-* Make player more visible
 
 
 ----------------------------------------      Bugs      --------------------------------------------
-* Fix the laser charge up controls
+* Fix the laser charge up controls ???
 * A* Bug  <-- shane
 * Death animations don't play after collision death. only bullets
-* Time UI not working correctly
-
 
 ----------------------------------------       UX       --------------------------------------------
 * More signposting for Enemy Spawn
+* VFX for player charging
 * Lobby UI fixes - anchor points
 * Leaderboard support for many scores
     * there may be dozens or (hopefully) hundreds of scores posted
@@ -21,6 +18,7 @@
         
 ----------------------------------------    Visuals    --------------------------------------------
 * Lighting
+* Make player more visible -> stop ghosts from being so visible
 * Enemy Bullets
 * Enemy shoot animation
     * serves as signposting for enemy shooting
@@ -28,7 +26,8 @@
 
 ----------------------------------------    Sounds    --------------------------------------------
 * Better Enemy Shoot and Die
-
+* Laser charge sound
+* Sounds at round start
 
 ---------------------------------------- Optional Features -----------------------------------------
 * Shield
@@ -43,3 +42,4 @@
 
 * Stuck on Spawn Point  <-- really tricky to reproduce
 * Wave counter
+* Time UI not working correctly
