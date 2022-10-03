@@ -54,11 +54,11 @@ public class SpawnManager : MonoBehaviour
 
         breakStartTime = GameManager.getEpochTime();
 
-        yield return new WaitForSeconds(breakTime);
+        yield return new WaitForSeconds(breakTime - PreWarnEnemySpawnTime);
 
         StartCoroutine(ManageWave(playerSpawnPt));
 
-        yield return new WaitForSeconds(waveTime);
+        yield return new WaitForSeconds(waveTime + PreWarnEnemySpawnTime);
 
         loopTimer.Hide();
         breakTimer.Show();
@@ -78,11 +78,11 @@ public class SpawnManager : MonoBehaviour
         Tile playerSpawnPt = GameManager.instance.OnReset();
         breakStartTime = GameManager.getEpochTime();
 
-        yield return new WaitForSeconds(breakTime);
+        yield return new WaitForSeconds(breakTime - PreWarnEnemySpawnTime);
 
         StartCoroutine(ManageWave(playerSpawnPt));
 
-        yield return new WaitForSeconds(waveTime);
+        yield return new WaitForSeconds(waveTime + PreWarnEnemySpawnTime);
 
         loopTimer.Hide();
         breakTimer.Show();
@@ -94,6 +94,22 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator ManageWave(Tile playerSpawnPt)
     {
+        int numWaveZero = (int)Mathf.Ceil(numEnemies / 3f);
+        int numWaveOne = (int)Mathf.Ceil((numEnemies - numWaveZero) / 2f);
+        int numWaveTwo = numEnemies - numWaveOne - numWaveZero;
+
+        float waveZeroTime = UnityEngine.Random.Range(2f, 3f);
+        float waveOneTime = UnityEngine.Random.Range(2f, 3f);
+
+        // Because of prewarning we spawn enemies early 
+        // wait the rest of break time before changing state
+        SpawnPoints.Remove(playerSpawnPt);
+        StartCoroutine(SpawnEnemies(numWaveZero));
+        SpawnPoints.Add(playerSpawnPt);
+
+        // Waiting till the actual start of wave
+        yield return new WaitForSeconds(PreWarnEnemySpawnTime);
+
         _state = State.Wave;
 
         GameManager.instance.onBreakEnd();
@@ -103,17 +119,6 @@ public class SpawnManager : MonoBehaviour
         loopTimer.Show();
 
         spawnStartTime = GameManager.getEpochTime();
-
-        int numWaveZero = (int)Mathf.Ceil(numEnemies / 3f);
-        int numWaveOne = (int)Mathf.Ceil((numEnemies - numWaveZero) / 2f);
-        int numWaveTwo = numEnemies - numWaveOne - numWaveZero;
-
-        float waveZeroTime = UnityEngine.Random.Range(2.5f, 3.5f);
-        float waveOneTime = UnityEngine.Random.Range(2.5f, 3.5f);
-
-        SpawnPoints.Remove(playerSpawnPt);
-        StartCoroutine(SpawnEnemies(numWaveZero));
-        SpawnPoints.Add(playerSpawnPt);
 
         yield return new WaitForSeconds(waveZeroTime);
         StartCoroutine(SpawnEnemies(numWaveOne));
