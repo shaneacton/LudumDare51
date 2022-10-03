@@ -7,7 +7,6 @@
 * Death animations don't play after collision death. only bullets
 
 ----------------------------------------       UX       --------------------------------------------
-* More signposting for Enemy Spawn
 * VFX for player charging
 * Leaderboard support for many scores
     * there may be dozens or (hopefully) hundreds of scores posted
@@ -16,15 +15,16 @@
         
         
 ----------------------------------------    Visuals    --------------------------------------------
-* Lighting
+* Lighting - ongoing
 * Enemy Bullets
 * Enemy shoot animation
     * serves as signposting for enemy shooting
+* Player charging VFX
+* New enemy spawn VFX
 
 
 ----------------------------------------    Sounds    --------------------------------------------
 * Better Enemy Shoot and Die
-* Laser charge sound
 * Sounds at round start
 
 ---------------------------------------- Optional Features -----------------------------------------
@@ -43,3 +43,5 @@
 * Time UI not working correctly
 * Make player more visible -> stop ghosts from being so visible
 * Lobby UI fixes - anchor points
+* Laser charge sound
+* More signposting for Enemy Spawn

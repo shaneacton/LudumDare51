@@ -56,20 +56,15 @@ public class GameManager : MonoBehaviour
         {
             playerCollider.enabled = true;
 
-            if (!alive) { return; }
-            Tile nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
-            foreach (Tile spawnPoint in SpawnManager.instance.SpawnPoints)
-            {
-                if (spawnPoint == nearestSpawnToPlayer)
-                {
-                    spawnPoint.setColour(Color.white);
-                }
-                else
-                {
-                    spawnPoint.setColour(Color.grey);
-                }
-            }
-
+            // if (!alive) { return; }
+            // Tile nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
+            // foreach (Tile spawnPoint in SpawnManager.instance.SpawnPoints)
+            // {
+            //     if (spawnPoint == nearestSpawnToPlayer)
+            //         spawnPoint.setColour(new Color(0.65f, 0.65f, 0.65f, 1f));
+            //     else
+            //         spawnPoint.setColour(Color.grey);
+            // }
         }
     }
 
