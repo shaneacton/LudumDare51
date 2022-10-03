@@ -139,13 +139,15 @@ public class GameManager : MonoBehaviour
 
         DisablePlayerMovementAndStopRecording();
 
-        Tile nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
-        Vector3 pos = nearestSpawn.transform.position;
+        nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
+        Vector3 pos = nearestSpawnToPlayer.transform.position;
         Node tilePos = MapManager.getTileLocation(pos);
         pos.z = 1 + (tilePos.y / (float)MapManager.singleton.mapDef.numYTiles);
         player.transform.position = pos;
 
-        return nearestSpawn;
+        nearestSpawnToPlayer.GetComponent<SpawnTile>().PlayerChargeEffect.Play();
+
+        return nearestSpawnToPlayer;
     }
 
 
@@ -182,6 +184,8 @@ public class GameManager : MonoBehaviour
             nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
             movingPlayerToTarget = true;
             player.GetComponent<Attack>().chargeUpBar.gameObject.SetActive(false);
+
+            nearestSpawnToPlayer.GetComponent<SpawnTile>().PlayerChargeEffect.Play();
         }
 
         return nearestSpawnToPlayer;

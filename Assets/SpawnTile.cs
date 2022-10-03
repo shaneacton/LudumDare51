@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.VFX;
 
@@ -9,6 +7,7 @@ public class SpawnTile : MonoBehaviour
 {
 
     public VisualEffect EnemySpawnVFX;
+    public ParticleSystem PlayerChargeEffect;
     public Light2D Light;
 
     public float lightFlashFreq = 10;
@@ -20,7 +19,7 @@ public class SpawnTile : MonoBehaviour
         FlashLight();
     }
 
-    public void StartEffects()
+    public void StartSpawn()
     {
         StartCoroutine(PlayVFXLate());
         Light.enabled = true;

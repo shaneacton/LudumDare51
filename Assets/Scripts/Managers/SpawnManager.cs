@@ -138,7 +138,7 @@ public class SpawnManager : MonoBehaviour
             transforms.Add(spawnPt);
 
             AudioManager.Play("EnemySpawn");
-            spawnPt.GetComponent<SpawnTile>().StartEffects();
+            spawnPt.GetComponent<SpawnTile>().StartSpawn();
         }
 
         yield return new WaitForSeconds(PreWarnEnemySpawnTime);
