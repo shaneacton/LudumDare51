@@ -598,6 +598,17 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1383965031 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1383965031, guid: 0b982206e1261774ebe3971b37196add, type: 3}
+  m_PrefabInstance: {fileID: 2945115441703637555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1495873234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,6 +1039,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1383965030, guid: 0b982206e1261774ebe3971b37196add, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -97.10199
+      objectReference: {fileID: 0}
     - target: {fileID: 2945115440634363572, guid: 0b982206e1261774ebe3971b37196add, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1132,18 +1147,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 2945115441863283557, guid: 0b982206e1261774ebe3971b37196add, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2945115441863283557, guid: 0b982206e1261774ebe3971b37196add, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2945115441882004676, guid: 0b982206e1261774ebe3971b37196add, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -97.10199
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b982206e1261774ebe3971b37196add, type: 3}
@@ -1494,6 +1497,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2048775195}
+    - target: {fileID: 2584111619894071132, guid: 9b16ffa503a3c904f8e4242b003bed60, type: 3}
+      propertyPath: waveUI
+      value: 
+      objectReference: {fileID: 1383965031}
     - target: {fileID: 2584111619894071132, guid: 9b16ffa503a3c904f8e4242b003bed60, type: 3}
       propertyPath: scoreUI
       value: 

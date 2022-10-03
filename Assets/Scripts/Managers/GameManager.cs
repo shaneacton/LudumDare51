@@ -18,8 +18,10 @@ public class GameManager : MonoBehaviour
     public GameObject deadUI;
     public GameObject HUD;
     public TextMeshProUGUI scoreUI;
+    public TextMeshProUGUI waveUI;
     public Texture2D cursorTexture;
     public int score = 0;
+    private int wave = 0;
     private List<List<MovementData>> _ghostMovements = new List<List<MovementData>>();
     private List<Ghost> _ghosts = new List<Ghost>();
 
@@ -77,6 +79,11 @@ public class GameManager : MonoBehaviour
         instance.scoreUI.SetText($"Score: {instance.score}");
     }
 
+    public void incrementWave(int num = 1)
+    {
+        wave += num;
+        waveUI.SetText($"Wave: {instance.wave}");
+    }
     public void OnKillEnemy(GameObject enemy)
     {
 
@@ -189,6 +196,8 @@ public class GameManager : MonoBehaviour
     {
         postProcessing.lerpStart = Time.time;
         AudioManager.Play("TenSecSong");
+        incrementWave();
+
         foreach (var g in _ghosts) { g.ResetPosition(); }
     }
 
