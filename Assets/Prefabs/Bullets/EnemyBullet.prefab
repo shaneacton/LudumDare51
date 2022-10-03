@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a7aaa840d6a9dd84285b791d6ce73c65, type: 2}
     - target: {fileID: 6546234609742408865, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6546234609742408865, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}
       propertyPath: m_LocalScale.x
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc173f4c2876be14897590860c291efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 500
+  _speed: 350
 --- !u!4 &429008569478480539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6546234609742408865, guid: 4c4a7563cee89a54f8d56be84958eb2d, type: 3}

@@ -1,11 +1,8 @@
 ﻿----------------------------------------    Features    --------------------------------------------
-* slower bullets
 
 ----------------------------------------      Bugs      --------------------------------------------
 * Fix the laser charge up controls ???
 * A* Bug  <-- shane
-* Change name in build
-* Fix in game score not showing (menu)
 
 ----------------------------------------       UX       --------------------------------------------
 * Screenshots for jam page
@@ -15,7 +12,6 @@
 * Enemy shoot animation <-- (Seems hard)
     * serves as signposting for enemy shooting
 * Give the lazer more love (lighting)
-* ghost lighting when shooting
 
 ----------------------------------------    Sounds    --------------------------------------------
 * Better Enemy Shoot and Die ???
@@ -49,3 +45,7 @@
     * need to guarentee that the player can see their own ranking, even 
         when diluted by others
 * Main menu game description
+* Fix in game score not showing (menu)
+* ghost lighting when shooting
+* Change name in build
+* slower bullets
