@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(GhostAttack))]
 class Ghost : MonoBehaviour
@@ -20,6 +21,8 @@ class Ghost : MonoBehaviour
     public GameObject warningIndicator;
     private Vector3 originalWarningIndicatorScale;
     public float warningIndicatorGrowSpeed = 0.001f;
+
+    public Light2D Light;
 
     public Renderer renderer;
 
@@ -87,11 +90,13 @@ class Ghost : MonoBehaviour
             nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attackType != AttackType.Nothing);
             if (nextAttack < 2 * 50 * indicatorSeconds && nextAttack != -1)
             {
-                renderer.material.SetColor("_Color", new Color(1f, 0.25f, 0.25f, 0.65f));
+                // renderer.material.SetColor("_Color", new Color(1f, 0.25f, 0.25f, 0.65f));
+                Light.intensity = 2f;
             }
             else
             {
-                renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.5f));
+                // renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.5f));
+                Light.intensity = 0f;
             }
 
             if (nextAttack < 50 * indicatorSeconds && nextAttack != -1)

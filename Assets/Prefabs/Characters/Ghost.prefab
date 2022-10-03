@@ -268,6 +268,7 @@ MonoBehaviour:
   indicatorSeconds: 1
   warningIndicator: {fileID: 5800150648635649440}
   warningIndicatorGrowSpeed: 0.005
+  Light: {fileID: 4405756782072789754}
   renderer: {fileID: 3955783186557442036}
   animator: {fileID: 4405756781895718323}
 --- !u!114 &-7760966744378250543
@@ -300,3 +301,14 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 950375154, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
   m_PrefabInstance: {fileID: 4405756782556481345}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4405756782072789754 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 758873531, guid: f7f49b7065ed44a44a71a4bbe2c3ce55, type: 3}
+  m_PrefabInstance: {fileID: 4405756782556481345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
