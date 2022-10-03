@@ -69,7 +69,7 @@ MonoBehaviour:
   - name: GhostPistol
     clip: {fileID: 8300000, guid: 2881f84aebb7b2940aefbbdfca2d4ed1, type: 3}
     volume: 0.923
-    pitch: 1
+    pitch: 1.42
     speed: 0
     loop: 0
     source: {fileID: 0}
@@ -120,5 +120,12 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     speed: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: LazerCharging
+    clip: {fileID: 8300000, guid: f59864c96efe95643b84f5f0623b4841, type: 3}
+    volume: 1
+    pitch: 1
+    speed: 2
     loop: 0
     source: {fileID: 0}

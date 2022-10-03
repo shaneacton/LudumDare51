@@ -68,6 +68,7 @@ public class Attack : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && lazerReady)
         {
             StartCoroutine(shake.Shake(lazerChargeTime, 0.1f));
+            AudioManager.Play("LazerCharging");
         }
 
         bool holdingLazer = Input.GetMouseButton(1) && lazerReady;
