@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using PlayFab.ClientModels;
 using TMPro;
@@ -26,7 +27,7 @@ public class EndUIManager : MonoBehaviour
     private void OnEnable()
     {
         NameField.text = playerName;
-        
+
         if (GameManager.instance == null) return;  // in main menu
 
         LeaderboardManager.instance.GetLeaderboard(DisplayLeaderboard);
@@ -38,7 +39,7 @@ public class EndUIManager : MonoBehaviour
 
     }
 
-    public void DisplayLeaderboard(GetLeaderboardResult result)
+    public void DisplayLeaderboard(GetLeaderboardAroundCharacterResult result)
     {
         Debug.Log("Got leaderboard succesfully" + result.Leaderboard.Count);
 
@@ -47,7 +48,7 @@ public class EndUIManager : MonoBehaviour
 
         for (int i = 0; i < leaderboard.Count - 1; i++)
         {
-            if (result.Leaderboard[i].Profile.PlayerId == LeaderboardManager.instance.playFabId)
+            if (result.Leaderboard[i].PlayFabId == LeaderboardManager.instance.playFabId)
             {
                 leaderboard[i] = $"<b><color=white>{leaderboard[i]}</color></b>";
                 break;
@@ -57,6 +58,12 @@ public class EndUIManager : MonoBehaviour
         leaderboard.Insert(0, "<b><color=white>Pos.\tName: Score</color></b>\n_________________");
         Debug.Log(_LeaderboardUI);
         _LeaderboardUI.SetText(string.Join('\n', leaderboard));
+    }
+
+    public IEnumerator SetDefaultName()
+    {
+        yield return new WaitForSeconds(1);
+        LeaderboardManager.instance.UpdateName(playerName);
     }
 
     public void SetName()

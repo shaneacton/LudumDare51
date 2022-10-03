@@ -727,7 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   computerId: 
   playFabId: 
-  LeaderboardSize: 10
+  LeaderboardSize: 100
   leaderboard: []
 --- !u!1001 &2056598061
 PrefabInstance:

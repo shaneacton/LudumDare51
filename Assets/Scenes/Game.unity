@@ -994,7 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   computerId: 
   playFabId: 
-  LeaderboardSize: 20
+  LeaderboardSize: 100
   leaderboard: []
 --- !u!4 &1822057919
 Transform:

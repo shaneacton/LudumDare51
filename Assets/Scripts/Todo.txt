@@ -6,21 +6,17 @@
 * A* Bug  <-- shane
 
 ----------------------------------------       UX       --------------------------------------------
-* Leaderboard support for many scores
-    * there may be dozens or (hopefully) hundreds of scores posted
-    * need to guarentee that the player can see their own ranking, even 
-        when diluted by others
-        
+Main menu game description 
         
 ----------------------------------------    Visuals    --------------------------------------------
 * Lighting - ongoing
-* Enemy shoot animation  (Seems hard)
+* Enemy shoot animation <-- (Seems hard)
     * serves as signposting for enemy shooting
 * Give the lazer more love (lighting)
 
 
 ----------------------------------------    Sounds    --------------------------------------------
-* Better Enemy Shoot and Die
+* Better Enemy Shoot and Die ???
 
 ---------------------------------------- Optional Features -----------------------------------------
 * Shield
@@ -46,3 +42,7 @@
 * Death animations don't play after collision death. only bullets
 * Sounds at round start
 * Enemy Bullets
+* Leaderboard support for many scores
+    * there may be dozens or (hopefully) hundreds of scores posted
+    * need to guarentee that the player can see their own ranking, even 
+        when diluted by others

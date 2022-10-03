@@ -14,7 +14,7 @@ public class LeaderboardManager : MonoBehaviour
     public string computerId;
     public string playFabId;
 
-    public int LeaderboardSize = 10;
+    public int LeaderboardSize = 100;
     public List<PlayerLeaderboardEntry> leaderboard;
 
 
@@ -78,15 +78,15 @@ public class LeaderboardManager : MonoBehaviour
         );
     }
 
-    public void GetLeaderboard(Action<GetLeaderboardResult> resultCallback)
+    public void GetLeaderboard(Action<GetLeaderboardAroundCharacterResult> resultCallback)
     {
-        var request = new GetLeaderboardRequest
+        var request = new GetLeaderboardAroundCharacterRequest
         {
             StatisticName = _LeaderboardName,
-            MaxResultsCount = 10,
+            MaxResultsCount = LeaderboardSize,
         };
 
-        PlayFabClientAPI.GetLeaderboard(
+        PlayFabClientAPI.GetLeaderboardAroundCharacter(
             request,
             resultCallback,
             response => { Debug.Log($"Get leaderboard failed {response.GenerateErrorReport()}"); }
