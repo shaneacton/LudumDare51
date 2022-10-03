@@ -8,9 +8,13 @@
         
 ----------------------------------------    Visuals    --------------------------------------------
 * Lighting - ongoing
+    * have the player/ghost eyes shine light in their direction of look
+        * acts as signposting for ghost shoot direction
+        * looks cool
 * Enemy shoot animation <-- (Seems hard)
     * serves as signposting for enemy shooting
 * Give the lazer more love (lighting)
+
 
 ----------------------------------------    Sounds    --------------------------------------------
 * Better Enemy Shoot and Die ???
