@@ -25,10 +25,15 @@ public class EndUIManager : MonoBehaviour
         playerName = PlayerPrefs.GetString("PlayerName");
         if (playerName == "")
             playerName = SystemInfo.deviceName;
+
+        if (playerName == "n/a")
+            playerName = $"Player-{Random.Range(0, 1000)}";
     }
 
     private void OnEnable()
     {
+        StartCoroutine(SetDefaultName());
+
         NameField.text = playerName;
 
         if (GameManager.instance == null) return;  // in main menu

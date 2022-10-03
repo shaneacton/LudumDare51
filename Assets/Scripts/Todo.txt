@@ -1,7 +1,6 @@
 ﻿----------------------------------------    Features    --------------------------------------------
 
 ----------------------------------------      Bugs      --------------------------------------------
-* Fix the laser charge up controls ???
 * A* Bug  <-- shane
 
 ----------------------------------------       UX       --------------------------------------------
@@ -49,3 +48,4 @@
 * ghost lighting when shooting
 * Change name in build
 * slower bullets
+* Fix the laser charge up controls ???
