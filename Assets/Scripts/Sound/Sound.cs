@@ -1,6 +1,8 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class Sound
@@ -11,18 +13,37 @@ public class Sound
     public float volume=0;
     [Range(.1f, 3f)]
     public float pitch=1;
-    public float speed=1;
+    public float randomPitchFac = 0;
     public bool loop=true;
 
     [HideInInspector]
     public AudioSource source;
 
-    public Sound(string name, AudioClip clip)
+    public List<AudioClip> altClips;
+    
+    public void init(GameObject audioManager)
     {
-        this.name = name;
-        this.clip = clip;
-        volume = 0;
-        pitch = 1;
-        loop = true;
+        if (altClips == null)
+        {
+            altClips = new List<AudioClip>();
+        }
+        altClips.Add(clip);
+        source = audioManager.AddComponent<AudioSource>();
+        source.volume = volume;
+        source.pitch = pitch; 
+        source.loop = loop;
     }
+
+    public void play()
+    {
+        int clipId = Mathf.RoundToInt(Random.Range(0f, altClips.Count-1));
+        // Debug.Log(name + " num clips: " + altClips.Count + " rand " + clipId);
+        source.clip = altClips[clipId];
+        // if (randomPitchFac != 0)
+        // {
+        //     float random = Random.Range(0f, 1f) * randomPitchFac;
+        // }
+        source.Play();
+    }
+    
 }
