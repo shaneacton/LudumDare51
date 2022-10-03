@@ -9,7 +9,6 @@
 ----------------------------------------       UX       --------------------------------------------
 * More signposting for Enemy Spawn
 * VFX for player charging
-* Lobby UI fixes - anchor points
 * Leaderboard support for many scores
     * there may be dozens or (hopefully) hundreds of scores posted
     * need to guarentee that the player can see their own ranking, even 
@@ -18,7 +17,6 @@
         
 ----------------------------------------    Visuals    --------------------------------------------
 * Lighting
-* Make player more visible -> stop ghosts from being so visible
 * Enemy Bullets
 * Enemy shoot animation
     * serves as signposting for enemy shooting
@@ -43,3 +41,5 @@
 * Stuck on Spawn Point  <-- really tricky to reproduce
 * Wave counter
 * Time UI not working correctly
+* Make player more visible -> stop ghosts from being so visible
+* Lobby UI fixes - anchor points

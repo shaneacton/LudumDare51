@@ -87,7 +87,7 @@ class Ghost : MonoBehaviour
             nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attackType != AttackType.Nothing);
             if (nextAttack < 2 * 50 * indicatorSeconds && nextAttack != -1)
             {
-                renderer.material.SetColor("_Color", new Color(1f, 0.25f, 0.25f, 1f));
+                renderer.material.SetColor("_Color", new Color(1f, 0.25f, 0.25f, 0.65f));
             }
             else
             {
