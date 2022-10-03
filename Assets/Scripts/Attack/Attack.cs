@@ -33,6 +33,8 @@ public class Attack : MonoBehaviour
 
     public CameraShake shake;
 
+    public ParticleSystem LazerChargeVFX;
+
     private void Start()
     {
         _look = GetComponent<MouseLook>();
@@ -69,6 +71,7 @@ public class Attack : MonoBehaviour
         {
             StartCoroutine(shake.Shake(lazerChargeTime, 0.1f));
             AudioManager.Play("LazerCharging");
+            LazerChargeVFX.Play();
         }
 
         bool holdingLazer = Input.GetMouseButton(1) && lazerReady;
