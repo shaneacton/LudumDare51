@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
         else
         {
             playerCollider.enabled = true;
+
+            if (!alive) { return; }
             Tile nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
             foreach (Tile spawnPoint in SpawnManager.instance.SpawnPoints)
             {
@@ -69,9 +71,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void incrementScore(int num=1)
+    public static void incrementScore(int num = 1)
     {
-        instance.score+=num;
+        instance.score += num;
         instance.scoreUI.SetText($"Score: {instance.score}");
     }
 
@@ -94,7 +96,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(DestroyEnemy(enemy));
     }
 
-    IEnumerator DestroyEnemy(GameObject enemy){
+    IEnumerator DestroyEnemy(GameObject enemy)
+    {
         yield return new WaitForSeconds(1);
         Destroy(enemy);
     }
@@ -107,7 +110,7 @@ public class GameManager : MonoBehaviour
         LeaderboardManager.instance.SendScore(score);
         StartCoroutine(showDeadUI());
         HUD.SetActive(false);
-        
+
         AudioManager.Play("PlayerDeath");
         AudioManager.Play("MenuSong");
 
@@ -117,7 +120,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
     }
 
-    IEnumerator showDeadUI(){
+    IEnumerator showDeadUI()
+    {
         yield return new WaitForSeconds(1f);
         Destroy(player);
         deadUI.SetActive(true);
@@ -131,10 +135,12 @@ public class GameManager : MonoBehaviour
         AudioManager.Stop("MenuSong");
         // AudioManager.Play("TenSecSong");
 
+        if (!alive) { return new Tile(); }
+        
         Tile nearestSpawn = SpawnManager.instance.getNearestSpawnPoint(player);
         Vector3 pos = nearestSpawn.transform.position;
         Node tilePos = MapManager.getTileLocation(pos);
-        pos.z = 1 + (tilePos.y/(float)MapManager.singleton.mapDef.numYTiles);
+        pos.z = 1 + (tilePos.y / (float)MapManager.singleton.mapDef.numYTiles);
         player.transform.position = pos;
 
         return nearestSpawn;
@@ -164,13 +170,16 @@ public class GameManager : MonoBehaviour
 
         foreach (var b in _bullets)
         {
-            try { Destroy(b.gameObject); } catch (Exception e) {Debug.LogError(e);}
+            try { Destroy(b.gameObject); } catch (Exception e) { Debug.LogError(e); }
         }
 
-        nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
-        movingPlayerToTarget = true;
-        player.GetComponent<Attack>().chargeUpBar.gameObject.SetActive( false);
-        // player.transform.position = nearestSpawn.position;
+        if (alive)
+        {
+            nearestSpawnToPlayer = SpawnManager.instance.getNearestSpawnPoint(player);
+            movingPlayerToTarget = true;
+            player.GetComponent<Attack>().chargeUpBar.gameObject.SetActive(false);
+            // player.transform.position = nearestSpawn.position;
+        }
 
         return nearestSpawnToPlayer;
     }

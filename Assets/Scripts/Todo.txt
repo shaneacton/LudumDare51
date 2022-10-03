@@ -1,15 +1,15 @@
 ﻿----------------------------------------    Features    --------------------------------------------
 * Laser charge sound
 * Wave counter
-    
+* Make player more visible
 
 
 ----------------------------------------      Bugs      --------------------------------------------
 * Fix the laser charge up controls
-* Stuck on Spawn Point
-* A* Bug
+* Stuck on Spawn Point  <-- really tricky to reproduce
+* A* Bug  <-- shane
 * Death animations don't play after collision death. only bullets
-
+* Time UI not working correctly
 
 
 ----------------------------------------       UX       --------------------------------------------
@@ -27,9 +27,9 @@
 * Enemy shoot animation
     * serves as signposting for enemy shooting
 
+
 ----------------------------------------    Sounds    --------------------------------------------
 * Better Enemy Shoot and Die
-
 
 
 ---------------------------------------- Optional Features -----------------------------------------

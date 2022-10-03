@@ -46,11 +46,7 @@ class Ghost : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_i == -1)
-        {
-            Debug.LogError("weird i value: " + _i);
-        }
-        if (movements.Count != 0 && _i < movements.Count)
+        if (movements.Count != 0 && _i < movements.Count - 1)
         {
             animator.SetBool("isMoving", Vector3.Distance(transform.position, movements[_i].position) >= 0.01);
             animator.SetFloat("direction", transform.rotation.z * 180);
@@ -72,7 +68,7 @@ class Ghost : MonoBehaviour
             // if (step.attacked)
             // _attack.fire();
 
-            _i -= rewindSpeed;
+            _i = Mathf.Max(_i - rewindSpeed, 0);
         }
     }
 
@@ -89,7 +85,7 @@ class Ghost : MonoBehaviour
             else if (step.attackType == AttackType.Lazer) { _attack.lazer(); }
 
             nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attackType != AttackType.Nothing);
-            if (nextAttack < 2*50 * indicatorSeconds && nextAttack != -1)
+            if (nextAttack < 2 * 50 * indicatorSeconds && nextAttack != -1)
             {
                 renderer.material.SetColor("_Color", new Color(1f, 0.25f, 0.25f, 1f));
             }
@@ -110,11 +106,11 @@ class Ghost : MonoBehaviour
                 warningIndicator.transform.localScale = originalWarningIndicatorScale;
             }
 
-            _i++;
+            _i = Mathf.Min(_i + 1, movements.Count - 1);
         }
         Vector3 pos = transform.position;
-        Node tilePos = MapManager.getTileLocation(pos-new Vector3(0, 0.1f, 0));
-        pos.z = 1 + (tilePos.y/(float)MapManager.singleton.mapDef.numYTiles);
+        Node tilePos = MapManager.getTileLocation(pos - new Vector3(0, 0.1f, 0));
+        pos.z = 1 + (tilePos.y / (float)MapManager.singleton.mapDef.numYTiles);
         transform.position = pos;
     }
 
