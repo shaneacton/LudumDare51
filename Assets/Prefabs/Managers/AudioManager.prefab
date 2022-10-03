@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6314860007265455376
 MonoBehaviour:
@@ -49,83 +49,98 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 0d32a2f9bdf53da44a527e1a24831c57, type: 3}
     volume: 0.594
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: Pistol
     clip: {fileID: 8300000, guid: 13177f52a5d4e5b409ca7f8fbaa2bdac, type: 3}
     volume: 0.201
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: EnemyPistol
-    clip: {fileID: 8300000, guid: 002912d13d9f92f4b9092df827415abe, type: 3}
+    clip: {fileID: 8300000, guid: 9e1bc93b8c2177a4da005f892ffc7cc2, type: 3}
     volume: 0.809
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips:
+    - {fileID: 8300000, guid: c7788c8251fe46b469655d7cbe77476f, type: 3}
   - name: GhostPistol
     clip: {fileID: 8300000, guid: 2881f84aebb7b2940aefbbdfca2d4ed1, type: 3}
     volume: 0.923
     pitch: 1.42
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: EnemyDeath
-    clip: {fileID: 8300000, guid: 02b4886a0828e3b4f89c0604a8356b92, type: 3}
-    volume: 0.803
-    pitch: 3
-    speed: 0
+    clip: {fileID: 8300000, guid: b2ed3b197f490b94cb2ddb2ce4b1b988, type: 3}
+    volume: 1
+    pitch: 1.5
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips:
+    - {fileID: 8300000, guid: a2ba3c93542d08e4bbfe1f1a76c0d341, type: 3}
+    - {fileID: 8300000, guid: c2fdd690a93f01c46bb678dd84164d03, type: 3}
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: 225587e54981539438e4d4306322f967, type: 3}
     volume: 1
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: Rewind
     clip: {fileID: 8300000, guid: 90bc48e8d30176f44b23d8f92ed56c24, type: 3}
     volume: 1
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: TenSecSong
     clip: {fileID: 8300000, guid: ed087922d36bf604eb91a2ef24f4ab53, type: 3}
     volume: 0.738
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: MenuSong
     clip: {fileID: 8300000, guid: 0dc25385ee273654b9cf073df1a7d236, type: 3}
     volume: 0.331
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: Lazer
     clip: {fileID: 8300000, guid: 4b9a78547ad57b341a41337475759803, type: 3}
     volume: 1
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: EnemySpawn
     clip: {fileID: 8300000, guid: 444219923725cb0459aec4f37291b2a2, type: 3}
     volume: 1
     pitch: 1
-    speed: 0
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
   - name: LazerCharging
     clip: {fileID: 8300000, guid: f59864c96efe95643b84f5f0623b4841, type: 3}
     volume: 1
     pitch: 1
-    speed: 2
+    randomPitchFac: 0
     loop: 0
     source: {fileID: 0}
+    altClips: []
