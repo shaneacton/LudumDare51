@@ -35,7 +35,7 @@ public class LeaderboardManager : MonoBehaviour
         if(computerId == "")
         {
             computerId = System.Guid.NewGuid().ToString();
-            PlayerPrefs.SetString("ComputerID", computerId);
+            // PlayerPrefs.SetString("ComputerID", computerId);
         }
         // better but doesn't work in webgl
         // computerId = SystemInfo.deviceUniqueIdentifier;
@@ -44,7 +44,7 @@ public class LeaderboardManager : MonoBehaviour
 
     void Login()
     {
-        Debug.Log($"Logging in {computerId}");
+        // Debug.Log($"Logging in {computerId}");
         var request = new LoginWithCustomIDRequest
         {
             CustomId = computerId,
@@ -54,7 +54,7 @@ public class LeaderboardManager : MonoBehaviour
         PlayFabClientAPI.LoginWithCustomID(request,
             response =>
             {
-                Debug.Log("Successful login");
+                // Debug.Log("Successful login");
                 playFabId = response.PlayFabId;
                 GetLeaderboard(EndUIManager.instance.DisplayLeaderboard);
             },
@@ -64,7 +64,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public void SendScore(int score)
     {
-        Debug.Log("Sending score");
+        // Debug.Log("Sending score");
         var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate> {
@@ -79,7 +79,7 @@ public class LeaderboardManager : MonoBehaviour
             request,
             response =>
             {
-                Debug.Log("Leaderboard update success");
+                // Debug.Log("Leaderboard update success");
                 GetLeaderboard(EndUIManager.instance.DisplayLeaderboard);
             },
             response => { Debug.Log($"Leaderboard update failed {response.GenerateErrorReport()}"); }

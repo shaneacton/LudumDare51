@@ -1,32 +1,51 @@
 ﻿----------------------------------------    Features    --------------------------------------------
+* Maps
+    * Add More Manual Maps
+        * Pick random map each spawn
+    * Procedural Map Generation - lol
+    * Larger Maps?
+    
+* Health system for player/enemies
+    * Player/Enemies could be briefly invulnerable after being hit
+    
+    
+    
+----------------------------------------    Enemies    --------------------------------------------
+* Exploding enemies
+* Big bads which take a few bullets
+    * Single Shot by laser
+* Enemies which 'pop' into smaller enemies
+* Tunnelling enemies
 
+---------------------------------    Powerups and weapons    -------------------------------------
+* Shield
+* Ghost kill power up
+* Bouncing bullets
+* Health pickups
+
+    
+    
 ----------------------------------------      Bugs      --------------------------------------------
 * A* Bug  <-- shane
 
 ----------------------------------------       UX       --------------------------------------------
-* Screenshots for jam page
         
 ----------------------------------------    Visuals    --------------------------------------------
 * Lighting - ongoing
-    * have the player/ghost eyes shine light in their direction of look
-        * acts as signposting for ghost shoot direction
-        * looks cool
 * Enemy shoot animation <-- (Seems hard)
     * serves as signposting for enemy shooting
 * Give the lazer more love (lighting)
 
 
 ----------------------------------------    Sounds    --------------------------------------------
-* Better Enemy Shoot and Die ???
 
----------------------------------------- Optional Features -----------------------------------------
-* Shield
-* Ghost kill power up
-* Exploding enemies
-* Maps
-    * Add more manual maps
-        * Pick random map each spawn
-    * Procedural Map Generation - lol
+
+
+
+
+
+
+
 
 ---------------------------------------- Done ----------------------------------------  
 

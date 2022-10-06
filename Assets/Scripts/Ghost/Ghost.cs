@@ -14,6 +14,7 @@ class Ghost : MonoBehaviour
     private bool _once;
 
     private GhostAttack _attack;
+    private MouseLook _look;
     private int rewindSpeed = 4;
 
     public int indicatorSeconds;
@@ -38,6 +39,7 @@ class Ghost : MonoBehaviour
     void Start()
     {
         _attack = GetComponent<GhostAttack>();
+        _look = GetComponent<MouseLook>();
         originalWarningIndicatorScale = warningIndicator.transform.localScale;
     }
 
@@ -88,15 +90,25 @@ class Ghost : MonoBehaviour
             else if (step.attackType == AttackType.Lazer) { _attack.lazer(); }
 
             nextAttack = movements.GetRange(_i, movements.Count - _i - 1).FindIndex((m) => m.attackType != AttackType.Nothing);
-            if (nextAttack < 2 * 50 * indicatorSeconds && nextAttack != -1)
+            float secondsTillAttack = nextAttack / 50f;
+            if (secondsTillAttack < 2.5f * indicatorSeconds && nextAttack != -1)
             {
-                // renderer.material.SetColor("_Color", new Color(1f, 0.25f, 0.25f, 0.65f));
-                Light.intensity = 2f;
+                float intensity = 3f * indicatorSeconds - secondsTillAttack;
+                intensity = Mathf.Max(0.3f, intensity);
+                // Debug.Log("setting intensity to: " + intensity);
+                Light.intensity = intensity;
+                _look.leftEyeLight.intensity = intensity;
+                _look.rightEyeLight.intensity = intensity;
+                _look.leftEyeLight.falloffIntensity = secondsTillAttack + 0.25f;
+                _look.rightEyeLight.falloffIntensity = secondsTillAttack + 0.25f;
             }
             else
             {
-                // renderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.5f));
                 Light.intensity = 0f;
+                _look.leftEyeLight.intensity = 0.3f;
+                _look.rightEyeLight.intensity = 0.3f;
+                _look.leftEyeLight.falloffIntensity = 0.5f;
+                _look.rightEyeLight.falloffIntensity = 0.5f;
             }
 
             if (nextAttack < 50 * indicatorSeconds && nextAttack != -1)

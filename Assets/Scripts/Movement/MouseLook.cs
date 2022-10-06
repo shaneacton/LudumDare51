@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MouseLook : MonoBehaviour
@@ -8,6 +9,9 @@ public class MouseLook : MonoBehaviour
     [HideInInspector] public Vector3 dir;
     [HideInInspector] public float angle;
     public Animator animator;
+
+    public Light2D leftEyeLight;
+    public Light2D rightEyeLight;
 
     void Start()
     {
